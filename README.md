@@ -38,6 +38,16 @@ In here lies the MangDL's github.io page and assets, primarily images.
 
 ---
 
+## **License**
+
+### <a target="_blank" href="https://choosealicense.com/licenses/mit/">MIT</a>
+
+Copyright for portions of project [mangdl.github.io](https://github.com/MangDL/mangdl.github.io) are held by [Github Account [rdbende](https://github.com/rdbende) Owner, 2021] as part of project [Sun-Valley-ttk-theme](https://github.com/rdbende/Sun-Valley-ttk-theme).
+
+All other copyright for project [mangdl.github.io](https://github.com/MangDL/mangdl.github.io) are held by [Github Account [whinee](https://github.com/whinee) Owner, 2021].
+
+Check the [LICENSE](LICENSE.md) for more details.
+
 ## **Credits**
 
 ### MangDL Logo

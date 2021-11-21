@@ -1,0 +1,36 @@
+Windows Powershell:
+    colors:
+        re:
+            "f9f1a5":
+                - iex
+            "767676":
+                - ' -[a-zA-Z\-]+'
+        sub:
+            "666666":
+                - "767676"
+            "008000":
+                - "f9f1a5"
+            "BA2121":
+                - "3a96dd"
+            "880000":
+                - "cccccc"
+    repl:
+        null:
+            null
+    rm:
+        - '<div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">'
+        - "</pre></div>"
+        - "<!-- HTML generated using hilite.me -->"
+Fish:
+    colors:
+        re:
+            null:
+                - null
+        sub:
+            null:
+                - null
+    repl:
+        null:
+            null:
+    rm:
+        - null

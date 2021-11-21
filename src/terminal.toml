@@ -1,0 +1,83 @@
+username = 'whi~nyaan'
+compname = 'blackspace'
+
+[alias]
+	ps_prompt = '[Y] Yes  [A] Yes to All  <span style="color:#f9f1a5;">[N] No</span>  [L] No to All  [S] Suspend  [?] Help (default is "N"): A'
+	username = 'whi~nyaan'
+	'...' = '<span style="color:#C50F1F;">...</span>'
+
+[terminals.prereq]
+	indented = true
+	os_family = 'Linux'
+	os = 'Arch'
+	terminal = 'Fish'
+	admin = false
+	pwd = '~'
+	[[terminals.prereq.cmdps]]
+		cmd = 'python --version'
+		op = 'Python 3.9.6'
+	[[terminals.prereq.cmdps]]
+		cmd = 'pip --version'
+		op = 'pip 21.2.4 from /usr/lib/python3.9/site-packages/pip (python 3.9)'
+	[[terminals.prereq.cmdps]]
+		cmd = 'git --version'
+		op = 'git version 2.33.0'
+
+[terminals.setup1]
+	indented = true
+	os_family = 'Linux'
+	os = 'Arch'
+	terminal = 'Fish'
+	admin = false
+	pwd = '~'
+	[[terminals.setup1.cmdps]]
+		cmd = '''git clone https://github.com/whitespace-negative/Test-Template.git
+cd Test-Template
+python3 -m venv venv'''
+		op = '''Cloning into Test-Template...
+remote: Enumerating objects: 275, done.
+${...}
+Resolving deltas: 100% (69/69), done.
+Creating the virtual environment...
+Done.'''
+
+[terminals.choco_install_1]
+	indented = true
+	os_family = 'Windows'
+	os = 'Win10'
+	terminal = 'Windows Powershell'
+	admin = true
+	pwd = 'C:\Windows\system32'
+	[[terminals.choco_install_1.cmdps]]
+		cmd = '''Set-ExecutionPolicy AllSigned'''
+		op = '''Execution Policy Change
+The execution policy helps protect you from scripts that you do not trust. Changing the execution policy might expose
+you to the security risks described in the about_Execution_Policies help topic at
+https:/go.microsoft.com/fwlink/?LinkID=135170. Do you want to change the execution policy?
+${ps_prompt}'''
+
+[terminals.choco_install_2]
+	indented = true
+	os_family = 'Windows'
+	os = 'Win10'
+	terminal = 'Windows Powershell'
+	admin = true
+	pwd = 'C:\Windows\system32'
+	[[terminals.choco_install_2.cmdps]]
+		cmd = '''Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))'''
+		op = '''Forcing web requests to allow TLS v1.2 (Required for requests to Chocolatey.org)
+Getting latest version of the Chocolatey package for download.
+Not using proxy.
+Getting Chocolatey from https://community.chocolatey.org/api/v2/package/chocolatey/0.10.15.
+Downloading https://community.chocolatey.org/api/v2/package/chocolatey/0.10.15 to C:\Users\${username}\AppData\Local\Temp\chocolatey\chocoInstall\chocolatey.zip
+Not using proxy.
+Extracting C:\Users\${username}\AppData\Local\Temp\chocolatey\chocoInstall\chocolatey.zip to C:\Users\${username}\AppData\Local\Temp\chocolatey\chocoInstall
+Installing Chocolatey on the local machine
+${...}
+Chocolatey (choco.exe) is now ready.
+You can call choco from anywhere, command line or powershell by typing choco.
+Run choco /? for a list of functions.
+You may need to shut down and restart powershell and/or consoles
+ first prior to using choco.
+Ensuring Chocolatey commands are on the path
+Ensuring chocolatey.nupkg is in the lib folder'''

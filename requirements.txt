@@ -1,0 +1,11 @@
+autopep8
+toml
+Pillow
+pyyaml
+selenium-driver-updater
+yapf
+isort
+mako
+pdoc3
+httpx
+lxml
