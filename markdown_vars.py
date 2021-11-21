@@ -35,7 +35,8 @@ class Vars:
     user = "whinee"
     dc_acc = "whi_ne#5135"
     dc_link = "https://discord.com/users/867696753434951732"
-    dc_inv = "https://discord.com/invite/JbAtUxGcJZ"
+    dc_inv = "JbAtUxGcJZ"
+    dc_serv = 889508240495366184
     python_ver = "3.10.0"
     os = "Arch Linux"
     # variables

@@ -26,8 +26,8 @@
     <a href="https://github.com/${organization}/${repo_name}/graphs/contributors">
         <img src="https://img.shields.io/github/contributors/${organization}/${repo_name}.svg?style=flat-square&logo=data:image/png;base64,${contributors_b64}">
     </a>
-    <a target="_blank" href="${dc_inv}">
-        <img src="https://img.shields.io/discord/${dc_inv}.svg?style=flat-square&logo=data:image/png;base64,${discord_b64}">
+    <a target="_blank" href="https://discord.com/invite/${dc_inv}">
+        <img src="https://img.shields.io/discord/${dc_serv}.svg?style=flat-square&logo=data:image/png;base64,${discord_b64}">
     </a>
 </p>
 
