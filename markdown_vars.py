@@ -33,7 +33,7 @@ class Vars:
     project_name = "MangDL"
     organization = project_name
     user = "whinee"
-    dc_acc = "whinee#5135"
+    dc_acc = "whi_ne#5135"
     dc_link = "https://discord.com/users/867696753434951732"
     python_ver = "3.10.0"
     os = "Arch Linux"

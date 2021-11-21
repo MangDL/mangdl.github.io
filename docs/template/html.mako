@@ -285,7 +285,7 @@
   supermodule = module.supermodule
   %>
   <nav id="sidebar">
-    <h1>mangDL</h1>
+    <h1>MangDL</h1>
 
     <%include file="logo.mako"/>
 

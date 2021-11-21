@@ -8,7 +8,7 @@ As used in this Disclaimer, the following terms shall have the following meaning
 
 - **Developer** hereby means the person who has developed the **Project** going by the username of "[${user}](https://www.github.com/${user})" in "[Github](https://github.com)", only meant to be used in singular form
 
-- **Project** hereby means the Open Source Project called "[${project_name}](https://www.github.com/${user}/${repo_name})" developed by the **Developer**, only meant to be used in singular form; and
+- **Project** hereby means the Open Source Project called "[${project_name}](https://www.github.com/${organization}/${repo_name})" developed by the **Developer**, only meant to be used in singular form; and
 
 - **User** hereby means the person who uses this **Project**, regardless of race, gender, age, ethnicity, sexual orientation, or disability, and no matter what their intention is
 
