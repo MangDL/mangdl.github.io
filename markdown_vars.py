@@ -35,6 +35,7 @@ class Vars:
     user = "whinee"
     dc_acc = "whi_ne#5135"
     dc_link = "https://discord.com/users/867696753434951732"
+    dc_inv = "https://discord.com/invite/JbAtUxGcJZ"
     python_ver = "3.10.0"
     os = "Arch Linux"
     # variables
@@ -53,6 +54,6 @@ class Vars:
     compname = "blackspace"
 
 
-icons = ["issues", "forks", "stars", "contributors", "license", "code"]
+icons = ["issues", "forks", "stars", "contributors", "license", "code", "discord"]
 for i in icons:
     setattr(Vars, f"{i}_b64", b64(f"{i}.png"))
