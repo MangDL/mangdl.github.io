@@ -3,6 +3,16 @@
 %>
 
 <%def name="mobile()" filter="minify_css">
+    @media (max-width: 520px) {
+        #min-block {
+            display: block;
+        }
+        #min-block-shrink {
+            display: block;
+            font-size: 5vw;
+        }
+    }
+
     html {
         scrollbar-face-color: #646464;
         scrollbar-base-color: #646464;

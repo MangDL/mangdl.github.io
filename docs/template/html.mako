@@ -286,9 +286,7 @@
   %>
   <nav id="sidebar">
     <h1>MangDL</h1>
-
     <%include file="logo.mako"/>
-
     % if google_search_query:
         <div class="gcse-search" style="height: 70px"
              data-as_oq="${' '.join(google_search_query.strip().split()) | h }"
@@ -368,18 +366,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
   <meta name="generator" content="pdoc ${pdoc.__version__}" />
+  <title>MangDL</title>
 
-<%
-    module_list = 'modules' in context.keys()  # Whether we're showing module list in server mode
-%>
+  <meta name="description" content="The most inefficient Manga downloader for PC">
+  <meta name="author" content="whi_ne">
 
-  % if module_list:
-    <title>Python module list</title>
-    <meta name="description" content="A list of documented Python modules." />
-  % else:
-    <title>${module.name} API documentation</title>
-    <meta name="description" content="${module.docstring | glimpse, trim, h}" />
-  % endif
+  <meta property="og:title" content="MangDL">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mangdl.github.io">
+  <meta property="og:description" content="The most inefficient Manga downloader for PC">
+  <meta property="og:image" content="https://raw.githubusercontent.com/MangDL/mangdl.github.io/master/docs/assets/images/banner.png">
+
+  <meta name="twitter:title" content="MangDL">
+
+  <link rel="icon" href="https://raw.githubusercontent.com/MangDL/mangdl.github.io/master/docs/assets/images/icons/logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/MangDL/mangdl.github.io/master/docs/assets/images/icons/logo.png">
 
   <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
   <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>

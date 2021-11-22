@@ -6,7 +6,7 @@
 
     - [x] Bare-bones sites
 
-    - [ ] Migrate every .md file to https://MangDL.github.io
+    - [ ] Migrate every .md file to https://mangdl.github.io
 
 - [ ] Library
 

@@ -16,13 +16,13 @@ from src.settings import stg
 FOLDER = stg("folder")
 
 def main():
-    DriverUpdater.install(
-        path = "./src/geckodriver",
-        driver_name = DriverUpdater.geckodriver,
-        upgrade = True,
-        check_driver_is_up_to_date = True,
-    )
-    terminal.update()
+    # DriverUpdater.install(
+    #     path = "./src/geckodriver",
+    #     driver_name = DriverUpdater.geckodriver,
+    #     upgrade = True,
+    #     check_driver_is_up_to_date = True,
+    # )
+    # terminal.update()
     importlib.reload(markdown_vars)
     Vars = markdown_vars.Vars
 
@@ -44,18 +44,17 @@ All other copyright for project [{Vars.project_name}](https://github.com/{Vars.u
     Vars.conditions = ("" if license["conditions"][0] is None else "\n" + "\n\n".join(license["conditions"]) + "\n")
     Vars.cholder = cholder
 
+    pdoc.tpl_lookup = TemplateLookup(
+        cache_args=dict(cached=True, cache_type='memory'),
+        input_encoding='utf-8',
+        directories=["./docs/template/"],
+    )
+    os.mkdir(FOLDER)
+    _html = pdoc.Module(FOLDER, context=pdoc.Context()).html()
+    os.rmdir(FOLDER)
     for tpl in list(Path(".").rglob("_*.md")):
-        # print(tpl)
         spl = str(tpl).split("/")
         file = os.path.join(*spl[:-1], spl[-1][1:].split(".")[0])
-        pdoc.tpl_lookup = TemplateLookup(
-            cache_args=dict(cached=True, cache_type='memory'),
-            input_encoding='utf-8',
-            directories=["template"],
-        )
-        os.mkdir(FOLDER)
-        _html = pdoc.Module(FOLDER, context=pdoc.Context()).html()
-        os.rmdir(FOLDER)
         RM = spl[-1][1:].split(".")[0] == "README"
         with open(tpl, "r") as fin, open(f'../{FOLDER}/{file}.md', "w") as fout, open(os.path.join(*spl[:-1], 'index.html') if RM else f'{file}.html', "w") as hout:
             tpl_str = fin.read()
@@ -112,11 +111,14 @@ All other copyright for project [{Vars.project_name}](https://github.com/{Vars.u
                 html = html.replace(o, n)
             soup = BeautifulSoup(html, "html.parser")
             toc = soup.select_one("h2 a#table-of-contents")
+            logo = soup.select_one("img#logo")
+            if logo:
+                logo["style"] = "display: block; margin: auto;"
             if RM:
                 if toc:
-                    html = html.replace(str(soup.select_one(".toc")), f'<div class="toc"><ul><li><a href="docs/index.html"><strong>Documentation</strong></a></li><ul></div><h2>Table of Contents</h2><div class="toc">{str(toc.find_next("ul"))}</div>')
+                    html = str(soup).replace(str(soup.select_one(".toc")), f'<div class="toc"><ul><li><a href="docs/index.html"><strong>Documentation</strong></a></li><ul></div><h2>Table of Contents</h2><div class="toc">{str(toc.find_next("ul"))}</div>')
             else:
-                html = html.replace(str(soup.select_one(".toc")), f'<div class="toc"><ul><li><a href="index.html"><strong>Homepage</strong></a></li><li><a href="docs/index.html"><strong>Documentation</strong></a></li><ul></div>')
+                html = str(soup).replace(str(soup.select_one(".toc")), f'<div class="toc"><ul><li><a href="index.html"><strong>Homepage</strong></a></li><li><a href="docs/index.html"><strong>Documentation</strong></a></li><ul></div>')
             hout.write(html)
 
 if __name__ == "__main__":

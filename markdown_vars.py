@@ -45,7 +45,7 @@ class Vars:
 
     # README.md
     # constants
-    title = "WIP: MangDL"
+    title = "MangDL"
     # variables
     TODO = todo()
 

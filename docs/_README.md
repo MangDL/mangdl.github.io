@@ -1,6 +1,10 @@
 <!-- Repository Name. Preferrably 1-5 words long. -->
+<img src="./assets/images/icons/logo-white.png" id="logo" width="300rem" height="auto" style="display: block; margin: auto;">
+
 <h1 align="center" style="font-weight: bold">
-    ${title}
+    <span id="min-block-shrink">▀▄▀▄▀▄</span>
+    <span id="min-block">${title}</span>
+    <span id="min-block-shrink">▀▄▀▄▀▄</span>
 </h1>
 
 
