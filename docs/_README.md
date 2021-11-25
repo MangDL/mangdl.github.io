@@ -17,9 +17,6 @@
 </h3>
 
 <p align="center">
-	<a href="https://github.com/${organization}/${repo_name}/blob/master/LICENSE.md">
-        <img src="https://img.shields.io/badge/LICENSE-A31F34?style=flat-square&logoWidth=25&logo=data:image/png;base64,${license_b64}">
-    </a>
     <a href="https://github.com/${organization}/${repo_name}/issues">
         <img src="https://img.shields.io/github/issues/${organization}/${repo_name}.svg?style=flat-square&logo=data:image/png;base64,${issues_b64}">
     </a>
@@ -32,6 +29,13 @@
     <a href="https://github.com/${organization}/${repo_name}/graphs/contributors">
         <img src="https://img.shields.io/github/contributors/${organization}/${repo_name}.svg?style=flat-square&logo=data:image/png;base64,${contributors_b64}">
     </a>
+</p>
+<p align="center">
+	<a href="https://github.com/${organization}/${repo_name}/blob/master/docs/LICENSE.md">
+        <img src="https://img.shields.io/badge/LICENSE-A31F34?style=flat-square&logoWidth=25&logo=data:image/png;base64,${license_b64}">
+    </a>
+</p>
+<p align="center">
     <a target="_blank" href="https://discord.com/invite/${dc_inv}">
         <img src="https://img.shields.io/discord/${dc_serv}.svg?style=flat-square&logo=data:image/png;base64,${discord_b64}">
     </a>
@@ -48,7 +52,7 @@ The most inefficient manga downloader for PC (and soon, also a reader)
 
 Github: [github.com/${organization}/${repo_name}](https://github.com/${organization}/${repo_name})
 
-Website: [${site}](https://${site})
+Website: [${site}](http://${site})
 
 ## **Important**
 
@@ -130,7 +134,7 @@ Downloading:
 mangdl dl <title> [OPTIONS]
 ```
 
-For programmatic use, visit the documentation: [${site}/docs](https://${site}/docs/index.html)
+For programmatic use, visit the documentation: [${site}/docs](http://${site}/docs/index.html)
 
 ## **Getting Started**
 

@@ -2,9 +2,7 @@
     <a target="_blank" href="https://choosealicense.com/licenses/mit/">MIT LICENSE</a>
 </h1>
 
-Copyright for portions of project [mangdl.github.io](https://github.com/MangDL/mangdl.github.io) are held by [Github Account [rdbende](https://github.com/rdbende) Owner, 2021] as part of project [Sun-Valley-ttk-theme](https://github.com/rdbende/Sun-Valley-ttk-theme).
-
-All other copyright for project [mangdl.github.io](https://github.com/MangDL/mangdl.github.io) are held by [Github Account [whinee](https://github.com/whinee) Owner, 2021].
+Copyright (c) 2021 Github Account [[Github Account [whinee](https://github.com/whinee) Owner, 2021] Owner
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
