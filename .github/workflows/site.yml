@@ -16,6 +16,7 @@ jobs:
         password: ${{ secrets.ftp_passwd }}
         local-dir: ./docs/
         server-dir: ./mangdl.rf.gd/htdocs/
+        dangerous-clean-slate: true
         exclude: |
-          .md*
-          template/*
+          *.md
+          **/template
