@@ -19,4 +19,4 @@ jobs:
         dangerous-clean-slate: true
         exclude: |
           *.md
-          **/template
+          **/template/**
