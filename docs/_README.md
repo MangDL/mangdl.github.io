@@ -48,13 +48,13 @@ The most inefficient manga downloader for PC (and soon, also a reader)
 
 Github: [github.com/${organization}/${repo_name}](https://github.com/${organization}/${repo_name})
 
-Website: [mangdl.github.io](https://mangdl.github.io)
+Website: [${site}](https://${site})
 
 ## **Important**
 
 This project is a work in progress. A package will be released soon as a beta.
 
-To be updated, be sure to watch this repository and join the [Discord Support Server](${dc_inv}) for mangDL.
+To be updated, be sure to watch this repository and join the [Discord Support Server](${dc_inv}) for MangDL.
 
 For the terms of usage and legals, visit [LICENSE.md](LICENSE.md) and [TERMS OF USAGE & DISCLAIMER.md](TERMS%20OF%20USAGE%20%26%20DISCLAIMER.md).
 
@@ -130,7 +130,7 @@ Downloading:
 mangdl dl <title> [OPTIONS]
 ```
 
-For programmatic use, visit the documentation: [mangdl.github.io/docs](https://mangdl.github.io/docs/index.html)
+For programmatic use, visit the documentation: [${site}/docs](https://${site}/docs/index.html)
 
 ## **Getting Started**
 
@@ -365,6 +365,6 @@ Check the [LICENSE](LICENSE.md) for more details.
 
 <sub>
     <i>
-        <b>NOTE:</b> If a reference or source material is not attributed properly or not at all, please kindly message me at Discord: <a target="_blank" href="${dc_link}">${dc_acc}</a> (or create a pull request, but at the moment there are no template for pull request so creating one I suppose would be hard) so I can properly give credit to their respective authors.
+        <b>NOTE:</b> If a reference or source material is not attributed properly or not at all, please kindly message me at Discord: <a target="_blank" href="${dc_link}">${dc_acc}</a> or create a pull request so I can properly give credit to their respective authors.
     </i>
 </sub>

@@ -1,11 +1,11 @@
 <!-- Repository Name. Preferrably 1-5 words long. -->
 <h1 align="center" style="font-weight: bold">
-    mangdl.github.io
+    mangdl.rf.gd
 </h1>
 
 <!-- Description. Preferrably 1 sentence long. -->
 <h3 align="center" style="font-weight: bold">
-    WIP: Home of MangDL's github.io page
+    WIP: Home of MangDL's site
 </h3>
 
 <p align="center">
@@ -33,7 +33,7 @@
 ---
 
 <h4 align="center">
-In here lies the MangDL's github.io page and assets, primarily images.
+In here lies the MangDL's site and assets, primarily images.
 </h4>
 
 ---
@@ -42,9 +42,7 @@ In here lies the MangDL's github.io page and assets, primarily images.
 
 ### <a target="_blank" href="https://choosealicense.com/licenses/mit/">MIT</a>
 
-Copyright for portions of project [mangdl.github.io](https://github.com/MangDL/mangdl.github.io) are held by [Github Account [rdbende](https://github.com/rdbende) Owner, 2021] as part of project [Sun-Valley-ttk-theme](https://github.com/rdbende/Sun-Valley-ttk-theme).
-
-All other copyright for project [mangdl.github.io](https://github.com/MangDL/mangdl.github.io) are held by [Github Account [whinee](https://github.com/whinee) Owner, 2021].
+Copyright (c) 2021 Github Account [[Github Account [whinee](https://github.com/whinee) Owner, 2021] Owner
 
 Check the [LICENSE](LICENSE.md) for more details.
 
