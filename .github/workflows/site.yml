@@ -15,4 +15,7 @@ jobs:
         username: ${{ secrets.ftp_uname }}
         password: ${{ secrets.ftp_passwd }}
         local-dir: ./docs/
-        server-dir: ./htdocs/
+        server-dir: ./mangdl.rf.gd/
+        exclude: |
+          .md*
+          template/*
