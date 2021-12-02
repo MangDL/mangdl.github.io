@@ -52,7 +52,7 @@
 <p>Part of the following is a summary of <a href="https://community.chocolatey.org/courses/installation/installing?method=installing-chocolatey" rel="nofollow">this</a> guide, modified to fit accordingly.</p>
 <ul>
 <li>
-<p>Press <kbd>Win</kbd>. An interface shoud plop up as shown below:</p>
+<p>Press <kbd>Win</kbd>. An interface shoud pop up as shown below:</p>
 <p><a href="assets/images/prerequisites/python/windows/1.png" rel="noopener noreferrer" target="_blank"><img alt="1" src="assets/images/prerequisites/python/windows/1.png" style="max-width:100%;"/></a></p>
 </li>
 <li>
@@ -88,7 +88,12 @@ Exit the settings app.</p>
 </li>
 <li>
 <p>A window with a title <code>Command Prompt</code> should appear. Focus to the said window and run the following command:</p>
-<div class="highlight highlight-source-batchfile"><pre><span class="pl-k">@</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">%SystemRoot%</span>\System32\WindowsPowerShell\v1.0\powershell.exe<span class="pl-pds">"</span></span> -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command <span class="pl-s"><span class="pl-pds">"</span>iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))<span class="pl-pds">"</span></span> <span class="pl-k">&amp;&amp;</span> <span class="pl-k">SET</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">PATH</span><span class="pl-k">=</span><span class="pl-smi">%PATH%</span>;<span class="pl-smi">%ALLUSERSPROFILE%</span>\chocolatey\bin<span class="pl-pds">"</span></span></pre></div>
+<div class="highlight highlight-source-batchfile"><pre><span class="pl-k">@</span><span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">%SystemRoot%</span>\System32\WindowsPowerShell\v1.0\powershell.exe<span class="pl-pds">"</span></span> -NoProfile -InputFormat 
+            <blockquote style='background:hsla(0 0% 100% / 5%);padding:0 20px 5px 20px;margin:30px 0 0;'>
+            <span style='font-size:150px;line-height:70px;margin-left:-20px;opacity:0.2'>❝</span>
+            <p style='font-size:15px;margin-top:-50px'><i>...but I don't think you'll write code valuable enough for them (Content creators and/or owners) to do that (file a DMCA strike against MangDL).</i></p>
+            <p">- <a href='https://github.com/justfoolingaround'>KR</a></p>
+            </blockquote> -ExecutionPolicy Bypass -Command <span class="pl-s"><span class="pl-pds">"</span>iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))<span class="pl-pds">"</span></span> <span class="pl-k">&amp;&amp;</span> <span class="pl-k">SET</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">PATH</span><span class="pl-k">=</span><span class="pl-smi">%PATH%</span>;<span class="pl-smi">%ALLUSERSPROFILE%</span>\chocolatey\bin<span class="pl-pds">"</span></span></pre></div>
 </li>
 <li>
 <p>After the command has finished running, install the rest of the prerequisites by running the following command:</p>

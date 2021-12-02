@@ -119,6 +119,13 @@ All other copyright for project [{Vars.project_name}](https://github.com/{Vars.u
                     html = str(soup).replace(str(soup.select_one(".toc")), f'<div class="toc"><ul><li><a href="docs/index.html"><strong>Documentation</strong></a></li><ul></div><h2>Table of Contents</h2><div class="toc">{str(toc.find_next("ul"))}</div>')
             else:
                 html = str(soup).replace(str(soup.select_one(".toc")), f'<div class="toc"><ul><li><a href="index.html"><strong>Homepage</strong></a></li><li><a href="docs/index.html"><strong>Documentation</strong></a></li><ul></div>')
+            quote = r"""
+            <blockquote style='background:hsla(0 0% 100% / 5%);padding:0 20px 5px 20px;margin:30px 0 0;'>
+            <span style='font-size:150px;line-height:70px;margin-left:-20px;opacity:0.2'>❝</span>
+            <p style='font-size:15px;margin-top:-50px'><i>...but I don't think you'll write code valuable enough for them (Content creators and/or owners) to do that (file a DMCA strike against MangDL).</i></p>
+            <p">- <a href='https://github.com/justfoolingaround'>KR</a></p>
+            </blockquote>"""
+            html = html.replace(str(soup.select_one("#content blockquote")), quote)
             hout.write(html)
 
 if __name__ == "__main__":

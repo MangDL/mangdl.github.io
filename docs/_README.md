@@ -50,6 +50,10 @@ The most inefficient manga downloader for PC (and soon, also a reader)
 
 ---
 
+> **❝** *...but I don't think you'll write code valuable enough for them (Content creators and/or owners) to do that (file a DMCA strike against MangDL).* **❞** 
+>
+> \- <a href='https://github.com/justfoolingaround'>KR</a>
+
 Github: [github.com/${organization}/${repo_name}](https://github.com/${organization}/${repo_name})
 
 Website: [${site}](http://${site})
