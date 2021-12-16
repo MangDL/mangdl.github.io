@@ -31,24 +31,38 @@
 <a aria-hidden="true" class="anchor" href="#----changelog" id="----changelog"><span aria-hidden="true" class="octicon octicon-link"></span></a>
     CHANGELOG
 </h1>
-<p><strong>MangDL v.0.0.0-alpha.0</strong></p>
-<p>START OF SEMANTIC VERSIONING.</p>
+<h2>
+<a aria-hidden="true" class="anchor" href="#mangdl-v000-alpha1" id="mangdl-v000-alpha1"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-alpha.1</strong>
+</h2>
 <p><strong>ADDED</strong></p>
 <ul>
-<li>Hachirumi provider</li>
+<li>
+<a href="https://danke.moe" rel="nofollow">Danke.moe</a> provider</li>
 </ul>
-<p><strong>CHANGED</strong></p>
+<h2>
+<a aria-hidden="true" class="anchor" href="#mangdl-v000-alpha0" id="mangdl-v000-alpha0"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-alpha.0</strong>
+</h2>
+<p>START OF SEMANTIC VERSIONING.</p>
+<h3>
+<a aria-hidden="true" class="anchor" href="#added" id="added"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+</h3>
+<p><a href="https://hachirumi.com" rel="nofollow">Hachirumi.com</a> provider</p>
+<h3>
+<a aria-hidden="true" class="anchor" href="#changed" id="changed"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
+</h3>
 <ul>
-<li>An intermediary script between the provider scripts and the cli has been made, which can also be used thru programmatic usage.
-Ex.:</li>
+<li>An intermediary script between the provider scripts and the cli has been made, which can also be used thru programmatic usage.</li>
 </ul>
+<p>Ex.:</p>
 <div class="highlight highlight-source-python"><pre><span class="pl-k">from</span> <span class="pl-s1">mangdl</span> <span class="pl-k">import</span> <span class="pl-v">Provider</span>
 <span class="pl-k">from</span> <span class="pl-s1">mangdl</span>.<span class="pl-v">API</span>.<span class="pl-v">Base</span> <span class="pl-k">import</span> <span class="pl-v">Search</span>
 
 <span class="pl-s1">md</span> <span class="pl-c1">=</span> <span class="pl-v">Provider</span>(<span class="pl-s">"mangadex"</span>)
 <span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-s1">md</span>.<span class="pl-en">search</span>(<span class="pl-v">Search</span>(<span class="pl-s">"sachi-iro no one room"</span>)):
     <span class="pl-en">print</span>(<span class="pl-s1">i</span>)</pre></div>
-<p><strong>REMOVED</strong></p>
+<h3>
+<a aria-hidden="true" class="anchor" href="#removed" id="removed"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>REMOVED</strong>
+</h3>
 <ul>
 <li>Saving and loading configs</li>
 </ul>

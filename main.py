@@ -63,9 +63,13 @@ All other copyright for project [{Vars.project_name}](https://github.com/{Vars.u
             fout.write(tpl_str)
 
             soup = BeautifulSoup(_html, "html.parser")
-            headers = {"Content-Type": "text/plain", "charset": "utf-8"}
+            headers = {"accept": "application/vnd.github.v3+json"}
+            data = {
+                "text": tpl_str
+            }
+            # print(tpl_str)
             md = str(
-                httpx.post("https://api.github.com/markdown/raw", headers=headers, data=tpl_str.encode("utf-8")).content,
+                httpx.post("https://api.github.com/markdown", headers=headers, json=data).content,
                 encoding="utf-8"
             )
 
