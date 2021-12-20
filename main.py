@@ -16,13 +16,13 @@ from src.settings import stg
 FOLDER = stg("folder")
 
 def main():
-    # DriverUpdater.install(
-    #     path = "./src/geckodriver",
-    #     driver_name = DriverUpdater.geckodriver,
-    #     upgrade = True,
-    #     check_driver_is_up_to_date = True,
-    # )
-    # terminal.update()
+    DriverUpdater.install(
+        path = "./src",
+        driver_name = DriverUpdater.chromedriver,
+        upgrade = True,
+        check_driver_is_up_to_date = True,
+    )
+    terminal.update()
     importlib.reload(markdown_vars)
     Vars = markdown_vars.Vars
 

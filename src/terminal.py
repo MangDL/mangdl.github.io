@@ -13,7 +13,7 @@ import requests
 from lxml import etree
 from PIL import Image
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
 
 from .settings import stg
 from .utils import dict_extr, dict_merge, req_net
@@ -177,8 +177,7 @@ def update():
     options.add_argument("--disable-application-cache")
     options.add_argument("--disable-gpu")
     options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--headless")
-    driver = webdriver.Firefox(executable_path=r"./src/geckodriver/geckodriver",
+    driver = webdriver.Chrome(executable_path=r"./src/chromedriver",
                                options=options)
     driver.get(f'file://{TERMINAL_HTML}')
     driver.fullscreen_window()

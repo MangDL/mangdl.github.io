@@ -32,39 +32,72 @@
     CHANGELOG
 </h1>
 <h2>
+<a aria-hidden="true" class="anchor" href="#mangdl-v000-alpha3" id="mangdl-v000-alpha3"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-alpha.3</strong>
+</h2>
+<p>FIRST PACKAGE PRERELEASE.</p>
+<h3>
+<a aria-hidden="true" class="anchor" href="#changed" id="changed"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
+</h3>
+<ul>
+<li>For programmatic usage of the function <code>manga</code> in every provider scripts, you can now change whether the function return the chapters and its metadata (which is significantly slower), just the link to the chapters, or none at all.
+Ex.:</li>
+</ul>
+<div class="highlight highlight-source-python"><pre><span class="pl-k">from</span> <span class="pl-s1">mangdl</span>.<span class="pl-s1">providers</span> <span class="pl-k">import</span> <span class="pl-v">Provider</span>
+
+<span class="pl-s1">prov</span> <span class="pl-c1">=</span> <span class="pl-v">Provider</span>(<span class="pl-s">"acescans"</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">prov</span>.<span class="pl-en">manga</span>(<span class="pl-s">'https://acescans.xyz/manga/hakoniwa-oukoku-no-souzoushu-sama/'</span>, <span class="pl-s1">chs</span><span class="pl-c1">=</span><span class="pl-c1">0</span>))</pre></div>
+<p><code>chs = 0</code> means the function will return an empty dictionary; <code>1</code>: links to the chapters; <code>2</code>: Ch object derived from the chapter's link. If the given integer is not 0-2 (inclusive), it will fallback to <code>1</code>.</p>
+<h2>
+<a aria-hidden="true" class="anchor" href="#mangdl-v000-alpha2" id="mangdl-v000-alpha2"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-alpha.2</strong>
+</h2>
+<p>PROVIDERS SPREE.</p>
+<h3>
+<a aria-hidden="true" class="anchor" href="#added" id="added"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+</h3>
+<ul>
+<li>
+<a href="https://acescans.xyz" rel="nofollow">acescans.xyz</a> provider</li>
+</ul>
+<h3>
+<a aria-hidden="true" class="anchor" href="#fixed" id="fixed"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+</h3>
+<ul>
+<li>Flamescans' chapter function throwing an error from untested code</li>
+</ul>
+<h2>
 <a aria-hidden="true" class="anchor" href="#mangdl-v000-alpha1" id="mangdl-v000-alpha1"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-alpha.1</strong>
 </h2>
 <p><strong>ADDED</strong></p>
 <ul>
 <li>
-<a href="https://danke.moe" rel="nofollow">Danke.moe</a> provider</li>
+<a href="https://danke.moe" rel="nofollow">danke.moe</a> provider</li>
 </ul>
 <h2>
 <a aria-hidden="true" class="anchor" href="#mangdl-v000-alpha0" id="mangdl-v000-alpha0"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-alpha.0</strong>
 </h2>
 <p>START OF SEMANTIC VERSIONING.</p>
 <h3>
-<a aria-hidden="true" class="anchor" href="#added" id="added"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a aria-hidden="true" class="anchor" href="#added-1" id="added-1"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
-<p><a href="https://hachirumi.com" rel="nofollow">Hachirumi.com</a> provider</p>
+<ul>
+<li>
+<a href="https://hachirumi.com" rel="nofollow">hachirumi.com</a> provider</li>
+</ul>
 <h3>
-<a aria-hidden="true" class="anchor" href="#changed" id="changed"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
+<a aria-hidden="true" class="anchor" href="#changed-1" id="changed-1"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
 </h3>
 <ul>
 <li>An intermediary script between the provider scripts and the cli has been made, which can also be used thru programmatic usage.</li>
 </ul>
 <p>Ex.:</p>
-<div class="highlight highlight-source-python"><pre><span class="pl-k">from</span> <span class="pl-s1">mangdl</span> <span class="pl-k">import</span> <span class="pl-v">Provider</span>
-<span class="pl-k">from</span> <span class="pl-s1">mangdl</span>.<span class="pl-v">API</span>.<span class="pl-v">Base</span> <span class="pl-k">import</span> <span class="pl-v">Search</span>
+<div class="highlight highlight-source-python"><pre><span class="pl-k">from</span> <span class="pl-s1">mangdl</span>.<span class="pl-s1">providers</span> <span class="pl-k">import</span> <span class="pl-v">Provider</span>
+<span class="pl-k">from</span> <span class="pl-s1">mangdl</span>.<span class="pl-s1">api</span>.<span class="pl-s1">base</span> <span class="pl-k">import</span> <span class="pl-v">Search</span>
 
-<span class="pl-s1">md</span> <span class="pl-c1">=</span> <span class="pl-v">Provider</span>(<span class="pl-s">"mangadex"</span>)
-<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-s1">md</span>.<span class="pl-en">search</span>(<span class="pl-v">Search</span>(<span class="pl-s">"sachi-iro no one room"</span>)):
+<span class="pl-s1">prov</span> <span class="pl-c1">=</span> <span class="pl-v">Provider</span>(<span class="pl-s">"mangadex"</span>)
+<span class="pl-k">for</span> <span class="pl-s1">i</span> <span class="pl-c1">in</span> <span class="pl-s1">prov</span>.<span class="pl-en">search</span>(<span class="pl-v">Search</span>(<span class="pl-s">"sachi-iro no one room"</span>)):
     <span class="pl-en">print</span>(<span class="pl-s1">i</span>)</pre></div>
-<h3>
-<a aria-hidden="true" class="anchor" href="#removed" id="removed"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>REMOVED</strong>
-</h3>
 <ul>
-<li>Saving and loading configs</li>
+<li>Removed saving and loading configs</li>
 </ul>
 <sub>
 <i>

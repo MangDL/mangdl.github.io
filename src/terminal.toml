@@ -81,3 +81,37 @@ You may need to shut down and restart powershell and/or consoles
  first prior to using choco.
 Ensuring Chocolatey commands are on the path
 Ensuring chocolatey.nupkg is in the lib folder'''
+
+[terminals.inst_winx64]
+    indented = true
+	os_family = 'Windows'
+	os = 'Win10'
+	terminal = 'Windows Powershell'
+	admin = true
+	pwd = 'C:\Windows\system32'
+	[[terminals.inst_winx64.cmdps]]
+        cmd = '''Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/MangDL/MangDL/master/assets/winx64.ps1'))'''
+        op = '''Forcing web requests to allow TLS v1.2 (Required for requests to Chocolatey.org)
+Getting latest version of the Chocolatey package for download.
+Not using proxy.
+Getting Chocolatey from https://community.chocolatey.org/api/v2/package/chocolatey/0.11.3.
+${...}
+Chocolatey installed 1/1 packages.
+ See the log for details (C:\ProgramData\chocolatey\logs\chocolatey.log)'''
+
+[terminals.inst_winx86]
+    indented = true
+	os_family = 'Windows'
+	os = 'Win10'
+	terminal = 'Windows Powershell'
+	admin = true
+	pwd = 'C:\Windows\system32'
+	[[terminals.inst_winx86.cmdps]]
+        cmd = '''Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/MangDL/MangDL/master/assets/winx86.ps1'))'''
+        op = '''Forcing web requests to allow TLS v1.2 (Required for requests to Chocolatey.org)
+Getting latest version of the Chocolatey package for download.
+Not using proxy.
+Getting Chocolatey from https://community.chocolatey.org/api/v2/package/chocolatey/0.11.3.
+${...}
+Chocolatey installed 1/1 packages.
+ See the log for details (C:\ProgramData\chocolatey\logs\chocolatey.log).'''

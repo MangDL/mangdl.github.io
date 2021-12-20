@@ -16,7 +16,7 @@ function toggle_light_mode() {
 
 var items = {
     "Installable": {
-        "Windows": { "Terminal": ["Powershell", "Command Prompt"] },
+        "Windows": { "Architecture": ["x64", "x86"] },
         "MacOS": { '': [] },
         "Linux": { "Distro": ["Debian", "Arch"] }
     },
