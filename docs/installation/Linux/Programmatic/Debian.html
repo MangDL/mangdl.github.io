@@ -37,20 +37,20 @@
 </head>
 
 <body>
-    <h2>Linux - Installable - Arch linux distro and derivatives</h2>
-    Open your preferred terminal and run the following command:
+    <h2>Linux - Programmatic - Debian linux distro and derivatives</h2>
     <ul>
-        <li>
+        <li>Open your preferred terminal and run the following command:
             <div class="highlight">
-                <pre><code class="language-shell">sudo pacman -Syyu --noconfirm curl p7zip
-curl -s https://raw.githubusercontent.com/MangDL/MangDL/master/assets/linux-install.sh | sudo bash</code></pre>
+                <pre><code class="language-shell">sudo apt update && sudo apt -y upgrade
+sudo apt -y install software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install -y python3.10 python3-pip git-all p7zip-full
+python3.10 -m pip install git+https://www.github.com/MangDL/MangDL</code></pre>
             </div>
         </li>
         <li>
-            You can now use MangDL by running the following command:
-            <div class="highlight">
-                <pre><code class="language-shell">mangdl</code></pre>
-            </div>
+            You can now use MangDL programmatically!
         </li>
     </ul>
     <script src="/script.js"></script>

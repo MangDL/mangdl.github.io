@@ -37,20 +37,34 @@
 </head>
 
 <body>
-    <h2>Linux - Installable - Arch linux distro and derivatives</h2>
-    Open your preferred terminal and run the following command:
+    <h2>Programmatic - MacOS</h2>
     <ul>
-        <li>
+        <li>Open your preferred terminal and run the following command:
             <div class="highlight">
-                <pre><code class="language-shell">sudo pacman -Syyu --noconfirm curl p7zip
-curl -s https://raw.githubusercontent.com/MangDL/MangDL/master/assets/linux-install.sh | sudo bash</code></pre>
+                <pre><code class="language-shell">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"</code></pre>
+            </div>
+        </li>
+        <li>Next, for OS X 10.13 (High Sierra) or younger, run the following command:
+            <div class="highlight">
+                <pre><code class="language-shell">echo 'export PATH="/usr/local/opt/python/libexec/bin:$PATH"' >> ~/.profile</code></pre>
+            </div>
+            And for OS X 10.12 (Sierra) or older, use the following command instead:
+            <div class="highlight">
+                <pre><code class="language-shell">echo 'export PATH=/usr/local/bin:/usr/local/sbin:$PATH' >> ~/.profile</code></pre>
+            </div>
+        </li>
+        <li>Afterwards, install the rest of the prerequisites by running the following command:
+            <div class="highlight">
+                <pre><code class="language-shell">brew install python git p7zip</code></pre>
+            </div>
+        </li>
+        <li>Then, install MangDL in your python installation by running the following command:
+            <div class="highlight">
+                <pre><code class="language-shell">python -m pip install git+https://github.com/MangDL/MangDL.git</code></pre>
             </div>
         </li>
         <li>
-            You can now use MangDL by running the following command:
-            <div class="highlight">
-                <pre><code class="language-shell">mangdl</code></pre>
-            </div>
+            You can now use MangDL programmatically!
         </li>
     </ul>
     <script src="/script.js"></script>
