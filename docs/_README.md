@@ -81,6 +81,7 @@ For the terms of usage and legals, visit [license](license.md) and [terms of usa
 
 ## **Sites**
 
+- [acescans.xyz](https://acescans.xyz)
 - [danke.moe](https://danke.moe)
 - [flamescans.org](https://flamescans.org)
 - [hachirumi.com](https://hachirumi.com)
@@ -89,7 +90,6 @@ For the terms of usage and legals, visit [license](license.md) and [terms of usa
 
 ### Coming soon™
 
-- [acescans.xyz](https://acescans.xyz)
 - [assortedscans.com](https://assortedscans.com)
 - [bunko.ml](https://bunko.ml)
 - [mangapill.com](https://mangapill.com/)
