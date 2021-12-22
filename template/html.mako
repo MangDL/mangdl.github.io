@@ -285,7 +285,7 @@
   supermodule = module.supermodule
   %>
   <nav id="sidebar">
-    <h1>mangDL</h1>
+    <h1>MangDL</h1>
 
     <%include file="logo.mako"/>
 
@@ -301,6 +301,16 @@
     % endif
 
     <h2>Index</h2>
+    <div class="toc">
+        <ul>
+            <li><a href="/index.html"><strong>Homepage</strong></a></li>
+            <li><a href="/installation.html"><strong>Installation</strong></a></li>
+            <li><a href="/tou_disc.html"><strong>Terms of Usage & Disclaimer</strong></a></li>
+            <li><a href="/docs/index.html"><strong>Documentation</strong></a></li>
+            <li><a href="/changelog.html"><strong>Changelog</strong></a></li>
+            <li><a href="/license.html"><strong>License</strong></a></li>
+        <ul>
+    </div>
     ${extract_toc(module.docstring) if extract_module_toc_into_sidebar else ''}
     <ul id="index">
     % if supermodule:

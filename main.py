@@ -47,7 +47,7 @@ All other copyright for project [{Vars.project_name}](https://github.com/{Vars.u
     pdoc.tpl_lookup = TemplateLookup(
         cache_args=dict(cached=True, cache_type='memory'),
         input_encoding='utf-8',
-        directories=["./docs/template/"],
+        directories=["./template/"],
     )
     os.mkdir(FOLDER)
     _html = pdoc.Module(FOLDER, context=pdoc.Context()).html()

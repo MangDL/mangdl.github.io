@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>mangdl.api.providers.mangadex API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/atom-one-dark.min.css" crossorigin>
+<style>html{scrollbar-face-color:#646464;scrollbar-base-color:#646464;scrollbar-3dlight-color:#646464;scrollbar-highlight-color:#646464;scrollbar-track-color:#000;scrollbar-arrow-color:#000;scrollbar-shadow-color:#646464;scrollbar-dark-shadow-color:#646464}::-webkit-scrollbar{width:14px;height:3px}::-webkit-scrollbar-button{background-color:#000;height:3px}::-webkit-scrollbar-track{background-color:#646464}::-webkit-scrollbar-track-piece{background-color:#000}::-webkit-scrollbar-thumb{height:50px;background-color:#666;border-radius:7px}::-webkit-scrollbar-corner{background-color:#646464}::-webkit-resizer{background-color:#666}:root{--highlight-color:#978141}.flex{display:flex !important}body{line-height:1.5em;color:#fff;background-color:#0f0f0f}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}#lunr-search{color:#fff;width:100%;font-size:1em;padding:6px 9px 5px 9px;border:1px solid transparent;background:#262626}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em;font-family:Liberation Mono}h2{font-size:1.75em;margin:.75em 0 .25em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#70BAFF;text-decoration:none;transition:color .2s ease-in-out}a:hover{color:#CDB4DB}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#79aaf8}pre code{background:transparent;font-size:.8em;line-height:1.4em}code{background:rgba(255,255,255,0.1);padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#1e2122;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #646464}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 2em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:0 0}.name{background:#000;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#0b0b0b}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{background:#282c34;max-height:500px;margin:0;overflow-x:scroll;overflow-y:scroll}.source pre code{font-size:12px;overflow-x:initial}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #1b1b1b}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>mangdl.api.providers.mangadex</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import ast
+import time
+from typing import Any, Dict, List, Union
+
+import httpx
+from yarl import URL
+
+from ...utils.settings import stg
+from ...utils.utils import ddir, de, dnrp, parse_list
+from ..base import Ch, Downloader, Manga, Search, Vls, req
+
+op_links = {
+    &#34;al&#34;: &#34;https://anilist.co/manga/{}&#34;,
+    &#34;ap&#34;: &#34;https://www.anime-planet.com/manga/{}&#34;,
+    &#34;bw&#34;: &#34;https://bookwalker.jp/{}&#34;,
+    &#34;mu&#34;: &#34;https://www.mangaupdates.com/series.html?id={}&#34;,
+    &#34;nu&#34;: &#34;https://www.novelupdates.com/series/{}&#34;,
+    &#34;kt&#34;: &#34;https://kitsu.io/api/edge/manga?filter[slug]={}&#34;,
+    &#34;mal&#34;: &#34;https://myanimelist.net/manga/{}&#34;
+}
+
+def ra(resp: httpx.Response) -&gt; int:
+    op = resp.headers.get(&#34;X-RateLimit-Retry-After&#34;)
+    if op:
+        op = int(op) - int(time.time()) + 1
+    else:
+        op = int(resp.headers[&#39;retry-after&#39;])
+    return op
+
+def value(d: Dict[Any, Any]) -&gt; Any:
+    return list(d.values())[0]
+
+def paginate(url: str, limit: int = 100, params: Dict[Any, Any] = {}) -&gt; List[Dict[str, Any]]:
+    def get_page(offset: int=0):
+        return req.get(url, ra, params={k: d[k] for d in [{&#34;limit&#34;: limit, &#34;offset&#34;: offset}, params] for k in d}).json()
+
+    ls = []
+    offset = 0
+    x = get_page(offset)
+    ls.append(x)
+
+    while x[&#34;total&#34;] - (offset + 100) &gt; 0:
+        offset += 100
+        ls.append(get_page(offset))
+    return ls
+
+def url_id(url: str) -&gt; str:
+    url = URL(url)
+    if url.is_absolute():
+        url = url.relative()
+    return url.parts[2]
+
+def chapter(url: str) -&gt; Ch:
+    id = url_id(url)
+    resp_obj = req.get(f&#34;https://api.mangadex.org/chapter/{id}&#34;, params={&#34;includes[]&#34;: &#34;scanlation_group&#34;}).json()
+
+    def attr(dir: str):
+        return ddir(resp_obj, f&#34;data/attributes/{dir}&#34;)
+
+    bu = req.get(f&#34;https://api.mangadex.org/at-home/server/{ddir(resp_obj, &#39;data/id&#39;)}&#34;, ra).json()[&#34;baseUrl&#34;]
+
+    ch = attr(&#34;chapter&#34;)
+    vol = attr(&#34;volume&#34;)
+    return Ch(
+        url         = url,
+        ch          = ast.literal_eval(ch) if ch else ch,
+        vol         = ast.literal_eval(vol) if vol else vol,
+        title       = attr(&#34;title&#34;),
+        uploaded_at = attr(&#34;publishAt&#34;),
+        imgs        = [f&#34;{bu}/data/{attr(&#39;hash&#39;)}/{i}&#34; for i in attr(&#34;data&#34;)],
+    )
+
+def manga(url: str, chs: int=0) -&gt; Manga:
+    id = url_id(url)
+    resp_obj = req.get(f&#34;https://api.mangadex.org/manga/{id}?includes[]=author&amp;includes[]=artist&amp;includes[]=cover_art&#34;, ra).json()
+    relps = ddir(resp_obj, &#34;data/relationships&#34;)
+
+    def attr(dir: str) -&gt; Any:
+        return ddir(resp_obj, f&#34;data/attributes/{dir}&#34;)
+
+    def relp(x: str) -&gt; str:
+        return [i for i in relps if i[&#34;type&#34;] == x][0]
+
+    links = attr(&#34;links&#34;)
+
+    chap_dict = {}
+    if chs:
+        n = 1
+        for d in paginate(f&#34;https://api.mangadex.org/manga/{id}/feed&#34;, 500, {&#34;translatedLanguage[]&#34;: &#34;en&#34;, &#34;order[chapter]&#34;: &#34;desc&#34;}):
+            for r in d[&#34;data&#34;]:
+                ch = ddir(r, &#34;attributes/chapter&#34;)
+                if ch:
+                    k = ast.literal_eval(ch)
+                else:
+                    k = -n
+                    n += 1
+                cch = f&#34;https://mangadex.org/chapter/{ddir(r, &#39;id&#39;)}&#34;
+                if chs == 2:
+                    cch = chapter(cch)
+                chap_dict[k] = cch
+
+    return Manga(
+        url             = url,
+        covers          = [f&#34;https://uploads.mangadex.org/covers/{id}/{ddir(c, &#39;attributes/fileName&#39;)}&#34; for i in paginate(f&#34;https://api.mangadex.org/cover?manga[]={id}&#34;) for c in i[&#34;data&#34;]],
+        title           = value(attr(&#34;title&#34;)),
+        alt_titles      = [value(i) for i in attr(&#34;altTitles&#34;)],
+        author          = [ddir(relp(&#34;author&#34;), &#34;attributes/name&#34;)],
+        artist          = [ddir(relp(&#34;artist&#34;), &#34;attributes/name&#34;)],
+        status          = {k: v for v, k in enumerate([&#34;ongoing&#34;, &#34;completed&#34;, &#34;hiatus&#34;, &#34;cancelled&#34;])}.get(attr(&#34;status&#34;), -1),
+        demographics    = attr(&#34;publicationDemographic&#34;),
+        content_rating  = attr(&#34;contentRating&#34;),
+        genres          = {value(ddir(i, &#34;attributes/name&#34;)): i[&#34;id&#34;] for i in attr(&#34;tags&#34;) if ddir(i, &#34;attributes/group&#34;) == &#34;genre&#34;},
+        updated_at      = attr(&#34;updatedAt&#34;),
+        created_at      = attr(&#34;createdAt&#34;),
+        description     = attr(&#34;description/en&#34;),
+        links           = {k: op_links[k].format(v) if k in op_links else v for k, v in links.items()} if links else {},
+        chapters        = chap_dict,
+    )
+
+def dl_search(s: Search) -&gt; Dict[str, str]:
+    params = []
+    sr = {}
+    ad = stg(f&#34;mangadex/search&#34;, f&#34;{dnrp(__file__, 3)}/utils/config.yaml&#34;)
+    for k in s.__dataclass_fields__:
+        v = getattr(s, k)
+        if type(v) is str:
+            params.append(f&#34;{k}={v}&#34;)
+        elif type(v) is list:
+            for vv in v:
+                params.append(f&#34;{ad[k]}[]={vv}&#34;)
+        elif type(v) is dict:
+            for vk, vv in v.items():
+                params.append(f&#34;{ad[k]}[{vk}]={vv}&#34;)
+        elif type(v) is Vls:
+            for vk in v.ls:
+                vv = v.vdict.get(vk, None)
+                if vv:
+                     params.append(f&#34;{ad[k]}[]={vv}&#34;)
+    for page in paginate(f&#39;https://api.mangadex.org/manga?{&#34;&amp;&#34;.join(params)}&#39;):
+        for comic in page[&#34;data&#34;]:
+            sr[value(ddir(comic, &#34;attributes/title&#34;))] = f&#39;https://mangadex.org/title/{comic[&#34;id&#34;]}&#39;
+    return sr
+
+def search(s: Search) -&gt; List[Manga]:
+    return [manga(i) for i in dl_search(**s.__dict__).values()]
+
+def cli_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
+    params = {}
+    tags = {ddir(t, &#34;attributes/name/en&#34;).lower(): t[&#34;id&#34;] for t in req.get(&#34;https://api.mangadex.org/manga/tag&#34;, ra).json()[&#34;data&#34;]}
+    vls = {&#34;tags&#34;: [*tags.keys()]}
+    for k, v in stg(f&#34;mangadex/cli_search&#34;, f&#34;{dnrp(__file__, 3)}/utils/config.yaml&#34;).items():
+        op = []
+        v = de(v, [])
+        strings = parse_list(kwargs[k])
+        if strings:
+            for string in strings:
+                if v and string in (v if type(v) is list else vls[v]):
+                        op.append(v[string] if type(v) == dict else string)
+                else:
+                    op.append(string)
+            params[k] = op
+    if kwargs[&#34;order&#34;]:
+        o, s = kwargs[&#34;order&#34;].split(&#34;:&#34;)
+        if o not in [&#39;title&#39;, &#39;year&#39;, &#39;createdAt&#39;, &#39;updatedAt&#39;, &#39;latestUploadedChapter&#39;, &#39;followedCount&#39;, &#39;relevance&#39;]:
+            o = None
+        if s not in [&#39;asc&#39;, &#39;desc&#39;]:
+            s = None
+        if o and s:
+            params[&#34;order&#34;] = Vls(o, s)
+    year = kwargs[&#34;year&#34;]
+    if year:
+        params.append(f&#39;year={year}&#39;)
+    tags = {ddir(t, &#34;attributes/name/en&#34;).lower(): t[&#34;id&#34;] for t in req.get(&#34;https://api.mangadex.org/manga/tag&#34;, ra).json()[&#34;data&#34;]}
+    im = kwargs[&#34;includemode&#34;]
+    it = not not kwargs[&#34;includetags&#34;]
+    if im:
+        im = im.upper()
+        if im in [&#34;AND&#34;, &#34;OR&#34;] and it:
+            params[&#34;includemode&#34;] = im
+        else:
+            im = None
+    em = kwargs[&#34;excludemode&#34;]
+    et = not not kwargs[&#34;excludetags&#34;]
+    if em:
+        em = em.upper()
+        if em in [&#34;AND&#34;, &#34;OR&#34;] and et:
+            params[&#34;excludemode&#34;] = em
+        else:
+            em = None
+
+    return dl_search(Search(title, **params))
+
+def ch_fn(url: str) -&gt; List[str]:
+    resp_obj = req.get(f&#34;https://api.mangadex.org/chapter/{id}&#34;, ra).json()
+    hash = ddir(resp_obj, &#39;data/attributes/hash&#39;)
+    bu = req.get(f&#34;https://api.mangadex.org/at-home/server/{ddir(resp_obj, &#39;data/id&#39;)}&#34;, ra).json()[&#34;baseUrl&#34;]
+    return [f&#34;{bu}/data/{hash}/{i}&#34; for i in ddir(resp_obj, &#34;data/attributes/data&#34;)]
+
+def chdls(url: str) -&gt; List[Dict[Union[float, int, None], str]]:
+    id = url_id(url)
+    op = []
+    for i in paginate(f&#34;https://api.mangadex.org/manga/{id}/feed&#34;, 500, {&#34;translatedLanguage[]&#34;: &#34;en&#34;, &#34;order[chapter]&#34;: &#34;desc&#34;}):
+        for d in i[&#34;data&#34;]:
+            op.append({ddir(d, &#34;attributes/chapter&#34;): d[&#34;id&#34;]})
+    return op
+
+def dl(url: str, **kwargs: Dict[str, Any]):
+    id = url_id(url)
+    Downloader(ch_fn, ra, **kwargs).dl_chdls(chdls(url), *ddir(req.get(f&#34;https://api.mangadex.org/manga/{id}&#34;).json(), &#34;data/attributes/title&#34;).values())
+
+def cli_dl(title: str, **kwargs: Dict[str, Any]):
+    Downloader(ch_fn, **kwargs).cli(cli_search, chdls, title)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="mangdl.api.providers.mangadex.ch_fn"><code class="name flex">
+<span>def <span class="ident">ch_fn</span></span>(<span>url: str) ‑> List[str]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ch_fn(url: str) -&gt; List[str]:
+    resp_obj = req.get(f&#34;https://api.mangadex.org/chapter/{id}&#34;, ra).json()
+    hash = ddir(resp_obj, &#39;data/attributes/hash&#39;)
+    bu = req.get(f&#34;https://api.mangadex.org/at-home/server/{ddir(resp_obj, &#39;data/id&#39;)}&#34;, ra).json()[&#34;baseUrl&#34;]
+    return [f&#34;{bu}/data/{hash}/{i}&#34; for i in ddir(resp_obj, &#34;data/attributes/data&#34;)]</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.mangadex.chapter"><code class="name flex">
+<span>def <span class="ident">chapter</span></span>(<span>url: str) ‑> <a title="mangdl.api.base.Ch" href="../base.html#mangdl.api.base.Ch">Ch</a></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def chapter(url: str) -&gt; Ch:
+    id = url_id(url)
+    resp_obj = req.get(f&#34;https://api.mangadex.org/chapter/{id}&#34;, params={&#34;includes[]&#34;: &#34;scanlation_group&#34;}).json()
+
+    def attr(dir: str):
+        return ddir(resp_obj, f&#34;data/attributes/{dir}&#34;)
+
+    bu = req.get(f&#34;https://api.mangadex.org/at-home/server/{ddir(resp_obj, &#39;data/id&#39;)}&#34;, ra).json()[&#34;baseUrl&#34;]
+
+    ch = attr(&#34;chapter&#34;)
+    vol = attr(&#34;volume&#34;)
+    return Ch(
+        url         = url,
+        ch          = ast.literal_eval(ch) if ch else ch,
+        vol         = ast.literal_eval(vol) if vol else vol,
+        title       = attr(&#34;title&#34;),
+        uploaded_at = attr(&#34;publishAt&#34;),
+        imgs        = [f&#34;{bu}/data/{attr(&#39;hash&#39;)}/{i}&#34; for i in attr(&#34;data&#34;)],
+    )</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.mangadex.chdls"><code class="name flex">
+<span>def <span class="ident">chdls</span></span>(<span>url: str) ‑> List[Dict[Union[float, int, ForwardRef(None)], str]]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def chdls(url: str) -&gt; List[Dict[Union[float, int, None], str]]:
+    id = url_id(url)
+    op = []
+    for i in paginate(f&#34;https://api.mangadex.org/manga/{id}/feed&#34;, 500, {&#34;translatedLanguage[]&#34;: &#34;en&#34;, &#34;order[chapter]&#34;: &#34;desc&#34;}):
+        for d in i[&#34;data&#34;]:
+            op.append({ddir(d, &#34;attributes/chapter&#34;): d[&#34;id&#34;]})
+    return op</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.mangadex.cli_dl"><code class="name flex">
+<span>def <span class="ident">cli_dl</span></span>(<span>title: str, **kwargs: Dict[str, Any])</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cli_dl(title: str, **kwargs: Dict[str, Any]):
+    Downloader(ch_fn, **kwargs).cli(cli_search, chdls, title)</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.mangadex.cli_search"><code class="name flex">
+<span>def <span class="ident">cli_search</span></span>(<span>title: str, **kwargs: Dict[str, Any]) ‑> Dict[str, str]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cli_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
+    params = {}
+    tags = {ddir(t, &#34;attributes/name/en&#34;).lower(): t[&#34;id&#34;] for t in req.get(&#34;https://api.mangadex.org/manga/tag&#34;, ra).json()[&#34;data&#34;]}
+    vls = {&#34;tags&#34;: [*tags.keys()]}
+    for k, v in stg(f&#34;mangadex/cli_search&#34;, f&#34;{dnrp(__file__, 3)}/utils/config.yaml&#34;).items():
+        op = []
+        v = de(v, [])
+        strings = parse_list(kwargs[k])
+        if strings:
+            for string in strings:
+                if v and string in (v if type(v) is list else vls[v]):
+                        op.append(v[string] if type(v) == dict else string)
+                else:
+                    op.append(string)
+            params[k] = op
+    if kwargs[&#34;order&#34;]:
+        o, s = kwargs[&#34;order&#34;].split(&#34;:&#34;)
+        if o not in [&#39;title&#39;, &#39;year&#39;, &#39;createdAt&#39;, &#39;updatedAt&#39;, &#39;latestUploadedChapter&#39;, &#39;followedCount&#39;, &#39;relevance&#39;]:
+            o = None
+        if s not in [&#39;asc&#39;, &#39;desc&#39;]:
+            s = None
+        if o and s:
+            params[&#34;order&#34;] = Vls(o, s)
+    year = kwargs[&#34;year&#34;]
+    if year:
+        params.append(f&#39;year={year}&#39;)
+    tags = {ddir(t, &#34;attributes/name/en&#34;).lower(): t[&#34;id&#34;] for t in req.get(&#34;https://api.mangadex.org/manga/tag&#34;, ra).json()[&#34;data&#34;]}
+    im = kwargs[&#34;includemode&#34;]
+    it = not not kwargs[&#34;includetags&#34;]
+    if im:
+        im = im.upper()
+        if im in [&#34;AND&#34;, &#34;OR&#34;] and it:
+            params[&#34;includemode&#34;] = im
+        else:
+            im = None
+    em = kwargs[&#34;excludemode&#34;]
+    et = not not kwargs[&#34;excludetags&#34;]
+    if em:
+        em = em.upper()
+        if em in [&#34;AND&#34;, &#34;OR&#34;] and et:
+            params[&#34;excludemode&#34;] = em
+        else:
+            em = None
+
+    return dl_search(Search(title, **params))</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.mangadex.dl"><code class="name flex">
+<span>def <span class="ident">dl</span></span>(<span>url: str, **kwargs: Dict[str, Any])</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dl(url: str, **kwargs: Dict[str, Any]):
+    id = url_id(url)
+    Downloader(ch_fn, ra, **kwargs).dl_chdls(chdls(url), *ddir(req.get(f&#34;https://api.mangadex.org/manga/{id}&#34;).json(), &#34;data/attributes/title&#34;).values())</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.mangadex.dl_search"><code class="name flex">
+<span>def <span class="ident">dl_search</span></span>(<span>s: <a title="mangdl.api.base.Search" href="../base.html#mangdl.api.base.Search">Search</a>) ‑> Dict[str, str]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dl_search(s: Search) -&gt; Dict[str, str]:
+    params = []
+    sr = {}
+    ad = stg(f&#34;mangadex/search&#34;, f&#34;{dnrp(__file__, 3)}/utils/config.yaml&#34;)
+    for k in s.__dataclass_fields__:
+        v = getattr(s, k)
+        if type(v) is str:
+            params.append(f&#34;{k}={v}&#34;)
+        elif type(v) is list:
+            for vv in v:
+                params.append(f&#34;{ad[k]}[]={vv}&#34;)
+        elif type(v) is dict:
+            for vk, vv in v.items():
+                params.append(f&#34;{ad[k]}[{vk}]={vv}&#34;)
+        elif type(v) is Vls:
+            for vk in v.ls:
+                vv = v.vdict.get(vk, None)
+                if vv:
+                     params.append(f&#34;{ad[k]}[]={vv}&#34;)
+    for page in paginate(f&#39;https://api.mangadex.org/manga?{&#34;&amp;&#34;.join(params)}&#39;):
+        for comic in page[&#34;data&#34;]:
+            sr[value(ddir(comic, &#34;attributes/title&#34;))] = f&#39;https://mangadex.org/title/{comic[&#34;id&#34;]}&#39;
+    return sr</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.mangadex.manga"><code class="name flex">
+<span>def <span class="ident">manga</span></span>(<span>url: str, chs: int = 0) ‑> <a title="mangdl.api.base.Manga" href="../base.html#mangdl.api.base.Manga">Manga</a></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def manga(url: str, chs: int=0) -&gt; Manga:
+    id = url_id(url)
+    resp_obj = req.get(f&#34;https://api.mangadex.org/manga/{id}?includes[]=author&amp;includes[]=artist&amp;includes[]=cover_art&#34;, ra).json()
+    relps = ddir(resp_obj, &#34;data/relationships&#34;)
+
+    def attr(dir: str) -&gt; Any:
+        return ddir(resp_obj, f&#34;data/attributes/{dir}&#34;)
+
+    def relp(x: str) -&gt; str:
+        return [i for i in relps if i[&#34;type&#34;] == x][0]
+
+    links = attr(&#34;links&#34;)
+
+    chap_dict = {}
+    if chs:
+        n = 1
+        for d in paginate(f&#34;https://api.mangadex.org/manga/{id}/feed&#34;, 500, {&#34;translatedLanguage[]&#34;: &#34;en&#34;, &#34;order[chapter]&#34;: &#34;desc&#34;}):
+            for r in d[&#34;data&#34;]:
+                ch = ddir(r, &#34;attributes/chapter&#34;)
+                if ch:
+                    k = ast.literal_eval(ch)
+                else:
+                    k = -n
+                    n += 1
+                cch = f&#34;https://mangadex.org/chapter/{ddir(r, &#39;id&#39;)}&#34;
+                if chs == 2:
+                    cch = chapter(cch)
+                chap_dict[k] = cch
+
+    return Manga(
+        url             = url,
+        covers          = [f&#34;https://uploads.mangadex.org/covers/{id}/{ddir(c, &#39;attributes/fileName&#39;)}&#34; for i in paginate(f&#34;https://api.mangadex.org/cover?manga[]={id}&#34;) for c in i[&#34;data&#34;]],
+        title           = value(attr(&#34;title&#34;)),
+        alt_titles      = [value(i) for i in attr(&#34;altTitles&#34;)],
+        author          = [ddir(relp(&#34;author&#34;), &#34;attributes/name&#34;)],
+        artist          = [ddir(relp(&#34;artist&#34;), &#34;attributes/name&#34;)],
+        status          = {k: v for v, k in enumerate([&#34;ongoing&#34;, &#34;completed&#34;, &#34;hiatus&#34;, &#34;cancelled&#34;])}.get(attr(&#34;status&#34;), -1),
+        demographics    = attr(&#34;publicationDemographic&#34;),
+        content_rating  = attr(&#34;contentRating&#34;),
+        genres          = {value(ddir(i, &#34;attributes/name&#34;)): i[&#34;id&#34;] for i in attr(&#34;tags&#34;) if ddir(i, &#34;attributes/group&#34;) == &#34;genre&#34;},
+        updated_at      = attr(&#34;updatedAt&#34;),
+        created_at      = attr(&#34;createdAt&#34;),
+        description     = attr(&#34;description/en&#34;),
+        links           = {k: op_links[k].format(v) if k in op_links else v for k, v in links.items()} if links else {},
+        chapters        = chap_dict,
+    )</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.mangadex.paginate"><code class="name flex">
+<span>def <span class="ident">paginate</span></span>(<span>url: str, limit: int = 100, params: Dict[Any, Any] = {}) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def paginate(url: str, limit: int = 100, params: Dict[Any, Any] = {}) -&gt; List[Dict[str, Any]]:
+    def get_page(offset: int=0):
+        return req.get(url, ra, params={k: d[k] for d in [{&#34;limit&#34;: limit, &#34;offset&#34;: offset}, params] for k in d}).json()
+
+    ls = []
+    offset = 0
+    x = get_page(offset)
+    ls.append(x)
+
+    while x[&#34;total&#34;] - (offset + 100) &gt; 0:
+        offset += 100
+        ls.append(get_page(offset))
+    return ls</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.mangadex.ra"><code class="name flex">
+<span>def <span class="ident">ra</span></span>(<span>resp: httpx.Response) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ra(resp: httpx.Response) -&gt; int:
+    op = resp.headers.get(&#34;X-RateLimit-Retry-After&#34;)
+    if op:
+        op = int(op) - int(time.time()) + 1
+    else:
+        op = int(resp.headers[&#39;retry-after&#39;])
+    return op</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.mangadex.search"><code class="name flex">
+<span>def <span class="ident">search</span></span>(<span>s: <a title="mangdl.api.base.Search" href="../base.html#mangdl.api.base.Search">Search</a>) ‑> List[<a title="mangdl.api.base.Manga" href="../base.html#mangdl.api.base.Manga">Manga</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def search(s: Search) -&gt; List[Manga]:
+    return [manga(i) for i in dl_search(**s.__dict__).values()]</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.mangadex.url_id"><code class="name flex">
+<span>def <span class="ident">url_id</span></span>(<span>url: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def url_id(url: str) -&gt; str:
+    url = URL(url)
+    if url.is_absolute():
+        url = url.relative()
+    return url.parts[2]</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.mangadex.value"><code class="name flex">
+<span>def <span class="ident">value</span></span>(<span>d: Dict[Any, Any]) ‑> Any</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def value(d: Dict[Any, Any]) -&gt; Any:
+    return list(d.values())[0]</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>MangDL</h1>
+<form>
+<input id="lunr-search" name="q" placeholder="Search..." aria-label="Search"
+disabled minlength="2">
+</form>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.15.3/tingle.min.css" integrity="sha512-j1u8eUJ4f23xPPxwOrLUPQaCD2dwzNqqmDDcWS4deWsMv2ohLqmXXuP3hU7g8TyzbMSakP/mMqoNBYWj8AEIFg==" crossorigin>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.15.3/tingle.min.js" integrity="sha512-plGUER9JkeEWPPqQBE4sdLqBoQug5Ap+BCGMc7bJ8BXkm+VVj6QzkpBz5Yv2yPkkq+cqg9IpkBaGCas6uDbW8g==" crossorigin></script>
+<style>
+.modal-dialog iframe {
+width: 100vw;
+height: calc(100vh - 80px);
+}
+@media screen and (min-width: 700px) {
+.modal-dialog iframe {
+width: 70vw;
+height: 80vh;
+}
+}
+.modal-dialog .tingle-modal-box {
+width: auto;
+background: #0f0f0f;
+}
+.modal-dialog .tingle-modal-box__content {padding: 0;}
+#search-status{
+font-family: Liberation Mono;
+}
+footer{
+font-family: Liberation Mono;
+}
+</style>
+<script>
+const input = document.getElementById('lunr-search');
+input.disabled = false;
+input.form.addEventListener('submit', (ev) => {
+ev.preventDefault();
+const url = new URL(window.location);
+url.searchParams.set('q', input.value);
+history.replaceState({}, null, url.toString());
+search(input.value);
+});
+const query = new URL(window.location).searchParams.get('q');
+if (query)
+search(query);
+function search(query) {
+const url = '../../../doc-search.html#' + encodeURIComponent(query);
+new tingle.modal({
+cssClass: ['modal-dialog'],
+onClose: () => {
+const url = new URL(window.location);
+url.searchParams.delete('q');
+history.replaceState({}, null, url.toString());
+setTimeout(() => input.focus(), 100);
+}
+}).setContent('<iframe src="' + url + '"></iframe>').open();
+}
+</script>
+<h2>Index</h2>
+<div class="toc">
+<ul>
+<li><a href="/index.html"><strong>Homepage</strong></a></li>
+<li><a href="/installation.html"><strong>Installation</strong></a></li>
+<li><a href="/tou_disc.html"><strong>Terms of Usage & Disclaimer</strong></a></li>
+<li><a href="/docs/index.html"><strong>Documentation</strong></a></li>
+<li><a href="/changelog.html"><strong>Changelog</strong></a></li>
+<li><a href="/license.html"><strong>License</strong></a></li>
+<ul>
+</div>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="mangdl.api.providers" href="index.html">mangdl.api.providers</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="mangdl.api.providers.mangadex.ch_fn" href="#mangdl.api.providers.mangadex.ch_fn">ch_fn</a></code></li>
+<li><code><a title="mangdl.api.providers.mangadex.chapter" href="#mangdl.api.providers.mangadex.chapter">chapter</a></code></li>
+<li><code><a title="mangdl.api.providers.mangadex.chdls" href="#mangdl.api.providers.mangadex.chdls">chdls</a></code></li>
+<li><code><a title="mangdl.api.providers.mangadex.cli_dl" href="#mangdl.api.providers.mangadex.cli_dl">cli_dl</a></code></li>
+<li><code><a title="mangdl.api.providers.mangadex.cli_search" href="#mangdl.api.providers.mangadex.cli_search">cli_search</a></code></li>
+<li><code><a title="mangdl.api.providers.mangadex.dl" href="#mangdl.api.providers.mangadex.dl">dl</a></code></li>
+<li><code><a title="mangdl.api.providers.mangadex.dl_search" href="#mangdl.api.providers.mangadex.dl_search">dl_search</a></code></li>
+<li><code><a title="mangdl.api.providers.mangadex.manga" href="#mangdl.api.providers.mangadex.manga">manga</a></code></li>
+<li><code><a title="mangdl.api.providers.mangadex.paginate" href="#mangdl.api.providers.mangadex.paginate">paginate</a></code></li>
+<li><code><a title="mangdl.api.providers.mangadex.ra" href="#mangdl.api.providers.mangadex.ra">ra</a></code></li>
+<li><code><a title="mangdl.api.providers.mangadex.search" href="#mangdl.api.providers.mangadex.search">search</a></code></li>
+<li><code><a title="mangdl.api.providers.mangadex.url_id" href="#mangdl.api.providers.mangadex.url_id">url_id</a></code></li>
+<li><code><a title="mangdl.api.providers.mangadex.value" href="#mangdl.api.providers.mangadex.value">value</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
