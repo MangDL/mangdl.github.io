@@ -58,6 +58,7 @@ body {
 }
 
 select {
+    display: flex;
     margin: 0.5em;
     font-size: 100%;
     text-align-last: center;
@@ -66,8 +67,9 @@ select {
     border: 0px;
     border-radius: 0.5em;
     color: inherit;
-    padding: 10% 0 10% 0;
-    width: 100%;
+    padding: 1em 0 1em 0;
+    width: 75%;
+    align-content: left;
 }
 
 select * {
@@ -109,39 +111,6 @@ pre {
     border-radius: 4px;
 }
 
-.highlight>.chroma {
-    color: #d0d0d0;
-    background-color: #212121;
-    position: static;
-    z-index: 1;
-    border-radius: 4px;
-    padding: 10px;
-}
-
-.chroma {
-    overflow: auto;
-}
-
-.chroma .lntable {
-    display: table;
-    width: 100%;
-    padding: 0 0 5px;
-    margin: 0;
-    border-spacing: 0;
-    border: 0;
-    overflow: auto;
-}
-
-.chroma .lntd:first-child {
-    padding: 7px 7px 7px 10px;
-    margin: 0;
-}
-
-.chroma .lntd:last-child {
-    padding: 7px 10px 7px 7px;
-    margin: 0;
-}
-
 .copy-code-button {
     position: absolute;
     z-index: 2;
@@ -179,4 +148,91 @@ pre {
     height: 0;
     z-index: -1;
     opacity: 0.01;
+}
+
+ul li img {
+    display: block;
+    max-width: 50%;
+}
+
+
+@media (max-width: 1000px) {
+	ul li img {
+        display: block;
+        max-width: 75%;
+    }
+}
+
+@media (max-width: 500px) {
+	ul li img {
+        display: block;
+        max-width: 100%;
+    }
+}
+
+kbd {
+    display: inline-block;
+    padding: 3px 5px;
+    font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+    line-height: normal;
+    line-height: 10px;
+    color: #c9d1d9;
+    vertical-align: middle;
+    background-color: #161b22;
+    border: solid 1px rgba(110,118,129,0.4);
+    border-bottom-color: rgba(110,118,129,0.4);
+    border-radius: 6px;
+    box-shadow: inset 0 -1px 0 rgba(110,118,129,0.4);
+}
+
+code {
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(110,118,129,0.4);
+    border-radius: 6px;
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    cursor: pointer;
+    align-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
+#ol-img {
+    margin: 0 auto;
+    align-self: center;
+    max-width: 100%;
+    max-height: 90vh;
+    width:auto;
+    size: contain;
+}
+
+#overlay p {
+    text-align: center;
+    margin: 0.2em 0 0 0;
+}
+
+#overlay a:link{
+    color: white;
+}
+
+#overlay a:visited{
+    color: white;
+}
+#overlay a:active{
+    color: white;
+}
+
+#overlay a:hover{
+    color: white;
 }

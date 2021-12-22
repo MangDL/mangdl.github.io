@@ -1,29 +1,18 @@
-var app = document.getElementsByTagName("BODY")[0];
-if (localStorage.lightMode == "dark") {
-    app.setAttribute("light-mode", "dark");
-}
-
-function toggle_light_mode() {
-    var app = document.getElementsByTagName("BODY")[0];
-    if (localStorage.lightMode == "dark") {
-        localStorage.lightMode = "light";
-        app.setAttribute("light-mode", "light");
-    } else {
-        localStorage.lightMode = "dark";
-        app.setAttribute("light-mode", "dark");
-    }
-}
-
 var items = {
     "Installable": {
-        "Windows": { "Architecture": ["x64", "x86"] },
+        "Windows": { '': [] },
         "MacOS": { '': [] },
         "Linux": { "Distro": ["Debian", "Arch"] }
     },
     "Portable": {
-        "Windows": { "Terminal": ["Powershell", "Command Prompt"] },
+        "Windows": { '': [] },
         "Linux": { "Distro": ["Debian", "Arch"] }
-    }
+    },
+    "Programmatic": {
+        "Windows": { "": [] },
+        "MacOS": { '': [] },
+        "Linux": { "Distro": ["Debian", "Arch"] }
+    },
 }
 window.onload = function () {
     var firstSel = document.getElementById("first");
@@ -143,3 +132,28 @@ function addCopyButtonToDom(button, highlightDiv) {
 document
     .querySelectorAll(".highlight")
     .forEach((highlightDiv) => createCopyButton(highlightDiv));
+
+function on() {
+    document.getElementById("overlay").style.display = "grid";
+}
+
+function off() {
+    document.getElementById("overlay").style.display = "none";
+}
+
+function enlarge(item) {
+    on();
+    document.getElementById("ol-img").src = item.src;
+}
+
+function addEnlarge(enlargeDiv) {
+    enlargeDiv.setAttribute("title", "Click me to enlarge!")
+}
+
+for (var i of document.querySelectorAll("ul li img")) {
+    i.setAttribute("onclick", "enlarge(this)");
+}
+
+document
+    .querySelectorAll(".el-img")
+    .forEach((enlargeDiv) => addEnlarge(enlargeDiv));
