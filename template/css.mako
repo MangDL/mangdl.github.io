@@ -338,8 +338,6 @@
         }
         #content {
             width: 70%;
-            max-width: 100ch;
-            padding: 3em 4em;
             border-left: 1px solid #1b1b1b;
         }
         pre code {

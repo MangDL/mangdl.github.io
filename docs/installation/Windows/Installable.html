@@ -1,101 +1,68 @@
-<!doctype html>
-
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>MangDL</title>
-
-    <meta name="description" content="The most inefficient Manga downloader for PC">
-    <meta name="author" content="whinee">
-
-    <meta property="og:title" content="MangDL">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mangdl.rf.gd">
-    <meta property="og:description" content="The most inefficient Manga downloader for PC">
-
-    <meta content="https://raw.githubusercontent.com/MangDL/mangdl.github.io/master/docs/assets/images/banner.png"
-        property="og:image" />
-    <meta content="MangDL" name="twitter:title" />
-    <link href="https://raw.githubusercontent.com/MangDL/mangdl.github.io/master/docs/assets/images/icons/logo.png"
-        rel="icon" type="image/png" />
-    <link href="https://raw.githubusercontent.com/MangDL/mangdl.github.io/master/docs/assets/images/icons/logo.png"
-        rel="apple-touch-icon" />
-
-    <link as="style" crossorigin=""
-        href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css"
-        integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" rel="preload stylesheet" />
-    <link as="style" crossorigin=""
-        href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css"
-        integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" rel="preload stylesheet" />
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/prism.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/prism.js"></script>
-</head>
-
-<body>
-    <div id="overlay" onclick="off()">
-        <img id="ol-img">
-        <p>Click anywhere to zoom out.</p>
-        <p>Image not zooming in enough? Create a pull request at <a
-                href=https://github.com/MangDL/mangdl.rf.gd>github.com/MangDL/mangdl.rf.gd</a> and fix the issue
-            yourself.</p>
-    </div>
-    <h2>Installable - Windows 7 and up</h2>
-    Part of the following is a summary of <a href="https://community.chocolatey.org/courses/installation/installing?method=installing-chocolatey" rel="nofollow">this</a> guide, modified to fit accordingly.
-    <ul>
-        <li>
-            Press <kbd>Windows</kbd> + <kbd>R</kbd> (Press <kbd>Windows</kbd> and <kbd>R</kbd> keys simultaneously)
-        </li>
-        <li>
-            A window with a title <code>Run</code> should appear. Focus to the said window in the <code>Open:</code>
-            text field by hovering the mouse towards the said text field and left-clicking the mouse and type
-            <code>powershell</code> like illustrated below:
-            <a class="el-img">
-                <img alt="run_box_cmd" src="/assets/images/run_box_ps.png" />
-            </a>
-        </li>
-        <li>
-            Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd> (Press <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, and
-            <kbd>Enter</kbd> keys simultaneously).
-        </li>
-        <li>
-            A window with a title <code>User Account Control</code> should appear like illustrated below:
-            <a class="el-img">
-                <img alt="run_box_cmd" src="/assets/images/UAC_ps.png" />
-            </a>
-            Focus to the said window and press the <code>Yes</code> button by hovering the mouse towards the said button
-            and left-clicking the mouse.
-        </li>
-        <li>
-            Now, there are two choices: 32-bit and 64-bit installation, the latter is recommended. Run the command
-            corresponding your choice.
-            <ul>
-                <li>
-                    64-bit:
-                    <div class="highlight">
-                        <pre><code class="language-powershell">Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/MangDL/MangDL/master/assets/inst-winx64.ps1'))</code></pre>
-                    </div>
-                </li>
-                <li>
-                    32-bit:
-                    <div class="highlight">
-                        <pre><code class="language-powershell">Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/MangDL/MangDL/master/assets/inst-winx86.ps1'))</code></pre>
-                    </div>
-                </li>
-            </ul>
-        </li>
-        <li>
-            You can now use MangDL by running the following command:
-            <div class="highlight">
-                <pre><code class="language-shell">mangdl</code></pre>
-            </div>
-        </li>
-    </ul>
-    <script src="/script.js"></script>
-</body>
-
-</html>
+<link as="style" crossorigin=""
+    href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css"
+    integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" rel="preload stylesheet" />
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/prism.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/prism.js"></script>
+<div id="overlay" onclick="off()">
+    <img id="ol-img">
+    <p>Click anywhere to zoom out.</p>
+    <p>Image not zooming in enough? Create a pull request at <a
+            href=https://github.com/MangDL/mangdl.rf.gd>github.com/MangDL/mangdl.rf.gd</a> and fix the issue
+        yourself.</p>
+</div>
+<h2>Installable - Windows 7 and up</h2>
+Part of the following is a summary of <a
+    href="https://community.chocolatey.org/courses/installation/installing?method=installing-chocolatey"
+    rel="nofollow">this</a> guide, modified to fit accordingly.
+<ul>
+    <li>
+        Press <kbd>Windows</kbd> + <kbd>R</kbd> (Press <kbd>Windows</kbd> and <kbd>R</kbd> keys simultaneously)
+    </li>
+    <li>
+        A window with a title <code>Run</code> should appear. Focus to the said window in the <code>Open:</code>
+        text field by hovering the mouse towards the said text field and left-clicking the mouse and type
+        <code>powershell</code> like illustrated below:
+        <a class="el-img">
+            <img alt="run_box_cmd" src="/assets/images/run_box_ps.png" />
+        </a>
+    </li>
+    <li>
+        Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd> (Press <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, and
+        <kbd>Enter</kbd> keys simultaneously).
+    </li>
+    <li>
+        A window with a title <code>User Account Control</code> should appear like illustrated below:
+        <a class="el-img">
+            <img alt="run_box_cmd" src="/assets/images/UAC_ps.png" />
+        </a>
+        Focus to the said window and press the <code>Yes</code> button by hovering the mouse towards the said button
+        and left-clicking the mouse.
+    </li>
+    <li>
+        Now, there are two choices: 32-bit and 64-bit installation, the latter is recommended. Run the command
+        corresponding your choice.
+        <ul>
+            <li>
+                64-bit:
+                <div class="highlight">
+                    <pre><code class="language-powershell">Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/MangDL/MangDL/master/assets/inst-winx64.ps1'))</code></pre>
+                </div>
+            </li>
+            <li>
+                32-bit:
+                <div class="highlight">
+                    <pre><code class="language-powershell">Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/MangDL/MangDL/master/assets/inst-winx86.ps1'))</code></pre>
+                </div>
+            </li>
+        </ul>
+    </li>
+    <li>
+        You can now use MangDL by running the following command:
+        <div class="highlight">
+            <pre><code class="language-shell">mangdl</code></pre>
+        </div>
+    </li>
+</ul>
+<script src="/script.js"></script>
