@@ -92,6 +92,7 @@ For the terms of usage and legals, visit [license](license.md) and [terms of usa
 
 - [assortedscans.com](https://assortedscans.com)
 - [bunko.ml](https://bunko.ml)
+- [deathtollscans.net](https://deathtollscans.net)
 - [mangapill.com](https://mangapill.com/)
 - [mangareader.to](https://mangareader.to)
 - [mangarock.to](https://mangarock.to)
