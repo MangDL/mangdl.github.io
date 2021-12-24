@@ -25,18 +25,18 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/whinee/mangDL/blob/None/project/mangdl/cli.py#L1-L67" class="git-link">Browse git</a>
 </summary>
-<pre><code class="python">import importlib
-from typing import Any
+<pre><code class="python">import builtins
+import inspect
+from typing import Any, Callable, List
 
 import click
+from tabulate import tabulate
 from yachalk import chalk
 
-from .utils import globals
-from .utils.log import logger
-from .utils.settings import wr_stg
-from .utils.utils import command
+from .providers import Provider
+from .utils.settings import stg
+from .utils.utils import dd, de, dnrp
 
 print(chalk.hex(&#34;D2748D&#34;).bold(r&#34;&#34;&#34;
  _____   ___     _____    _____     __   _________   ______    __
@@ -47,11 +47,117 @@ print(chalk.hex(&#34;D2748D&#34;).bold(r&#34;&#34;&#34;
    \ \_\    \ \_\\ \_\ \ \_\\ \_\＼ ＼____\\ \________\\ \_____/ \ \_____\
     \/_/     \/_/ \/_/  \/_/ \/_/  ＼/____/ \/________/ \/____/   \/_____/
 
-The most inefficient, non user-friendly and colorful manga downloader (and soon, also a reader)&#34;&#34;&#34;) + chalk.hex(&#34;3279a1&#34;)(&#39;\nWIP ofc, whaddya expect?\n&#39;))
+The most inefficient, non user-friendly and colorful manga downloader (and soon, also a reader)&#34;&#34;&#34;) + chalk.hex(&#34;3279a1&#34;)(&#39;\nChat with whi~nyaan at https://discord.com/invite/JbAtUxGcJZ\n&#39;))
+
+def cao(group: click.group, cmd: str) -&gt; List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]:
+    &#34;&#34;&#34;Retruns wrappers for a click command evaluated from the given arguments.
+
+    Args:
+        group (click.group): Command group of the command to be under.
+        cmd (str): Name of the command.
+
+    Returns:
+        List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]: The wrappers.
+    &#34;&#34;&#34;
+    cmd = stg(f&#34;cmd/{cmd}&#34;, f&#34;{dnrp(__file__)}/utils/config.yaml&#34;)
+    arguments = cmd[&#34;arguments&#34;]
+
+    def c(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
+        &#34;&#34;&#34;The command wrapper.
+        Args:
+            f (Callable[[Any], Any]): The command function to be decorated.
+        Returns:
+            Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
+        &#34;&#34;&#34;
+        help = []
+        if arguments:
+            for k, v in arguments.items():
+                arguments[k][&#34;help&#34;] = [*v[&#34;help&#34;], *[None for _ in range(3 - len(v[&#34;help&#34;]))]]
+            for k, v in arguments.items():
+                t, h, e = v[&#34;help&#34;]
+                e = &#39;\nEx.: {e}&#39; if e else &#34;&#34;
+                help.append([f&#34;&lt;{k}&gt;&#34;, t, f&#39;{h}{e}&#39;])
+        s, h = cmd[&#34;help&#34;]
+        return group.command(*de(cmd[&#34;args&#34;], []), **dd({&#34;context_settings&#34;: {&#39;help_option_names&#39;: [&#39;-h&#39;, &#39;--help&#39;]}, &#34;short_help&#34;: s, &#34;help&#34;: f&#34;\b\n{h}\n{tabulate(help, tablefmt=&#39;plain&#39;)}&#34;}, cmd[&#34;kwargs&#34;]))(f)
+
+    def a(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
+        &#34;&#34;&#34;The arguments wrapper.
+        Args:
+            f (Callable[[Any], Any]): The command function to be decorated.
+        Returns:
+            Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
+        &#34;&#34;&#34;
+        args = {}
+        kwargs = {}
+        if arguments:
+            for k, v in arguments.items():
+                kw = {&#34;metavar&#34;: f&#34;&lt;{k}&gt;&#34;}
+                args[k] = [k, *de(v[&#34;args&#34;], [])]
+                kwargs[k] = dd(kw, v[&#34;kwargs&#34;])
+            for i in list(args.keys()):
+                f = click.argument(*args[i], **kwargs[i])(f)
+        return f
+
+    def o(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
+        &#34;&#34;&#34;The options wrapper.
+        Args:
+            f (Callable[[Any], Any]): The command function to be decorated.
+        Returns:
+            Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
+        &#34;&#34;&#34;
+        if opts:= cmd[&#34;options&#34;]:
+            n = 0
+            args = {}
+            kwargs = {}
+            for k, v in opts.items():
+                l = len(v[&#34;help&#34;][0] or &#34;&#34;)
+                n = l if l &gt; n else n
+                opts[k][&#34;help&#34;] = [*v[&#34;help&#34;], *[None for _ in range(3 - len(v[&#34;help&#34;]))]]
+            for k, v in opts.items():
+                a = de(v[&#34;args&#34;], [])
+                kw = de(v[&#34;kwargs&#34;], {})
+                a[0] = f&#34;--{a[0]}&#34;
+                a.insert(0, f&#34;-{k}&#34;)
+                kt = kw.get(&#34;type&#34;, None)
+                t, h, e = v[&#34;help&#34;]
+                t = t or &#34;&#34;
+                h = &#34;\n&#34;.join(f&#39;{&#34; &#34; * ((n + 3)-(0 if i else len(j)))}{j}&#39; for i, j in enumerate(h.split(&#34;\n&#34;))) if h else &#34;&#34;
+                e = &#34;\n&#34; + &#34;\n&#34;.join(f&#39;{&#34; &#34; * (n + (11 if i else 5))}{&#34;Ex.: &#34; if not i else &#34;&#34;}{j}&#39; for i, j in enumerate(e.split(&#34;\n&#34;))) if e else &#34;&#34;
+                kw[&#34;help&#34;] = f&#39;\b\n{t}{&#34; &#34;*((n + 3) - len(t))}{h}{e}&#39;
+                if type(kt) is dict:
+                    ktk, ktv = list(kt.items())[0]
+                    kta, ktkw = [i[1] for i in ktv.items()]
+                    kw[&#34;type&#34;] = getattr(click, ktk)(*kta, **ktkw if ktkw else {})
+                elif kt:
+                    kw[&#34;type&#34;] = getattr(builtins, kt)
+                args[k] = a
+                kwargs[k] = kw
+            for i in list(args.keys()):
+                f = click.option(*args[i], **kwargs[i])(f)
+        return f
+
+    return c, a, o
+
+def command(group: click.group) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
+    &#34;&#34;&#34;Wrapper for click commands.
+
+    Args:
+        group (click.group): Command group of the command to be under.
+
+    Returns:
+        Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
+    &#34;&#34;&#34;
+    def inner(f: Callable[[Any], Any]):
+        m = inspect.getouterframes(inspect.currentframe())[1][4][0]
+        for m in cao(group, m[4:m.index(&#34;(&#34;)]):
+            f = m(f)
+        return f
+    return inner
 
 @click.group(context_settings={&#39;help_option_names&#39;: [&#39;-h&#39;, &#39;--help&#39;]})
 def cli():
-    &#34;&#34;&#34;Main command group.
+    &#34;&#34;&#34;
+    Main command group.
     &#34;&#34;&#34;
     pass
 
@@ -62,21 +168,7 @@ def dl(title: str, **kwargs: dict[str, Any]):
     Args:
         title (str): The title of the manga to be search for and download.
     &#34;&#34;&#34;
-    globals.log = logger(kwargs[&#34;verbosity&#34;])
-    globals.style = kwargs[&#34;colortheme&#34;]
-    sc = kwargs[&#34;saveconfig&#34;]
-    if sc:
-        ls = [
-            &#34;saveconfig&#34;,
-            &#34;loadconfig&#34;,
-            &#34;overridelc&#34;
-        ]
-        for i in ls:
-            kwargs.pop(i)
-        wr_stg(f&#39;config/dl/{sc}&#39;, kwargs)
-    else:
-        prov = kwargs.pop(&#34;provider&#34;)
-        getattr(importlib.import_module(f&#39;mangdl.API.Providers.{prov if prov else &#34;mangadex&#34;}&#39;), &#34;cli_dl&#34;)(title, **kwargs)
+    Provider(kwargs.pop(&#34;provider&#34;, &#34;mangadex&#34;)).cli_dl(title, **kwargs)
 
 @command(cli)
 def credits():
@@ -101,12 +193,159 @@ def credits():
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="mangdl.cli.cao"><code class="name flex">
+<span>def <span class="ident">cao</span></span>(<span>group: <function group at 0x7fb2921f6290>, cmd: str) ‑> List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Retruns wrappers for a click command evaluated from the given arguments.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>group</code></strong> :&ensp;<code>click.group</code></dt>
+<dd>Command group of the command to be under.</dd>
+<dt><strong><code>cmd</code></strong> :&ensp;<code>str</code></dt>
+<dd>Name of the command.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]</code></dt>
+<dd>The wrappers.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cao(group: click.group, cmd: str) -&gt; List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]:
+    &#34;&#34;&#34;Retruns wrappers for a click command evaluated from the given arguments.
+
+    Args:
+        group (click.group): Command group of the command to be under.
+        cmd (str): Name of the command.
+
+    Returns:
+        List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]: The wrappers.
+    &#34;&#34;&#34;
+    cmd = stg(f&#34;cmd/{cmd}&#34;, f&#34;{dnrp(__file__)}/utils/config.yaml&#34;)
+    arguments = cmd[&#34;arguments&#34;]
+
+    def c(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
+        &#34;&#34;&#34;The command wrapper.
+        Args:
+            f (Callable[[Any], Any]): The command function to be decorated.
+        Returns:
+            Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
+        &#34;&#34;&#34;
+        help = []
+        if arguments:
+            for k, v in arguments.items():
+                arguments[k][&#34;help&#34;] = [*v[&#34;help&#34;], *[None for _ in range(3 - len(v[&#34;help&#34;]))]]
+            for k, v in arguments.items():
+                t, h, e = v[&#34;help&#34;]
+                e = &#39;\nEx.: {e}&#39; if e else &#34;&#34;
+                help.append([f&#34;&lt;{k}&gt;&#34;, t, f&#39;{h}{e}&#39;])
+        s, h = cmd[&#34;help&#34;]
+        return group.command(*de(cmd[&#34;args&#34;], []), **dd({&#34;context_settings&#34;: {&#39;help_option_names&#39;: [&#39;-h&#39;, &#39;--help&#39;]}, &#34;short_help&#34;: s, &#34;help&#34;: f&#34;\b\n{h}\n{tabulate(help, tablefmt=&#39;plain&#39;)}&#34;}, cmd[&#34;kwargs&#34;]))(f)
+
+    def a(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
+        &#34;&#34;&#34;The arguments wrapper.
+        Args:
+            f (Callable[[Any], Any]): The command function to be decorated.
+        Returns:
+            Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
+        &#34;&#34;&#34;
+        args = {}
+        kwargs = {}
+        if arguments:
+            for k, v in arguments.items():
+                kw = {&#34;metavar&#34;: f&#34;&lt;{k}&gt;&#34;}
+                args[k] = [k, *de(v[&#34;args&#34;], [])]
+                kwargs[k] = dd(kw, v[&#34;kwargs&#34;])
+            for i in list(args.keys()):
+                f = click.argument(*args[i], **kwargs[i])(f)
+        return f
+
+    def o(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
+        &#34;&#34;&#34;The options wrapper.
+        Args:
+            f (Callable[[Any], Any]): The command function to be decorated.
+        Returns:
+            Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
+        &#34;&#34;&#34;
+        if opts:= cmd[&#34;options&#34;]:
+            n = 0
+            args = {}
+            kwargs = {}
+            for k, v in opts.items():
+                l = len(v[&#34;help&#34;][0] or &#34;&#34;)
+                n = l if l &gt; n else n
+                opts[k][&#34;help&#34;] = [*v[&#34;help&#34;], *[None for _ in range(3 - len(v[&#34;help&#34;]))]]
+            for k, v in opts.items():
+                a = de(v[&#34;args&#34;], [])
+                kw = de(v[&#34;kwargs&#34;], {})
+                a[0] = f&#34;--{a[0]}&#34;
+                a.insert(0, f&#34;-{k}&#34;)
+                kt = kw.get(&#34;type&#34;, None)
+                t, h, e = v[&#34;help&#34;]
+                t = t or &#34;&#34;
+                h = &#34;\n&#34;.join(f&#39;{&#34; &#34; * ((n + 3)-(0 if i else len(j)))}{j}&#39; for i, j in enumerate(h.split(&#34;\n&#34;))) if h else &#34;&#34;
+                e = &#34;\n&#34; + &#34;\n&#34;.join(f&#39;{&#34; &#34; * (n + (11 if i else 5))}{&#34;Ex.: &#34; if not i else &#34;&#34;}{j}&#39; for i, j in enumerate(e.split(&#34;\n&#34;))) if e else &#34;&#34;
+                kw[&#34;help&#34;] = f&#39;\b\n{t}{&#34; &#34;*((n + 3) - len(t))}{h}{e}&#39;
+                if type(kt) is dict:
+                    ktk, ktv = list(kt.items())[0]
+                    kta, ktkw = [i[1] for i in ktv.items()]
+                    kw[&#34;type&#34;] = getattr(click, ktk)(*kta, **ktkw if ktkw else {})
+                elif kt:
+                    kw[&#34;type&#34;] = getattr(builtins, kt)
+                args[k] = a
+                kwargs[k] = kw
+            for i in list(args.keys()):
+                f = click.option(*args[i], **kwargs[i])(f)
+        return f
+
+    return c, a, o</code></pre>
+</details>
+</dd>
+<dt id="mangdl.cli.command"><code class="name flex">
+<span>def <span class="ident">command</span></span>(<span>group: <function group at 0x7fb2921f6290>) ‑> Callable[[Callable[[Any], Any]], Callable[[Any], Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wrapper for click commands.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>group</code></strong> :&ensp;<code>click.group</code></dt>
+<dd>Command group of the command to be under.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Callable[[Callable[[Any], Any]], Callable[[Any], Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def command(group: click.group) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
+    &#34;&#34;&#34;Wrapper for click commands.
+
+    Args:
+        group (click.group): Command group of the command to be under.
+
+    Returns:
+        Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
+    &#34;&#34;&#34;
+    def inner(f: Callable[[Any], Any]):
+        m = inspect.getouterframes(inspect.currentframe())[1][4][0]
+        for m in cao(group, m[4:m.index(&#34;(&#34;)]):
+            f = m(f)
+        return f
+    return inner</code></pre>
+</details>
+</dd>
+</dl>
 </section>
 <section>
 </section>
 </article>
 <nav id="sidebar">
-<h1>mangDL</h1>
+<h1>MangDL</h1>
 <form>
 <input id="lunr-search" name="q" placeholder="Search..." aria-label="Search"
 disabled minlength="2">
@@ -164,12 +403,28 @@ setTimeout(() => input.focus(), 100);
 </script>
 <h2>Index</h2>
 <div class="toc">
+<ul>
+<li><a href="/index.html"><strong>Homepage</strong></a></li>
+<li><a href="/installation.html"><strong>Installation</strong></a></li>
+<li><a href="/tou_disc.html"><strong>Terms of Usage & Disclaimer</strong></a></li>
+<li><a href="/docs/index.html"><strong>Documentation</strong></a></li>
+<li><a href="/changelog.html"><strong>Changelog</strong></a></li>
+<li><a href="/license.html"><strong>License</strong></a></li>
+<ul>
+</div>
+<div class="toc">
 <ul></ul>
 </div>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
 <li><code><a title="mangdl" href="index.html">mangdl</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="mangdl.cli.cao" href="#mangdl.cli.cao">cao</a></code></li>
+<li><code><a title="mangdl.cli.command" href="#mangdl.cli.command">command</a></code></li>
 </ul>
 </li>
 </ul>

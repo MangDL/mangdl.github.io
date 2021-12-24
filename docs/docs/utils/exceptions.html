@@ -25,11 +25,12 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/whinee/mangDL/blob/None/project/mangdl/utils/exceptions.py#L1-L3" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class UnexpectedDatetimeFormat(Exception):
-    def __init__(self, details):
-        self.details = details</code></pre>
+    pass
+
+class DownloadFailed(Exception):
+    pass</code></pre>
 </details>
 </section>
 <section>
@@ -41,20 +42,37 @@
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="mangdl.utils.exceptions.UnexpectedDatetimeFormat"><code class="flex name class">
-<span>class <span class="ident">UnexpectedDatetimeFormat</span></span>
-<span>(</span><span>details)</span>
+<dt id="mangdl.utils.exceptions.DownloadFailed"><code class="flex name class">
+<span>class <span class="ident">DownloadFailed</span></span>
+<span>(</span><span>*args, **kwargs)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Common base class for all non-exit exceptions.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/whinee/mangDL/blob/None/project/mangdl/utils/exceptions.py#L1-L3" class="git-link">Browse git</a>
+</summary>
+<pre><code class="python">class DownloadFailed(Exception):
+    pass</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+<dt id="mangdl.utils.exceptions.UnexpectedDatetimeFormat"><code class="flex name class">
+<span>class <span class="ident">UnexpectedDatetimeFormat</span></span>
+<span>(</span><span>*args, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Common base class for all non-exit exceptions.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
 </summary>
 <pre><code class="python">class UnexpectedDatetimeFormat(Exception):
-    def __init__(self, details):
-        self.details = details</code></pre>
+    pass</code></pre>
 </details>
 <h3>Ancestors</h3>
 <ul class="hlist">
@@ -66,7 +84,7 @@
 </section>
 </article>
 <nav id="sidebar">
-<h1>mangDL</h1>
+<h1>MangDL</h1>
 <form>
 <input id="lunr-search" name="q" placeholder="Search..." aria-label="Search"
 disabled minlength="2">
@@ -124,6 +142,16 @@ setTimeout(() => input.focus(), 100);
 </script>
 <h2>Index</h2>
 <div class="toc">
+<ul>
+<li><a href="/index.html"><strong>Homepage</strong></a></li>
+<li><a href="/installation.html"><strong>Installation</strong></a></li>
+<li><a href="/tou_disc.html"><strong>Terms of Usage & Disclaimer</strong></a></li>
+<li><a href="/docs/index.html"><strong>Documentation</strong></a></li>
+<li><a href="/changelog.html"><strong>Changelog</strong></a></li>
+<li><a href="/license.html"><strong>License</strong></a></li>
+<ul>
+</div>
+<div class="toc">
 <ul></ul>
 </div>
 <ul id="index">
@@ -134,6 +162,9 @@ setTimeout(() => input.focus(), 100);
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
+<li>
+<h4><code><a title="mangdl.utils.exceptions.DownloadFailed" href="#mangdl.utils.exceptions.DownloadFailed">DownloadFailed</a></code></h4>
+</li>
 <li>
 <h4><code><a title="mangdl.utils.exceptions.UnexpectedDatetimeFormat" href="#mangdl.utils.exceptions.UnexpectedDatetimeFormat">UnexpectedDatetimeFormat</a></code></h4>
 </li>

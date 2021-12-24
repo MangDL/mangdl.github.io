@@ -8,6 +8,9 @@ import yaml
 from bs4 import BeautifulSoup
 from mako.lookup import TemplateLookup
 from selenium_driver_updater import DriverUpdater
+import subprocess
+import shlex
+import shutil
 
 import markdown_vars
 from src import terminal
@@ -16,13 +19,13 @@ from src.settings import stg
 FOLDER = stg("folder")
 
 def main():
-    DriverUpdater.install(
-        path = "./src",
-        driver_name = DriverUpdater.chromedriver,
-        upgrade = True,
-        check_driver_is_up_to_date = True,
-    )
-    terminal.update()
+    # DriverUpdater.install(
+    #     path = "./src",
+    #     driver_name = DriverUpdater.chromedriver,
+    #     upgrade = True,
+    #     check_driver_is_up_to_date = True,
+    # )
+    # terminal.update()
     importlib.reload(markdown_vars)
     Vars = markdown_vars.Vars
 
@@ -120,17 +123,23 @@ All other copyright for project [{Vars.project_name}](https://github.com/{Vars.u
                 logo["style"] = "display: block; margin: auto;"
             if RM:
                 if toc:
-                    html = str(soup).replace(str(soup.select_one(".toc")), f'<div class="toc"><ul><li><a href="docs/index.html"><strong>Documentation</strong></a></li><ul></div><h2>Table of Contents</h2><div class="toc">{str(toc.find_next("ul"))}</div>')
-            else:
-                html = str(soup).replace(str(soup.select_one(".toc")), f'<div class="toc"><ul><li><a href="index.html"><strong>Homepage</strong></a></li><li><a href="docs/index.html"><strong>Documentation</strong></a></li><ul></div>')
+                    html = str(soup).replace(str(soup.select_one(".toc")), f'{str(soup.select_one(".toc"))}<div class="toc"><ul><li><h3><a href="#table-of-contents">Table of Contents</a></h3>{str(toc.find_next("ul"))}</li></ul>')
             quote = r"""
-            <blockquote style='background:hsla(0 0% 100% / 5%);padding:0 20px 5px 20px;margin:30px 0 0;'>
-            <span style='font-size:150px;line-height:70px;margin-left:-20px;opacity:0.2'>❝</span>
-            <p style='font-size:15px;margin-top:-50px'><i>...but I don't think you'll write code valuable enough for them (Content creators and/or owners) to do that (file a DMCA strike against MangDL).</i></p>
-            <p">- <a href='https://github.com/justfoolingaround'>KR</a></p>
-            </blockquote>"""
-            html = html.replace(str(soup.select_one("#content blockquote")), quote)
+<blockquote style='background:hsla(0 0% 100% / 5%);padding:0 20px 5px 20px;margin:30px 0 0;'>
+<span style='font-size:150px;line-height:70px;margin-left:-20px;opacity:0.2'>❝</span>
+<p style='font-size:15px;margin-top:-50px'><b><i>...but I don't think you'll write code valuable enough for them</i></b> (Content creators and/or owners) <b><i>to do that</i></b> (file a DMCA strike against MangDL)</p>
+<p">- <a href='https://github.com/justfoolingaround'>KR</a></p>
+</blockquote>
+<blockquote style='background:hsla(0 0% 100% / 5%);padding:0 20px 5px 20px;margin:30px 0 0;'>
+<span style='font-size:150px;line-height:70px;margin-left:-20px;opacity:0.2'>❝</span>
+<p style='font-size:15px;margin-top:-50px'><b><i><del>whi_ne has good organization</del></i></b> [skills] <b><i><del>and bad code</del></i></b></p>
+<p">- <a href='https://github.com/ArjixWasTaken'>Arjix</a></p>
+</blockquote>"""
+            html = html.replace(str(soup.select_one("#quotes")), quote)
             hout.write(html)
+    shutil.rmtree("./docs/docs")
+    subprocess.run(shlex.split(f"pdoc --html --template-dir template -o docs --force ../MangDL/mangdl"))
+    shutil.move('./docs/mangdl', './docs/docs')
 
 if __name__ == "__main__":
     main()

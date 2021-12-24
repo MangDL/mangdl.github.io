@@ -24,8 +24,10 @@ window.onload = function () {
     for (var x in items) {
         firstSel.options[firstSel.options.length] = new Option(x, x);
     }
+    rel.load('./installation/index.html');
     firstSel.onchange = function () {
         rel.empty()
+        rel.load(`./installation/OS.html`);
         if (firstSel.value == "") {
             secSel.style = "display: none;";
             ss.style = "display: none;";
@@ -53,6 +55,7 @@ window.onload = function () {
             ts.style = "display: none;";
             rel.load(`./installation/${this.value}/${firstSel.value}.html`);
         } else {
+            rel.load(`./installation/${secSel.value}/index.html`);
             ts.textContent = Object.keys(items[firstSel.value][this.value])[0];
             ts.style = "display: block;"
             thirdSel.style = "display: block;"

@@ -65,7 +65,7 @@ class Provider:
         local = locals()
         [local.pop(i) for i in [&#34;self&#34;,]]
         return self.prov.manga(**local)
-    def dl_search(self, s: Search) -&gt; Dict[str, str]:
+    def dl_search(self, title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
         &#34;&#34;&#34;Used for downloading when imported.
         Args:
             s (Search): Search dataclass, search parameters for searching.
@@ -203,7 +203,7 @@ class Provider:
         local = locals()
         [local.pop(i) for i in [&#34;self&#34;,]]
         return self.prov.manga(**local)
-    def dl_search(self, s: Search) -&gt; Dict[str, str]:
+    def dl_search(self, title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
         &#34;&#34;&#34;Used for downloading when imported.
         Args:
             s (Search): Search dataclass, search parameters for searching.
@@ -430,7 +430,7 @@ then pass that to <code>dl_search</code> for it to return the search results.</p
 </details>
 </dd>
 <dt id="mangdl.providers.Provider.dl_search"><code class="name flex">
-<span>def <span class="ident">dl_search</span></span>(<span>self, s: <a title="mangdl.api.base.Search" href="api/base.html#mangdl.api.base.Search">Search</a>) ‑> Dict[str, str]</span>
+<span>def <span class="ident">dl_search</span></span>(<span>self, title: str, **kwargs: Dict[str, Any]) ‑> Dict[str, str]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Used for downloading when imported.</p>
@@ -448,7 +448,7 @@ then pass that to <code>dl_search</code> for it to return the search results.</p
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def dl_search(self, s: Search) -&gt; Dict[str, str]:
+<pre><code class="python">def dl_search(self, title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
     &#34;&#34;&#34;Used for downloading when imported.
     Args:
         s (Search): Search dataclass, search parameters for searching.

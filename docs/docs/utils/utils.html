@@ -25,24 +25,25 @@
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/whinee/mangDL/blob/None/project/mangdl/utils/utils.py#L1-L248" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">import ast
-import builtins
-import inspect
+import difflib
+import itertools
 import re
+import sys
 from datetime import datetime, timedelta
 from functools import lru_cache
 from os.path import dirname as dn
 from os.path import realpath as rp
+from time import strftime, strptime
 from typing import Any, Callable, Dict, List, Union
+import unicodedata
 
-import click
-from tabulate import tabulate
-
-from . import exceptions
-from .settings import stg
-
+# https://stackoverflow.com/a/93029
+ALL_CHARS = (chr(i) for i in range(sys.maxunicode))
+CATEGORIES = {&#39;Cn&#39;}
+CCHARS = &#39;&#39;.join(map(chr, itertools.chain(range(0x00,0x20), range(0x7f,0xa0))))
+CCHARS_RE = re.compile(&#39;[%s]&#39; % re.escape(CCHARS))
 
 def dnrp(file: str, n: int=1) -&gt; str:
     &#34;&#34;&#34;
@@ -113,142 +114,38 @@ def ddir(d: Dict[Any, Any], dir: str) -&gt; Any:
     return op
 
 @lru_cache
-def dt(dt: str) -&gt; str:
+def dt(dt: str, format: str) -&gt; str:
     &#34;&#34;&#34;
-    Remove timezone from datetime.
+    Remove timezone from datetime and format it to ISO 8601 format.
 
-    Arguments:
-        dt {str} -- datetime???
-
-    Raises:
-        exceptions.UnexpectedDatetimeFormat: raised when the given string is not a datetime formatted
-            at the following format: ``
+    Args:
+        dt (str): Unformatted datetime string to be formatted to ISO 8601 format
+        format (str): The initial format of the datetime string
 
     Returns:
-        str -- [description]
+        str: Formatted datetime string
     &#34;&#34;&#34;
+    dt = strftime(&#34;%Y-%m-%dT%H:%M:%S&#34;, strptime(dt, format))
     tz = re.match(r&#34;(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})([-+])(\d{2}):(\d{2})&#34;, dt)
     if tz:
         iso, s, ho, mo = tz.groups()
         s = -1 if s == &#34;-&#34; else 1
         return (datetime.fromisoformat(iso) - (s * timedelta(hours=int(ho), minutes=int(mo)))).strftime(&#34;%Y-%m-%dT%H:%M:%S&#34;)
-    elif re.match(r&#34;\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}&#34;, dt):
-        return dt
     else:
-        raise exceptions.UnexpectedDatetimeFormat(datetime)
+        return dt
 
-def cao(group: click.group, cmd: str) -&gt; List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]:
-    &#34;&#34;&#34;Retruns wrappers for a click command evaluated from the given arguments.
+@lru_cache
+def dt_ts(ts: str) -&gt; str:
+    &#34;&#34;&#34;
+    Convert the given unix timestamp to ISO 8601 format.
 
     Args:
-        group (click.group): Command group of the command to be under.
-        cmd (str): Name of the command.
+        ts (str): unix timestamp to be converted to ISO 8601 format
 
     Returns:
-        List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]: The wrappers.
+        str: Formatted datetime string
     &#34;&#34;&#34;
-    cmd = stg(f&#34;cmd/{cmd}&#34;, f&#34;{dnrp(__file__)}/config.yaml&#34;)
-    arguments = cmd[&#34;arguments&#34;]
-
-    def c(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-        &#34;&#34;&#34;The command wrapper.
-
-        Args:
-            f (Callable[[Any], Any]): The command function to be decorated.
-
-        Returns:
-            Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
-        &#34;&#34;&#34;
-        help = []
-        if arguments:
-            for k, v in arguments.items():
-                arguments[k][&#34;help&#34;] = [*v[&#34;help&#34;], *[None for _ in range(3 - len(v[&#34;help&#34;]))]]
-            for k, v in arguments.items():
-                t, h, e = v[&#34;help&#34;]
-                e = &#39;\nEx.: {e}&#39; if e else &#34;&#34;
-                help.append([f&#34;&lt;{k}&gt;&#34;, t, f&#39;{h}{e}&#39;])
-        s, h = cmd[&#34;help&#34;]
-        return group.command(*de(cmd[&#34;args&#34;], []), **dd({&#34;context_settings&#34;: {&#39;help_option_names&#39;: [&#39;-h&#39;, &#39;--help&#39;]}, &#34;short_help&#34;: s, &#34;help&#34;: f&#34;\b\n{h}\n{tabulate(help, tablefmt=&#39;plain&#39;)}&#34;}, cmd[&#34;kwargs&#34;]))(f)
-
-    def a(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-        &#34;&#34;&#34;The arguments wrapper.
-
-        Args:
-            f (Callable[[Any], Any]): The command function to be decorated.
-
-        Returns:
-            Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
-        &#34;&#34;&#34;
-        args = {}
-        kwargs = {}
-        if arguments:
-            for k, v in arguments.items():
-                kw = {&#34;metavar&#34;: f&#34;&lt;{k}&gt;&#34;}
-                args[k] = [k, *de(v[&#34;args&#34;], [])]
-                kwargs[k] = dd(kw, v[&#34;kwargs&#34;])
-            for i in list(args.keys()):
-                f = click.argument(*args[i], **kwargs[i])(f)
-        return f
-
-    def o(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-        &#34;&#34;&#34;The options wrapper.
-
-        Args:
-            f (Callable[[Any], Any]): The command function to be decorated.
-
-        Returns:
-            Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
-        &#34;&#34;&#34;
-        if opts:= cmd[&#34;options&#34;]:
-            n = 0
-            args = {}
-            kwargs = {}
-            for k, v in opts.items():
-                l = len(v[&#34;help&#34;][0] or &#34;&#34;)
-                n = l if l &gt; n else n
-                opts[k][&#34;help&#34;] = [*v[&#34;help&#34;], *[None for _ in range(3 - len(v[&#34;help&#34;]))]]
-            for k, v in opts.items():
-                a = de(v[&#34;args&#34;], [])
-                kw = de(v[&#34;kwargs&#34;], {})
-                a[0] = f&#34;--{a[0]}&#34;
-                a.insert(0, f&#34;-{k}&#34;)
-                kt = kw.get(&#34;type&#34;, None)
-                t, h, e = v[&#34;help&#34;]
-                t = t or &#34;&#34;
-                h = &#34;\n&#34;.join(f&#39;{&#34; &#34; * ((n + 3)-(0 if i else len(j)))}{j}&#39; for i, j in enumerate(h.split(&#34;\n&#34;))) if h else &#34;&#34;
-                e = &#34;\n&#34; + &#34;\n&#34;.join(f&#39;{&#34; &#34; * (n + (11 if i else 5))}{&#34;Ex.: &#34; if not i else &#34;&#34;}{j}&#39; for i, j in enumerate(e.split(&#34;\n&#34;))) if e else &#34;&#34;
-                kw[&#34;help&#34;] = f&#39;\b\n{t}{&#34; &#34;*((n + 3) - len(t))}{h}{e}&#39;
-                if type(kt) is dict:
-                    ktk, ktv = list(kt.items())[0]
-                    kta, ktkw = [i[1] for i in ktv.items()]
-                    kw[&#34;type&#34;] = getattr(click, ktk)(*kta, **ktkw if ktkw else {})
-                elif kt:
-                    kw[&#34;type&#34;] = getattr(builtins, kt)
-                args[k] = a
-                kwargs[k] = kw
-            for i in list(args.keys()):
-                f = click.option(*args[i], **kwargs[i])(f)
-        return f
-
-    return c, a, o
-
-
-def command(group: click.group) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-    &#34;&#34;&#34;Wrapper for click commands.
-
-    Args:
-        group (click.group): Command group of the command to be under.
-
-    Returns:
-        Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
-    &#34;&#34;&#34;
-    def inner(f: Callable[[Any], Any]):
-        m = inspect.getouterframes(inspect.currentframe())[1][4][0]
-        for m in cao(group, m[4:m.index(&#34;(&#34;)]):
-            f = m(f)
-        return f
-    return inner
-
+    return (datetime.utcfromtimestamp(int(ts))).strftime(&#34;%Y-%m-%dT%H:%M:%S&#34;)
 
 def parse_list(opt: Union[str, None]):
     &#34;&#34;&#34;
@@ -274,7 +171,34 @@ def parse_list(opt: Union[str, None]):
                 opts[i] = x.strip()
         return opts
     else:
-        return None</code></pre>
+        return None
+
+def squery(query: str, possibilities: List[str], cutoff: int=0.6, *, processor: Callable[[Any], Any]=lambda r: r):
+    &#34;&#34;&#34;Custom search query.
+
+    Args:
+        query (str): String to search for in the possibilities.
+        possibilities (List[str]): The possibilities to search from.
+        cutoff (int, optional): The minimum percentage of similarity from the
+            given possibilities. Defaults to 0.6.
+        processor (Callable[[Any], Any], optional): Processes the possibilities
+            before comparing it with the query. Defaults to lambda r:r.
+    &#34;&#34;&#34;
+
+    sequence_matcher = difflib.SequenceMatcher()
+    sequence_matcher.set_seq2(query)
+
+    for search_value in possibilities:
+        sequence_matcher.set_seq1(processor(search_value))
+        if (query.lower() in processor(search_value).lower()):
+            yield (None, search_value)
+            continue
+        if (sequence_matcher.real_quick_ratio() &gt;= cutoff and sequence_matcher.quick_ratio(
+        ) &gt;= cutoff and sequence_matcher.ratio() &gt;= cutoff):
+            yield (sequence_matcher.ratio(), search_value)
+
+def sanitize_text(s: str):
+    return unicodedata.normalize(&#34;NFKD&#34;, CCHARS_RE.sub(&#39;&#39;, s)).strip()</code></pre>
 </details>
 </section>
 <section>
@@ -284,158 +208,6 @@ def parse_list(opt: Union[str, None]):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="mangdl.utils.utils.cao"><code class="name flex">
-<span>def <span class="ident">cao</span></span>(<span>group: <function group at 0x7f3200c15d80>, cmd: str) ‑> List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Retruns wrappers for a click command evaluated from the given arguments.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>group</code></strong> :&ensp;<code>click.group</code></dt>
-<dd>Command group of the command to be under.</dd>
-<dt><strong><code>cmd</code></strong> :&ensp;<code>str</code></dt>
-<dd>Name of the command.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]</code></dt>
-<dd>The wrappers.</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/whinee/mangDL/blob/None/project/mangdl/utils/utils.py#L111-L204" class="git-link">Browse git</a>
-</summary>
-<pre><code class="python">def cao(group: click.group, cmd: str) -&gt; List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]:
-    &#34;&#34;&#34;Retruns wrappers for a click command evaluated from the given arguments.
-
-    Args:
-        group (click.group): Command group of the command to be under.
-        cmd (str): Name of the command.
-
-    Returns:
-        List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]: The wrappers.
-    &#34;&#34;&#34;
-    cmd = stg(f&#34;cmd/{cmd}&#34;, f&#34;{dnrp(__file__)}/config.yaml&#34;)
-    arguments = cmd[&#34;arguments&#34;]
-
-    def c(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-        &#34;&#34;&#34;The command wrapper.
-
-        Args:
-            f (Callable[[Any], Any]): The command function to be decorated.
-
-        Returns:
-            Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
-        &#34;&#34;&#34;
-        help = []
-        if arguments:
-            for k, v in arguments.items():
-                arguments[k][&#34;help&#34;] = [*v[&#34;help&#34;], *[None for _ in range(3 - len(v[&#34;help&#34;]))]]
-            for k, v in arguments.items():
-                t, h, e = v[&#34;help&#34;]
-                e = &#39;\nEx.: {e}&#39; if e else &#34;&#34;
-                help.append([f&#34;&lt;{k}&gt;&#34;, t, f&#39;{h}{e}&#39;])
-        s, h = cmd[&#34;help&#34;]
-        return group.command(*de(cmd[&#34;args&#34;], []), **dd({&#34;context_settings&#34;: {&#39;help_option_names&#39;: [&#39;-h&#39;, &#39;--help&#39;]}, &#34;short_help&#34;: s, &#34;help&#34;: f&#34;\b\n{h}\n{tabulate(help, tablefmt=&#39;plain&#39;)}&#34;}, cmd[&#34;kwargs&#34;]))(f)
-
-    def a(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-        &#34;&#34;&#34;The arguments wrapper.
-
-        Args:
-            f (Callable[[Any], Any]): The command function to be decorated.
-
-        Returns:
-            Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
-        &#34;&#34;&#34;
-        args = {}
-        kwargs = {}
-        if arguments:
-            for k, v in arguments.items():
-                kw = {&#34;metavar&#34;: f&#34;&lt;{k}&gt;&#34;}
-                args[k] = [k, *de(v[&#34;args&#34;], [])]
-                kwargs[k] = dd(kw, v[&#34;kwargs&#34;])
-            for i in list(args.keys()):
-                f = click.argument(*args[i], **kwargs[i])(f)
-        return f
-
-    def o(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-        &#34;&#34;&#34;The options wrapper.
-
-        Args:
-            f (Callable[[Any], Any]): The command function to be decorated.
-
-        Returns:
-            Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
-        &#34;&#34;&#34;
-        if opts:= cmd[&#34;options&#34;]:
-            n = 0
-            args = {}
-            kwargs = {}
-            for k, v in opts.items():
-                l = len(v[&#34;help&#34;][0] or &#34;&#34;)
-                n = l if l &gt; n else n
-                opts[k][&#34;help&#34;] = [*v[&#34;help&#34;], *[None for _ in range(3 - len(v[&#34;help&#34;]))]]
-            for k, v in opts.items():
-                a = de(v[&#34;args&#34;], [])
-                kw = de(v[&#34;kwargs&#34;], {})
-                a[0] = f&#34;--{a[0]}&#34;
-                a.insert(0, f&#34;-{k}&#34;)
-                kt = kw.get(&#34;type&#34;, None)
-                t, h, e = v[&#34;help&#34;]
-                t = t or &#34;&#34;
-                h = &#34;\n&#34;.join(f&#39;{&#34; &#34; * ((n + 3)-(0 if i else len(j)))}{j}&#39; for i, j in enumerate(h.split(&#34;\n&#34;))) if h else &#34;&#34;
-                e = &#34;\n&#34; + &#34;\n&#34;.join(f&#39;{&#34; &#34; * (n + (11 if i else 5))}{&#34;Ex.: &#34; if not i else &#34;&#34;}{j}&#39; for i, j in enumerate(e.split(&#34;\n&#34;))) if e else &#34;&#34;
-                kw[&#34;help&#34;] = f&#39;\b\n{t}{&#34; &#34;*((n + 3) - len(t))}{h}{e}&#39;
-                if type(kt) is dict:
-                    ktk, ktv = list(kt.items())[0]
-                    kta, ktkw = [i[1] for i in ktv.items()]
-                    kw[&#34;type&#34;] = getattr(click, ktk)(*kta, **ktkw if ktkw else {})
-                elif kt:
-                    kw[&#34;type&#34;] = getattr(builtins, kt)
-                args[k] = a
-                kwargs[k] = kw
-            for i in list(args.keys()):
-                f = click.option(*args[i], **kwargs[i])(f)
-        return f
-
-    return c, a, o</code></pre>
-</details>
-</dd>
-<dt id="mangdl.utils.utils.command"><code class="name flex">
-<span>def <span class="ident">command</span></span>(<span>group: <function group at 0x7f3200c15d80>) ‑> Callable[[Callable[[Any], Any]], Callable[[Any], Any]]</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Wrapper for click commands.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>group</code></strong> :&ensp;<code>click.group</code></dt>
-<dd>Command group of the command to be under.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<p>Callable[[Callable[[Any], Any]], Callable[[Any], Any]]</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/whinee/mangDL/blob/None/project/mangdl/utils/utils.py#L207-L221" class="git-link">Browse git</a>
-</summary>
-<pre><code class="python">def command(group: click.group) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-    &#34;&#34;&#34;Wrapper for click commands.
-
-    Args:
-        group (click.group): Command group of the command to be under.
-
-    Returns:
-        Callable[[Callable[[Any], Any]], Callable[[Any], Any]]
-    &#34;&#34;&#34;
-    def inner(f: Callable[[Any], Any]):
-        m = inspect.getouterframes(inspect.currentframe())[1][4][0]
-        for m in cao(group, m[4:m.index(&#34;(&#34;)]):
-            f = m(f)
-        return f
-    return inner</code></pre>
-</details>
-</dd>
 <dt id="mangdl.utils.utils.dd"><code class="name flex">
 <span>def <span class="ident">dd</span></span>(<span>default: Dict[Any, Any], d: Optional[Dict[Any, Any]]) ‑> Dict[Any, Any]</span>
 </code></dt>
@@ -454,7 +226,6 @@ items in the d dict.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/whinee/mangDL/blob/None/project/mangdl/utils/utils.py#L50-L65" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def dd(default: Dict[Any, Any], d: Union[Dict[Any, Any], None]) -&gt; Dict[Any, Any]:
     &#34;&#34;&#34;Defaults dictionary. Overwrite the items in the default dict with the
@@ -494,7 +265,6 @@ will return <code>1</code></p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/whinee/mangDL/blob/None/project/mangdl/utils/utils.py#L67-L84" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def ddir(d: Dict[Any, Any], dir: str) -&gt; Any:
     &#34;&#34;&#34;Retrieve dictionary value using recursive indexing with a string.
@@ -533,7 +303,6 @@ will return <code>1</code></p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/whinee/mangDL/blob/None/project/mangdl/utils/utils.py#L34-L48" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def de(a: Any, d: Any) -&gt; Any:
     &#34;&#34;&#34;
@@ -569,7 +338,6 @@ will return <code>1</code></p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/whinee/mangDL/blob/None/project/mangdl/utils/utils.py#L18-L32" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def dnrp(file: str, n: int=1) -&gt; str:
     &#34;&#34;&#34;
@@ -589,49 +357,79 @@ will return <code>1</code></p>
 </details>
 </dd>
 <dt id="mangdl.utils.utils.dt"><code class="name flex">
-<span>def <span class="ident">dt</span></span>(<span>dt: str) ‑> str</span>
+<span>def <span class="ident">dt</span></span>(<span>dt: str, format: str) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Remove timezone from datetime.</p>
-<h2 id="arguments">Arguments</h2>
-<p>dt {str} &ndash; datetime???</p>
-<h2 id="raises">Raises</h2>
+<div class="desc"><p>Remove timezone from datetime and format it to ISO 8601 format.</p>
+<h2 id="args">Args</h2>
 <dl>
-<dt><code>exceptions.UnexpectedDatetimeFormat</code></dt>
-<dd>raised when the given string is not a datetime formatted
-at the following format: ``</dd>
+<dt><strong><code>dt</code></strong> :&ensp;<code>str</code></dt>
+<dd>Unformatted datetime string to be formatted to ISO 8601 format</dd>
+<dt><strong><code>format</code></strong> :&ensp;<code>str</code></dt>
+<dd>The initial format of the datetime string</dd>
 </dl>
 <h2 id="returns">Returns</h2>
-<p>str &ndash; [description]</p></div>
+<dl>
+<dt><code>str</code></dt>
+<dd>Formatted datetime string</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/whinee/mangDL/blob/None/project/mangdl/utils/utils.py#L86-L109" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@lru_cache
-def dt(dt: str) -&gt; str:
+def dt(dt: str, format: str) -&gt; str:
     &#34;&#34;&#34;
-    Remove timezone from datetime.
+    Remove timezone from datetime and format it to ISO 8601 format.
 
-    Arguments:
-        dt {str} -- datetime???
-
-    Raises:
-        exceptions.UnexpectedDatetimeFormat: raised when the given string is not a datetime formatted
-            at the following format: ``
+    Args:
+        dt (str): Unformatted datetime string to be formatted to ISO 8601 format
+        format (str): The initial format of the datetime string
 
     Returns:
-        str -- [description]
+        str: Formatted datetime string
     &#34;&#34;&#34;
+    dt = strftime(&#34;%Y-%m-%dT%H:%M:%S&#34;, strptime(dt, format))
     tz = re.match(r&#34;(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})([-+])(\d{2}):(\d{2})&#34;, dt)
     if tz:
         iso, s, ho, mo = tz.groups()
         s = -1 if s == &#34;-&#34; else 1
         return (datetime.fromisoformat(iso) - (s * timedelta(hours=int(ho), minutes=int(mo)))).strftime(&#34;%Y-%m-%dT%H:%M:%S&#34;)
-    elif re.match(r&#34;\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}&#34;, dt):
-        return dt
     else:
-        raise exceptions.UnexpectedDatetimeFormat(datetime)</code></pre>
+        return dt</code></pre>
+</details>
+</dd>
+<dt id="mangdl.utils.utils.dt_ts"><code class="name flex">
+<span>def <span class="ident">dt_ts</span></span>(<span>ts: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Convert the given unix timestamp to ISO 8601 format.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>ts</code></strong> :&ensp;<code>str</code></dt>
+<dd>unix timestamp to be converted to ISO 8601 format</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>Formatted datetime string</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@lru_cache
+def dt_ts(ts: str) -&gt; str:
+    &#34;&#34;&#34;
+    Convert the given unix timestamp to ISO 8601 format.
+
+    Args:
+        ts (str): unix timestamp to be converted to ISO 8601 format
+
+    Returns:
+        str: Formatted datetime string
+    &#34;&#34;&#34;
+    return (datetime.utcfromtimestamp(int(ts))).strftime(&#34;%Y-%m-%dT%H:%M:%S&#34;)</code></pre>
 </details>
 </dd>
 <dt id="mangdl.utils.utils.parse_list"><code class="name flex">
@@ -649,7 +447,6 @@ else it splits it into a list.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/whinee/mangDL/blob/None/project/mangdl/utils/utils.py#L224-L248" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def parse_list(opt: Union[str, None]):
     &#34;&#34;&#34;
@@ -678,13 +475,73 @@ else it splits it into a list.</p>
         return None</code></pre>
 </details>
 </dd>
+<dt id="mangdl.utils.utils.sanitize_text"><code class="name flex">
+<span>def <span class="ident">sanitize_text</span></span>(<span>s: str)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sanitize_text(s: str):
+    return unicodedata.normalize(&#34;NFKD&#34;, CCHARS_RE.sub(&#39;&#39;, s)).strip()</code></pre>
+</details>
+</dd>
+<dt id="mangdl.utils.utils.squery"><code class="name flex">
+<span>def <span class="ident">squery</span></span>(<span>query: str, possibilities: List[str], cutoff: int = 0.6, *, processor: Callable[[Any], Any] = &lt;function &lt;lambda&gt;&gt;)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Custom search query.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>query</code></strong> :&ensp;<code>str</code></dt>
+<dd>String to search for in the possibilities.</dd>
+<dt><strong><code>possibilities</code></strong> :&ensp;<code>List[str]</code></dt>
+<dd>The possibilities to search from.</dd>
+<dt><strong><code>cutoff</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>The minimum percentage of similarity from the
+given possibilities. Defaults to 0.6.</dd>
+<dt><strong><code>processor</code></strong> :&ensp;<code>Callable[[Any], Any]</code>, optional</dt>
+<dd>Processes the possibilities
+before comparing it with the query. Defaults to lambda r:r.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def squery(query: str, possibilities: List[str], cutoff: int=0.6, *, processor: Callable[[Any], Any]=lambda r: r):
+    &#34;&#34;&#34;Custom search query.
+
+    Args:
+        query (str): String to search for in the possibilities.
+        possibilities (List[str]): The possibilities to search from.
+        cutoff (int, optional): The minimum percentage of similarity from the
+            given possibilities. Defaults to 0.6.
+        processor (Callable[[Any], Any], optional): Processes the possibilities
+            before comparing it with the query. Defaults to lambda r:r.
+    &#34;&#34;&#34;
+
+    sequence_matcher = difflib.SequenceMatcher()
+    sequence_matcher.set_seq2(query)
+
+    for search_value in possibilities:
+        sequence_matcher.set_seq1(processor(search_value))
+        if (query.lower() in processor(search_value).lower()):
+            yield (None, search_value)
+            continue
+        if (sequence_matcher.real_quick_ratio() &gt;= cutoff and sequence_matcher.quick_ratio(
+        ) &gt;= cutoff and sequence_matcher.ratio() &gt;= cutoff):
+            yield (sequence_matcher.ratio(), search_value)</code></pre>
+</details>
+</dd>
 </dl>
 </section>
 <section>
 </section>
 </article>
 <nav id="sidebar">
-<h1>mangDL</h1>
+<h1>MangDL</h1>
 <form>
 <input id="lunr-search" name="q" placeholder="Search..." aria-label="Search"
 disabled minlength="2">
@@ -742,6 +599,16 @@ setTimeout(() => input.focus(), 100);
 </script>
 <h2>Index</h2>
 <div class="toc">
+<ul>
+<li><a href="/index.html"><strong>Homepage</strong></a></li>
+<li><a href="/installation.html"><strong>Installation</strong></a></li>
+<li><a href="/tou_disc.html"><strong>Terms of Usage & Disclaimer</strong></a></li>
+<li><a href="/docs/index.html"><strong>Documentation</strong></a></li>
+<li><a href="/changelog.html"><strong>Changelog</strong></a></li>
+<li><a href="/license.html"><strong>License</strong></a></li>
+<ul>
+</div>
+<div class="toc">
 <ul></ul>
 </div>
 <ul id="index">
@@ -752,14 +619,15 @@ setTimeout(() => input.focus(), 100);
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="two-column">
-<li><code><a title="mangdl.utils.utils.cao" href="#mangdl.utils.utils.cao">cao</a></code></li>
-<li><code><a title="mangdl.utils.utils.command" href="#mangdl.utils.utils.command">command</a></code></li>
 <li><code><a title="mangdl.utils.utils.dd" href="#mangdl.utils.utils.dd">dd</a></code></li>
 <li><code><a title="mangdl.utils.utils.ddir" href="#mangdl.utils.utils.ddir">ddir</a></code></li>
 <li><code><a title="mangdl.utils.utils.de" href="#mangdl.utils.utils.de">de</a></code></li>
 <li><code><a title="mangdl.utils.utils.dnrp" href="#mangdl.utils.utils.dnrp">dnrp</a></code></li>
 <li><code><a title="mangdl.utils.utils.dt" href="#mangdl.utils.utils.dt">dt</a></code></li>
+<li><code><a title="mangdl.utils.utils.dt_ts" href="#mangdl.utils.utils.dt_ts">dt_ts</a></code></li>
 <li><code><a title="mangdl.utils.utils.parse_list" href="#mangdl.utils.utils.parse_list">parse_list</a></code></li>
+<li><code><a title="mangdl.utils.utils.sanitize_text" href="#mangdl.utils.utils.sanitize_text">sanitize_text</a></code></li>
+<li><code><a title="mangdl.utils.utils.squery" href="#mangdl.utils.utils.squery">squery</a></code></li>
 </ul>
 </li>
 </ul>

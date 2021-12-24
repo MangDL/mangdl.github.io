@@ -13,9 +13,12 @@
 
 <!-- Description. Preferrably 1 sentence long. -->
 <h3 align="center" style="font-weight: bold">
-    WIP: Manga Downloader
+    Manga Downloader
 </h3>
 
+<h4 align="center" style="font-weight: bold">
+    Info
+</h4>
 <p align="center">
     <a href="https://github.com/${organization}/${repo_name}/issues">
         <img src="https://img.shields.io/github/issues/${organization}/${repo_name}.svg?style=flat-square&logo=data:image/png;base64,${issues_b64}">
@@ -23,16 +26,22 @@
     <a href="https://github.com/${organization}/${repo_name}/network/members">
         <img src="https://img.shields.io/github/forks/${organization}/${repo_name}.svg?style=flat-square&logo=data:image/png;base64,${forks_b64}">
     </a>
-    <a href="https://github.com/${organization}/${repo_name}/network/members">
+    <a href="https://github.com/${organization}/${repo_name}/stargazers">
         <img src="https://img.shields.io/github/stars/${organization}/${repo_name}.svg?style=flat-square&logo=data:image/png;base64,${stars_b64}">
     </a>
     <a href="https://github.com/${organization}/${repo_name}/graphs/contributors">
         <img src="https://img.shields.io/github/contributors/${organization}/${repo_name}.svg?style=flat-square&logo=data:image/png;base64,${contributors_b64}">
     </a>
+    <a href="http://${site}/license.html">
+        <img src="https://img.shields.io/badge/LICENSE-A31F34?style=flat-square&logoWidth=25&logo=data:image/png;base64,${license_b64}">
+    </a>
 </p>
 <p align="center">
-	<a href="https://github.com/${organization}/${repo_name}/blob/master/docs/LICENSE.md">
-        <img src="https://img.shields.io/badge/LICENSE-A31F34?style=flat-square&logoWidth=25&logo=data:image/png;base64,${license_b64}">
+    <a href="https://github.com/${organization}/${repo_name}/releases">
+        <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/${organization}/${repo_name}?include_prereleases&style=flat-square">
+    </a>
+    <a href="https://github.com/${organization}/${repo_name}/releases">
+        <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/${organization}/${repo_name}/Build?label=Build&style=flat-square">
     </a>
 </p>
 <p align="center">
@@ -50,17 +59,30 @@ The most inefficient manga downloader for PC (and soon, also a reader)
 
 ---
 
-> **❝** *...but I don't think you'll write code valuable enough for them (Content creators and/or owners) to do that (file a DMCA strike against MangDL).* **❞**
->
-> \- <a href='https://github.com/justfoolingaround'>KR</a>
+<div id="quotes">
+    <blockquote>
+        <p dir="auto"><b>❝<i>...but I don't think you'll write code valuable enough for them</i></b> (Content creators and/or owners) <b><i>to do that (file a DMCA strike against MangDL).</i>❞</b></p>
+        <p dir="auto">- <a href="https://github.com/justfoolingaround">KR</a></p>
+    </blockquote>
+    <blockquote>
+        <p dir="auto"><b>❝<i><del>whi_ne has good organization</del></i></b> [skills] <b><i><del>and bad code</del></i>❞</b></p>
+        <p dir="auto">- <a href='https://github.com/ArjixWasTaken'>Arjix</a></p>
+    </blockquote>
+</div>
 
 Github: [github.com/${organization}/${repo_name}](https://github.com/${organization}/${repo_name})
 
 Website: [${site}](http://${site})
 
+## **Downloads**
+
+Since people are looking for the download first, here you go:
+
+Follow [this link](http://mangdl.rf.gd/installation.html) to install MangDL in your machine.
+
 ## **Important**
 
-This project is a work in progress. A package will be released soon as a beta.
+This project is a work in progress, use at your own risk.
 
 To be updated, be sure to watch this repository and join the [Discord Support Server](https://discord.com/invite/${dc_inv}) for MangDL.
 
@@ -87,17 +109,18 @@ For the terms of usage and legals, visit [license](license.md) and [terms of usa
 - [hachirumi.com](https://hachirumi.com)
 - [mangadex.org](https://mangadex.org)
 - [manganato.com](https://manganato.com)
+- [setsuscans.com](https://setsuscans.com/)
 
 ### Coming soon™
 
-- [assortedscans.com](https://assortedscans.com)
-- [bunko.ml](https://bunko.ml)
-- [deathtollscans.net](https://deathtollscans.net)
+- [assortedscans.com](https://assortedscans.com/)
+- [bunko.ml](https://bunko.ml/)
+- [deathtollscans.net](https://deathtollscans.net/)
 - [mangapill.com](https://mangapill.com/)
-- [mangareader.to](https://mangareader.to)
-- [mangarock.to](https://mangarock.to)
-- [setsuscans.com](https://setsuscans.com/)
-- [web-ace.jp/youngaceup](https://web-ace.jp/youngaceup)
+- [mangareader.to](https://mangareader.to/)
+- [mangarock.to](https://mangarock.to/)
+- [mangasushi.net](https://mangasushi.net/)
+- [web-ace.jp/youngaceup](https://web-ace.jp/youngaceup/)
 - [windyfall.com](https://windyfall.com/)
 - [xunscans.xyz](https://xunscans.xyz/)
 
