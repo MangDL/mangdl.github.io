@@ -27,13 +27,14 @@ window.onload = function () {
     rel.load('./installation/index.html');
     firstSel.onchange = function () {
         rel.empty()
-        rel.load(`./installation/OS.html`);
         if (firstSel.value == "") {
+            rel.load('./installation/index.html');
             secSel.style = "display: none;";
             ss.style = "display: none;";
             thirdSel.style = "display: none;";
             ts.style = "display: none;";
         } else {
+            rel.load(`./installation/OS.html`);
             ss.style = "display: block;";
             secSel.style = "display: block;"
             thirdSel.length = 1;
