@@ -94,8 +94,7 @@ def dl_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
     if pages:
         for p in range(int(pages[-2].text)):
             for r in soup(f&#34;https://acescans.xyz/page/{p+1}/?s={urllib.parse.quote_plus(title)}&#34;).select(&#34;.listupd .bs .bsx a&#34;):
-                if not r.select_one(&#34;.limit .novelabel&#34;):
-                    sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
+                sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
     else:
         for r in ms.select(&#34;.listupd .bs .bsx a&#34;):
             sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
@@ -248,8 +247,7 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
     if pages:
         for p in range(int(pages[-2].text)):
             for r in soup(f&#34;https://acescans.xyz/page/{p+1}/?s={urllib.parse.quote_plus(title)}&#34;).select(&#34;.listupd .bs .bsx a&#34;):
-                if not r.select_one(&#34;.limit .novelabel&#34;):
-                    sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
+                sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
     else:
         for r in ms.select(&#34;.listupd .bs .bsx a&#34;):
             sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
