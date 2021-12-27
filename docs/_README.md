@@ -9,16 +9,11 @@
     <span id="min-block-shrink">▀▄▀▄▀▄</span>
 </h1>
 
-
-
 <!-- Description. Preferrably 1 sentence long. -->
 <h3 align="center" style="font-weight: bold">
     Manga Downloader
 </h3>
 
-<h4 align="center" style="font-weight: bold">
-    Info
-</h4>
 <p align="center">
     <a href="https://github.com/${organization}/${repo_name}/issues">
         <img src="https://img.shields.io/github/issues/${organization}/${repo_name}.svg?style=flat-square&logo=data:image/png;base64,${issues_b64}">

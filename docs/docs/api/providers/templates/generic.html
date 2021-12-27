@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>mangdl.providers API documentation</title>
+<title>mangdl.api.providers.templates.generic API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,70 +19,60 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>mangdl.providers</code></h1>
+<h1 class="title">Module <code>mangdl.api.providers.templates.generic</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from importlib import import_module
-from typing import Any, Dict, List
+<pre><code class="python">from types import ModuleType
+from typing import Any, Dict, List, Union
 
-from .api.base import Ch, Manga, Search
+from ...base import Ch, Manga
 
 
-class Provider:
-    def __init__(self, prov: str):
-        self.prov = import_module(f&#34;.{prov}&#34;, &#34;mangdl.api.providers&#34;)
-        self.template = import_module(f&#34;.{self.prov.template}&#34;, &#34;mangdl.api.providers.templates&#34;).template
+class template:
+    def __init__(self, prov: ModuleType) -&gt; None:
+        self.prov = prov
+
+    def ch_fn(self, url: str) -&gt; List[str]:
+        local = locals()
+        [local.pop(i) for i in [&#34;self&#34;,]]
+        return self.prov.ch_fn(**local)
 
     def chapter(self, url: str) -&gt; Ch:
         local = locals()
         [local.pop(i) for i in [&#34;self&#34;,]]
-        return self.template(self.prov).chapter(
-            **local,
-        )
+        return self.prov.chapter(**local)
+
+    def chdls(self, url: str, chs: int=0) -&gt; List[Dict[Union[float, int, None], str]]:
+        local = locals()
+        [local.pop(i) for i in [&#34;self&#34;,]]
+        return self.prov.chdls(**local)
 
     def manga(self, url: str, chs: int=0) -&gt; Manga:
         local = locals()
         [local.pop(i) for i in [&#34;self&#34;,]]
-        return self.template(self.prov).manga(
-            **local,
-        )
+        return self.prov.manga(**local)
 
-    def dl_search(self, title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
-        &#34;&#34;&#34;Used for downloading when imported.
-        Args:
-            s (Search): Search dataclass, search parameters for searching.
-        Returns:
-            Dict[str, str]: Search results.
-        &#34;&#34;&#34;
+    def dl_search(self, title: str, **kwargs: Dict[str, Any]):
+        return self.prov.dl_search(title, **kwargs)
+
+    def cli_search(self, title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
         local = locals()
         [local.pop(i) for i in [&#34;self&#34;,]]
-        return self.template(self.prov).dl_search(
-            **local,
-        )
-
-    def search(self, s: Search) -&gt; List[Manga]:
-        op = []
-        for i in self.template(self.prov).dl_search(**s.__dict__).values():
-            op.append(self.template.manga(i))
-        return op
+        return self.prov.clu_search(**local)
 
     def dl(self, url: str, **kwargs: Dict[str, Any]):
         local = locals()
         [local.pop(i) for i in [&#34;self&#34;,]]
-        return self.template(self.prov).dl(
-            **local,
-        )
+        return self.prov.dl(**local)
 
     def cli_dl(self, title: str, **kwargs: Dict[str, Any]):
         local = locals()
         [local.pop(i) for i in [&#34;self&#34;,]]
-        return self.template(self.prov).cli_dl(
-            **local,
-        )</code></pre>
+        return self.prov.cli_dl(**local)</code></pre>
 </details>
 </section>
 <section>
@@ -94,9 +84,9 @@ class Provider:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="mangdl.providers.Provider"><code class="flex name class">
-<span>class <span class="ident">Provider</span></span>
-<span>(</span><span>prov: str)</span>
+<dt id="mangdl.api.providers.templates.generic.template"><code class="flex name class">
+<span>class <span class="ident">template</span></span>
+<span>(</span><span>prov: module)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -104,62 +94,67 @@ class Provider:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class Provider:
-    def __init__(self, prov: str):
-        self.prov = import_module(f&#34;.{prov}&#34;, &#34;mangdl.api.providers&#34;)
-        self.template = import_module(f&#34;.{self.prov.template}&#34;, &#34;mangdl.api.providers.templates&#34;).template
+<pre><code class="python">class template:
+    def __init__(self, prov: ModuleType) -&gt; None:
+        self.prov = prov
+
+    def ch_fn(self, url: str) -&gt; List[str]:
+        local = locals()
+        [local.pop(i) for i in [&#34;self&#34;,]]
+        return self.prov.ch_fn(**local)
 
     def chapter(self, url: str) -&gt; Ch:
         local = locals()
         [local.pop(i) for i in [&#34;self&#34;,]]
-        return self.template(self.prov).chapter(
-            **local,
-        )
+        return self.prov.chapter(**local)
+
+    def chdls(self, url: str, chs: int=0) -&gt; List[Dict[Union[float, int, None], str]]:
+        local = locals()
+        [local.pop(i) for i in [&#34;self&#34;,]]
+        return self.prov.chdls(**local)
 
     def manga(self, url: str, chs: int=0) -&gt; Manga:
         local = locals()
         [local.pop(i) for i in [&#34;self&#34;,]]
-        return self.template(self.prov).manga(
-            **local,
-        )
+        return self.prov.manga(**local)
 
-    def dl_search(self, title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
-        &#34;&#34;&#34;Used for downloading when imported.
-        Args:
-            s (Search): Search dataclass, search parameters for searching.
-        Returns:
-            Dict[str, str]: Search results.
-        &#34;&#34;&#34;
+    def dl_search(self, title: str, **kwargs: Dict[str, Any]):
+        return self.prov.dl_search(title, **kwargs)
+
+    def cli_search(self, title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
         local = locals()
         [local.pop(i) for i in [&#34;self&#34;,]]
-        return self.template(self.prov).dl_search(
-            **local,
-        )
-
-    def search(self, s: Search) -&gt; List[Manga]:
-        op = []
-        for i in self.template(self.prov).dl_search(**s.__dict__).values():
-            op.append(self.template.manga(i))
-        return op
+        return self.prov.clu_search(**local)
 
     def dl(self, url: str, **kwargs: Dict[str, Any]):
         local = locals()
         [local.pop(i) for i in [&#34;self&#34;,]]
-        return self.template(self.prov).dl(
-            **local,
-        )
+        return self.prov.dl(**local)
 
     def cli_dl(self, title: str, **kwargs: Dict[str, Any]):
         local = locals()
         [local.pop(i) for i in [&#34;self&#34;,]]
-        return self.template(self.prov).cli_dl(
-            **local,
-        )</code></pre>
+        return self.prov.cli_dl(**local)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
-<dt id="mangdl.providers.Provider.chapter"><code class="name flex">
-<span>def <span class="ident">chapter</span></span>(<span>self, url: str) ‑> <a title="mangdl.api.base.Ch" href="api/base.html#mangdl.api.base.Ch">Ch</a></span>
+<dt id="mangdl.api.providers.templates.generic.template.ch_fn"><code class="name flex">
+<span>def <span class="ident">ch_fn</span></span>(<span>self, url: str) ‑> List[str]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ch_fn(self, url: str) -&gt; List[str]:
+    local = locals()
+    [local.pop(i) for i in [&#34;self&#34;,]]
+    return self.prov.ch_fn(**local)</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.templates.generic.template.chapter"><code class="name flex">
+<span>def <span class="ident">chapter</span></span>(<span>self, url: str) ‑> <a title="mangdl.api.base.Ch" href="../../base.html#mangdl.api.base.Ch">Ch</a></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -170,12 +165,25 @@ class Provider:
 <pre><code class="python">def chapter(self, url: str) -&gt; Ch:
     local = locals()
     [local.pop(i) for i in [&#34;self&#34;,]]
-    return self.template(self.prov).chapter(
-        **local,
-    )</code></pre>
+    return self.prov.chapter(**local)</code></pre>
 </details>
 </dd>
-<dt id="mangdl.providers.Provider.cli_dl"><code class="name flex">
+<dt id="mangdl.api.providers.templates.generic.template.chdls"><code class="name flex">
+<span>def <span class="ident">chdls</span></span>(<span>self, url: str, chs: int = 0) ‑> List[Dict[Union[float, int, ForwardRef(None)], str]]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def chdls(self, url: str, chs: int=0) -&gt; List[Dict[Union[float, int, None], str]]:
+    local = locals()
+    [local.pop(i) for i in [&#34;self&#34;,]]
+    return self.prov.chdls(**local)</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.templates.generic.template.cli_dl"><code class="name flex">
 <span>def <span class="ident">cli_dl</span></span>(<span>self, title: str, **kwargs: Dict[str, Any])</span>
 </code></dt>
 <dd>
@@ -187,12 +195,25 @@ class Provider:
 <pre><code class="python">def cli_dl(self, title: str, **kwargs: Dict[str, Any]):
     local = locals()
     [local.pop(i) for i in [&#34;self&#34;,]]
-    return self.template(self.prov).cli_dl(
-        **local,
-    )</code></pre>
+    return self.prov.cli_dl(**local)</code></pre>
 </details>
 </dd>
-<dt id="mangdl.providers.Provider.dl"><code class="name flex">
+<dt id="mangdl.api.providers.templates.generic.template.cli_search"><code class="name flex">
+<span>def <span class="ident">cli_search</span></span>(<span>self, title: str, **kwargs: Dict[str, Any]) ‑> Dict[str, str]</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cli_search(self, title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
+    local = locals()
+    [local.pop(i) for i in [&#34;self&#34;,]]
+    return self.prov.clu_search(**local)</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.templates.generic.template.dl"><code class="name flex">
 <span>def <span class="ident">dl</span></span>(<span>self, url: str, **kwargs: Dict[str, Any])</span>
 </code></dt>
 <dd>
@@ -204,46 +225,24 @@ class Provider:
 <pre><code class="python">def dl(self, url: str, **kwargs: Dict[str, Any]):
     local = locals()
     [local.pop(i) for i in [&#34;self&#34;,]]
-    return self.template(self.prov).dl(
-        **local,
-    )</code></pre>
+    return self.prov.dl(**local)</code></pre>
 </details>
 </dd>
-<dt id="mangdl.providers.Provider.dl_search"><code class="name flex">
-<span>def <span class="ident">dl_search</span></span>(<span>self, title: str, **kwargs: Dict[str, Any]) ‑> Dict[str, str]</span>
+<dt id="mangdl.api.providers.templates.generic.template.dl_search"><code class="name flex">
+<span>def <span class="ident">dl_search</span></span>(<span>self, title: str, **kwargs: Dict[str, Any])</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Used for downloading when imported.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>s</code></strong> :&ensp;<code>Search</code></dt>
-<dd>Search dataclass, search parameters for searching.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>Dict[str, str]</code></dt>
-<dd>Search results.</dd>
-</dl></div>
+<div class="desc"></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def dl_search(self, title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
-    &#34;&#34;&#34;Used for downloading when imported.
-    Args:
-        s (Search): Search dataclass, search parameters for searching.
-    Returns:
-        Dict[str, str]: Search results.
-    &#34;&#34;&#34;
-    local = locals()
-    [local.pop(i) for i in [&#34;self&#34;,]]
-    return self.template(self.prov).dl_search(
-        **local,
-    )</code></pre>
+<pre><code class="python">def dl_search(self, title: str, **kwargs: Dict[str, Any]):
+    return self.prov.dl_search(title, **kwargs)</code></pre>
 </details>
 </dd>
-<dt id="mangdl.providers.Provider.manga"><code class="name flex">
-<span>def <span class="ident">manga</span></span>(<span>self, url: str, chs: int = 0) ‑> <a title="mangdl.api.base.Manga" href="api/base.html#mangdl.api.base.Manga">Manga</a></span>
+<dt id="mangdl.api.providers.templates.generic.template.manga"><code class="name flex">
+<span>def <span class="ident">manga</span></span>(<span>self, url: str, chs: int = 0) ‑> <a title="mangdl.api.base.Manga" href="../../base.html#mangdl.api.base.Manga">Manga</a></span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -254,25 +253,7 @@ class Provider:
 <pre><code class="python">def manga(self, url: str, chs: int=0) -&gt; Manga:
     local = locals()
     [local.pop(i) for i in [&#34;self&#34;,]]
-    return self.template(self.prov).manga(
-        **local,
-    )</code></pre>
-</details>
-</dd>
-<dt id="mangdl.providers.Provider.search"><code class="name flex">
-<span>def <span class="ident">search</span></span>(<span>self, s: <a title="mangdl.api.base.Search" href="api/base.html#mangdl.api.base.Search">Search</a>) ‑> List[<a title="mangdl.api.base.Manga" href="api/base.html#mangdl.api.base.Manga">Manga</a>]</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def search(self, s: Search) -&gt; List[Manga]:
-    op = []
-    for i in self.template(self.prov).dl_search(**s.__dict__).values():
-        op.append(self.template.manga(i))
-    return op</code></pre>
+    return self.prov.manga(**local)</code></pre>
 </details>
 </dd>
 </dl>
@@ -325,7 +306,7 @@ const query = new URL(window.location).searchParams.get('q');
 if (query)
 search(query);
 function search(query) {
-const url = '../doc-search.html#' + encodeURIComponent(query);
+const url = '../../../../doc-search.html#' + encodeURIComponent(query);
 new tingle.modal({
 cssClass: ['modal-dialog'],
 onClose: () => {
@@ -354,20 +335,22 @@ setTimeout(() => input.focus(), 100);
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="mangdl" href="index.html">mangdl</a></code></li>
+<li><code><a title="mangdl.api.providers.templates" href="index.html">mangdl.api.providers.templates</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="mangdl.providers.Provider" href="#mangdl.providers.Provider">Provider</a></code></h4>
+<h4><code><a title="mangdl.api.providers.templates.generic.template" href="#mangdl.api.providers.templates.generic.template">template</a></code></h4>
 <ul class="two-column">
-<li><code><a title="mangdl.providers.Provider.chapter" href="#mangdl.providers.Provider.chapter">chapter</a></code></li>
-<li><code><a title="mangdl.providers.Provider.cli_dl" href="#mangdl.providers.Provider.cli_dl">cli_dl</a></code></li>
-<li><code><a title="mangdl.providers.Provider.dl" href="#mangdl.providers.Provider.dl">dl</a></code></li>
-<li><code><a title="mangdl.providers.Provider.dl_search" href="#mangdl.providers.Provider.dl_search">dl_search</a></code></li>
-<li><code><a title="mangdl.providers.Provider.manga" href="#mangdl.providers.Provider.manga">manga</a></code></li>
-<li><code><a title="mangdl.providers.Provider.search" href="#mangdl.providers.Provider.search">search</a></code></li>
+<li><code><a title="mangdl.api.providers.templates.generic.template.ch_fn" href="#mangdl.api.providers.templates.generic.template.ch_fn">ch_fn</a></code></li>
+<li><code><a title="mangdl.api.providers.templates.generic.template.chapter" href="#mangdl.api.providers.templates.generic.template.chapter">chapter</a></code></li>
+<li><code><a title="mangdl.api.providers.templates.generic.template.chdls" href="#mangdl.api.providers.templates.generic.template.chdls">chdls</a></code></li>
+<li><code><a title="mangdl.api.providers.templates.generic.template.cli_dl" href="#mangdl.api.providers.templates.generic.template.cli_dl">cli_dl</a></code></li>
+<li><code><a title="mangdl.api.providers.templates.generic.template.cli_search" href="#mangdl.api.providers.templates.generic.template.cli_search">cli_search</a></code></li>
+<li><code><a title="mangdl.api.providers.templates.generic.template.dl" href="#mangdl.api.providers.templates.generic.template.dl">dl</a></code></li>
+<li><code><a title="mangdl.api.providers.templates.generic.template.dl_search" href="#mangdl.api.providers.templates.generic.template.dl_search">dl_search</a></code></li>
+<li><code><a title="mangdl.api.providers.templates.generic.template.manga" href="#mangdl.api.providers.templates.generic.template.manga">manga</a></code></li>
 </ul>
 </li>
 </ul>

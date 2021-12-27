@@ -26,88 +26,14 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import urllib
-from typing import Any, Dict, List, Union
+<pre><code class="python">scanlator = &#34;Flame Scans&#34;
+base_url = &#34;https://flamescans.org&#34;
+template = &#34;fs_wp&#34;
 
-from ...utils.utils import dt
-from ..base import Ch, Downloader, Manga, Search, soup
+rpa = 10
 
-
-def chapter(url: str) -&gt; Ch:
-    ms = soup(url)
-    ch = ms.select_one(&#34;h1.entry-title&#34;).text.split()[-1]
-    return Ch(
-        url              = url,
-        ch               = ch,
-        vol              = None,
-        title            = f&#34;Chapter {ch}&#34;,
-        scanlator_groups = &#34;Flame Scans&#34;,
-        imgs             = [i[&#34;src&#34;] for i in ms.select(&#34;#readerarea p img&#34;)],
-    )
-
-def manga(url: str, chs: int=0) -&gt; Manga:
-    ms = soup(url)
-    meta = {}
-    for m in ms.select(&#34;.tsinfo.bixbox .imptdt&#34;):
-        i = m.select_one(&#34;i&#34;)
-        meta[m.next_element.strip()] = i.text if i else m.select_one(&#34;a&#34;).text
-
-    chap_dict={}
-    if chs:
-        for c in ms.select(&#34;div.eplister ul li&#34;):
-            cch = c.select_one(&#34;a&#34;)[&#34;href&#34;]
-            if chs == 2:
-                cch = chapter(cch)
-            chap_dict[c[&#34;data-num&#34;]] = cch
-
-    return Manga(
-        url             = url,
-        covers          = [ms.select_one(&#34;.thumb .attachment-.size-.wp-post-image&#34;)[&#34;src&#34;]],
-        title           = ms.select_one(&#34;h1.entry-title&#34;).text,
-        alt_titles      = ms.select_one(&#34;span.alternative&#34;).text.split(&#34; | &#34;),
-        author          = meta[&#34;Author&#34;].split(&#34;, &#34;),
-        status          = {k: v for v, k in enumerate([&#34;Ongoing&#34;, &#34;Completed&#34;, &#34;Hiatus&#34;, &#34;Cancelled&#34;])}.get(meta[&#34;Status&#34;], -1),
-        updated_at      = dt(meta[&#34;Updated On&#34;], r&#34;%B %d, %Y&#34;),
-        created_at      = dt(meta[&#34;Posted On&#34;], r&#34;%B %d, %Y&#34;),
-        description     = &#34;\n&#34;.join(i.text for i in ms.select(&#34;.entry-content.entry-content-single p&#34;)),
-        chapters        = chap_dict,
-    )
-
-def dl_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
-    sr = {}
-    ms = soup(f&#34;https://flamescans.org/?s={urllib.parse.quote_plus(title)}&#34;)
-    pages = ms.select(&#34;a.page-numbers&#34;)
-    if pages:
-        for p in range(int(pages[-2].text)):
-            for r in soup(f&#34;https://flamescans.org/page/{p+1}/?s={urllib.parse.quote_plus(title)}&#34;).select(&#34;.listupd .bs .bsx a&#34;):
-                if not r.select_one(&#34;.limit .novelabel&#34;):
-                    sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
-    else:
-        for r in ms.select(&#34;.listupd .bs .bsx a&#34;):
-            sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
-    return sr
-
-def search(s: Search) -&gt; List[Manga]:
-    return [manga(i) for i in dl_search(**s.__dict__).values()]
-
-def cli_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
-    return dl_search(title, **kwargs)
-
-def ch_fn(url: str) -&gt; List[str]:
-    return [i[&#34;src&#34;] for i in soup(url).select(&#34;#readerarea p img&#34;)]
-
-def chdls(url: str) -&gt; List[Dict[Union[float, int, None], str]]:
-    op = []
-    for c in soup(url).select(&#34;div.eplister ul li&#34;):
-        op.append({c[&#34;data-num&#34;]: c.select_one(&#34;a&#34;)[&#34;href&#34;]})
-    return op
-
-def dl(url: str, **kwargs: Dict[str, Any]):
-    ms = soup(url)
-    Downloader(ch_fn, **kwargs).dl_chdls(chdls(url), ms.select_one(&#34;h1.entry-title&#34;).text)
-
-def cli_dl(title: str, **kwargs: Dict[str, Any]):
-    Downloader(ch_fn, **kwargs).cli(cli_search, chdls, title)</code></pre>
+def check_manga(r):
+    return not r.select_one(&#34;.limit .novelabel&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -117,8 +43,8 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="mangdl.api.providers.flamescans.ch_fn"><code class="name flex">
-<span>def <span class="ident">ch_fn</span></span>(<span>url: str) ‑> List[str]</span>
+<dt id="mangdl.api.providers.flamescans.check_manga"><code class="name flex">
+<span>def <span class="ident">check_manga</span></span>(<span>r)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -126,161 +52,8 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def ch_fn(url: str) -&gt; List[str]:
-    return [i[&#34;src&#34;] for i in soup(url).select(&#34;#readerarea p img&#34;)]</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.flamescans.chapter"><code class="name flex">
-<span>def <span class="ident">chapter</span></span>(<span>url: str) ‑> <a title="mangdl.api.base.Ch" href="../base.html#mangdl.api.base.Ch">Ch</a></span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def chapter(url: str) -&gt; Ch:
-    ms = soup(url)
-    ch = ms.select_one(&#34;h1.entry-title&#34;).text.split()[-1]
-    return Ch(
-        url              = url,
-        ch               = ch,
-        vol              = None,
-        title            = f&#34;Chapter {ch}&#34;,
-        scanlator_groups = &#34;Flame Scans&#34;,
-        imgs             = [i[&#34;src&#34;] for i in ms.select(&#34;#readerarea p img&#34;)],
-    )</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.flamescans.chdls"><code class="name flex">
-<span>def <span class="ident">chdls</span></span>(<span>url: str) ‑> List[Dict[Union[float, int, ForwardRef(None)], str]]</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def chdls(url: str) -&gt; List[Dict[Union[float, int, None], str]]:
-    op = []
-    for c in soup(url).select(&#34;div.eplister ul li&#34;):
-        op.append({c[&#34;data-num&#34;]: c.select_one(&#34;a&#34;)[&#34;href&#34;]})
-    return op</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.flamescans.cli_dl"><code class="name flex">
-<span>def <span class="ident">cli_dl</span></span>(<span>title: str, **kwargs: Dict[str, Any])</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def cli_dl(title: str, **kwargs: Dict[str, Any]):
-    Downloader(ch_fn, **kwargs).cli(cli_search, chdls, title)</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.flamescans.cli_search"><code class="name flex">
-<span>def <span class="ident">cli_search</span></span>(<span>title: str, **kwargs: Dict[str, Any]) ‑> Dict[str, str]</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def cli_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
-    return dl_search(title, **kwargs)</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.flamescans.dl"><code class="name flex">
-<span>def <span class="ident">dl</span></span>(<span>url: str, **kwargs: Dict[str, Any])</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def dl(url: str, **kwargs: Dict[str, Any]):
-    ms = soup(url)
-    Downloader(ch_fn, **kwargs).dl_chdls(chdls(url), ms.select_one(&#34;h1.entry-title&#34;).text)</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.flamescans.dl_search"><code class="name flex">
-<span>def <span class="ident">dl_search</span></span>(<span>title: str, **kwargs: Dict[str, Any]) ‑> Dict[str, str]</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def dl_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
-    sr = {}
-    ms = soup(f&#34;https://flamescans.org/?s={urllib.parse.quote_plus(title)}&#34;)
-    pages = ms.select(&#34;a.page-numbers&#34;)
-    if pages:
-        for p in range(int(pages[-2].text)):
-            for r in soup(f&#34;https://flamescans.org/page/{p+1}/?s={urllib.parse.quote_plus(title)}&#34;).select(&#34;.listupd .bs .bsx a&#34;):
-                if not r.select_one(&#34;.limit .novelabel&#34;):
-                    sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
-    else:
-        for r in ms.select(&#34;.listupd .bs .bsx a&#34;):
-            sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
-    return sr</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.flamescans.manga"><code class="name flex">
-<span>def <span class="ident">manga</span></span>(<span>url: str, chs: int = 0) ‑> <a title="mangdl.api.base.Manga" href="../base.html#mangdl.api.base.Manga">Manga</a></span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def manga(url: str, chs: int=0) -&gt; Manga:
-    ms = soup(url)
-    meta = {}
-    for m in ms.select(&#34;.tsinfo.bixbox .imptdt&#34;):
-        i = m.select_one(&#34;i&#34;)
-        meta[m.next_element.strip()] = i.text if i else m.select_one(&#34;a&#34;).text
-
-    chap_dict={}
-    if chs:
-        for c in ms.select(&#34;div.eplister ul li&#34;):
-            cch = c.select_one(&#34;a&#34;)[&#34;href&#34;]
-            if chs == 2:
-                cch = chapter(cch)
-            chap_dict[c[&#34;data-num&#34;]] = cch
-
-    return Manga(
-        url             = url,
-        covers          = [ms.select_one(&#34;.thumb .attachment-.size-.wp-post-image&#34;)[&#34;src&#34;]],
-        title           = ms.select_one(&#34;h1.entry-title&#34;).text,
-        alt_titles      = ms.select_one(&#34;span.alternative&#34;).text.split(&#34; | &#34;),
-        author          = meta[&#34;Author&#34;].split(&#34;, &#34;),
-        status          = {k: v for v, k in enumerate([&#34;Ongoing&#34;, &#34;Completed&#34;, &#34;Hiatus&#34;, &#34;Cancelled&#34;])}.get(meta[&#34;Status&#34;], -1),
-        updated_at      = dt(meta[&#34;Updated On&#34;], r&#34;%B %d, %Y&#34;),
-        created_at      = dt(meta[&#34;Posted On&#34;], r&#34;%B %d, %Y&#34;),
-        description     = &#34;\n&#34;.join(i.text for i in ms.select(&#34;.entry-content.entry-content-single p&#34;)),
-        chapters        = chap_dict,
-    )</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.flamescans.search"><code class="name flex">
-<span>def <span class="ident">search</span></span>(<span>s: <a title="mangdl.api.base.Search" href="../base.html#mangdl.api.base.Search">Search</a>) ‑> List[<a title="mangdl.api.base.Manga" href="../base.html#mangdl.api.base.Manga">Manga</a>]</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def search(s: Search) -&gt; List[Manga]:
-    return [manga(i) for i in dl_search(**s.__dict__).values()]</code></pre>
+<pre><code class="python">def check_manga(r):
+    return not r.select_one(&#34;.limit .novelabel&#34;)</code></pre>
 </details>
 </dd>
 </dl>
@@ -366,16 +139,8 @@ setTimeout(() => input.focus(), 100);
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
-<ul class="two-column">
-<li><code><a title="mangdl.api.providers.flamescans.ch_fn" href="#mangdl.api.providers.flamescans.ch_fn">ch_fn</a></code></li>
-<li><code><a title="mangdl.api.providers.flamescans.chapter" href="#mangdl.api.providers.flamescans.chapter">chapter</a></code></li>
-<li><code><a title="mangdl.api.providers.flamescans.chdls" href="#mangdl.api.providers.flamescans.chdls">chdls</a></code></li>
-<li><code><a title="mangdl.api.providers.flamescans.cli_dl" href="#mangdl.api.providers.flamescans.cli_dl">cli_dl</a></code></li>
-<li><code><a title="mangdl.api.providers.flamescans.cli_search" href="#mangdl.api.providers.flamescans.cli_search">cli_search</a></code></li>
-<li><code><a title="mangdl.api.providers.flamescans.dl" href="#mangdl.api.providers.flamescans.dl">dl</a></code></li>
-<li><code><a title="mangdl.api.providers.flamescans.dl_search" href="#mangdl.api.providers.flamescans.dl_search">dl_search</a></code></li>
-<li><code><a title="mangdl.api.providers.flamescans.manga" href="#mangdl.api.providers.flamescans.manga">manga</a></code></li>
-<li><code><a title="mangdl.api.providers.flamescans.search" href="#mangdl.api.providers.flamescans.search">search</a></code></li>
+<ul class="">
+<li><code><a title="mangdl.api.providers.flamescans.check_manga" href="#mangdl.api.providers.flamescans.check_manga">check_manga</a></code></li>
 </ul>
 </li>
 </ul>

@@ -26,103 +26,25 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import ast
-import urllib
-from typing import Any, Callable, Dict, List, Union
+<pre><code class="python">from ast import literal_eval
 
-from ...utils.utils import dt, sanitize_text
-from ..base import Ch, Downloader, Manga, Search, soup, urel
+from ..base import soup, urel
 
+scanlator = &#34;Mangasushi&#34;
+base_url = &#34;https://mangasushi.net&#34;
+template = &#34;wordpress&#34;
 
-def chapter(url: str) -&gt; Ch:
-    ms = soup(url)
-    ch = ms.select_one(&#34;#wp-manga-current-chap&#34;)[&#34;value&#34;].split(&#34;-&#34;)[-1]
-    return Ch(
-        url              = url,
-        ch               = ch,
-        vol              = None,
-        title            = f&#34;Chapter {ch}&#34;,
-        scanlator_groups = &#34;Mangasushi&#34;,
-        imgs             = [sanitize_text(i[&#34;data-src&#34;]) for i in ms.select(&#34;.page-break img&#34;)],
-    )
+src = &#34;data-src&#34;
 
-def manga(url: str, chs: int=0) -&gt; Manga:
-    ms = soup(url)
-    meta = {}
-    for c in [&#34;post-content_item&#34;, &#34;post-status&#34;]:
-        for m in ms.select(f&#34;div.{c}&#34;):
-            v = m.select_one(&#34;.summary-content&#34;)
-            idx = sanitize_text(m.select_one(&#34;h5&#34;).text)
-            if v:
-                meta[idx] = sanitize_text(v.text)
-            else:
-                meta[idx] = [sanitize_text(i.text) for i in m.select(&#34;a&#34;)]
+def ch_num_fn(soup):
+    return literal_eval(&#34;.&#34;.join(soup.select_one(&#34;#wp-manga-current-chap&#34;)[&#34;value&#34;].split(&#34;-&#34;)[1:]))
 
-    def mst(s: str, pp: Callable[[str], List[Any]]=lambda x: x):
-        return pp(sanitize_text(meta.get(s))) if meta.get(s) else []
+def rch_num_fun(url):
+    return literal_eval(&#34;.&#34;.join(urel(url).parts[3].split(&#34;-&#34;)[1:]))
 
-    rch = soup(f&#34;https://mangasushi.net/manga/{urel(url).parts[2]}/ajax/chapters/&#34;, method=&#34;post&#34;)
-    dates = [sanitize_text(i.text) for i in rch.select(&#34;.chapter-release-date&#34;)]
-    chap_dict={}
-    if chs:
-        for c in rch.select(&#34;li.wp-manga-chapter    a&#34;):
-            cch = c[&#34;href&#34;]
-            if chs == 2:
-                cch = chapter(cch)
-            chap_dict[ast.literal_eval(urel(c[&#34;href&#34;]).parts[3].split(&#34;-&#34;)[-1])] = cch
-    return Manga(
-        url             = url,
-        covers          = [ms.select_one(&#34;.summary_image img&#34;)[&#34;src&#34;]],
-        title           = sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
-        alt_titles      = mst(&#34;Alternative&#34;),
-        author          = mst(&#34;Author(s)&#34;, lambda x: x.split(&#34;,&#34;)),
-        artist          = mst(&#34;Artist(s)&#34;, lambda x: x.split(&#34;,&#34;)),
-        status          = {k: v for v, k in enumerate([&#34;OnGoing&#34;, &#34;Completed&#34;, &#34;On Hold&#34;])}.get(meta[&#34;Status&#34;], -1),
-        genres          = mst(&#34;Genre(s)&#34;, lambda x: x.split(&#34;,&#34;)),
-        updated_at      = dt(dates[0], r&#34;%B %d, %Y&#34;) if dates else &#34;1970-01-01T00:00:00&#34;,
-        created_at      = dt(dates[-1], r&#34;%B %d, %Y&#34;) if dates else &#34;1970-01-01T00:00:00&#34;,
-        description     = sanitize_text(ms.select_one(&#34;.summary__content&#34;).text),
-        chapters        = chap_dict,
-    )
-
-def dl_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
-    sr = {}
-    def pr(num: int):
-        url = f&#34;https://mangasushi.net/page/{num}?s={urllib.parse.quote_plus(title)}&amp;post_type=wp-manga&#34;
-        ts = soup(url).select(&#34;div.post-title a&#34;)
-        for r in ts:
-            sr[r.text] = r[&#34;href&#34;]
-        return len(ts)
-    i = 1
-    cp = pr(i)
-    while cp // 12:
-        i += 1
-        cp = pr(i)
-    return sr
-
-def search(s: Search) -&gt; List[Manga]:
-    return [manga(i) for i in dl_search(**s.__dict__).values()]
-
-def cli_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
-    return dl_search(title, **kwargs)
-
-def ch_fn(url: str) -&gt; List[str]:
-    op = [sanitize_text(i[&#34;data-src&#34;]) for i in soup(url).select(&#34;.page-break img&#34;)]
-    return op
-
-def chdls(url: str) -&gt; List[Dict[Union[float, int, None], str]]:
-    op = []
-    rch = soup(f&#34;https://mangasushi.net/manga/{urel(url).parts[2]}/ajax/chapters/&#34;, method=&#34;post&#34;)
-    for c in rch.select(&#34;li.wp-manga-chapter    a&#34;):
-        op.append({ast.literal_eval(urel(c[&#34;href&#34;]).parts[3].split(&#34;-&#34;)[-1]): c[&#34;href&#34;]})
-    return op
-
-def dl(url: str, **kwargs: Dict[str, Any]):
-    ms = soup(url)
-    Downloader(ch_fn, **kwargs).dl_chdls(chdls(url), sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text))
-
-def cli_dl(title: str, **kwargs: Dict[str, Any]):
-    Downloader(ch_fn, **kwargs).cli(cli_search, chdls, title)</code></pre>
+def rch_fn(url):
+    url = f&#34;{base_url}/manga/{urel(url).parts[2]}/ajax/chapters/&#34;
+    return soup(url, method=&#34;post&#34;)</code></pre>
 </details>
 </section>
 <section>
@@ -132,8 +54,8 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="mangdl.api.providers.mangasushi.ch_fn"><code class="name flex">
-<span>def <span class="ident">ch_fn</span></span>(<span>url: str) ‑> List[str]</span>
+<dt id="mangdl.api.providers.mangasushi.ch_num_fn"><code class="name flex">
+<span>def <span class="ident">ch_num_fn</span></span>(<span>soup)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -141,13 +63,12 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def ch_fn(url: str) -&gt; List[str]:
-    op = [sanitize_text(i[&#34;data-src&#34;]) for i in soup(url).select(&#34;.page-break img&#34;)]
-    return op</code></pre>
+<pre><code class="python">def ch_num_fn(soup):
+    return literal_eval(&#34;.&#34;.join(soup.select_one(&#34;#wp-manga-current-chap&#34;)[&#34;value&#34;].split(&#34;-&#34;)[1:]))</code></pre>
 </details>
 </dd>
-<dt id="mangdl.api.providers.mangasushi.chapter"><code class="name flex">
-<span>def <span class="ident">chapter</span></span>(<span>url: str) ‑> <a title="mangdl.api.base.Ch" href="../base.html#mangdl.api.base.Ch">Ch</a></span>
+<dt id="mangdl.api.providers.mangasushi.rch_fn"><code class="name flex">
+<span>def <span class="ident">rch_fn</span></span>(<span>url)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -155,21 +76,13 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def chapter(url: str) -&gt; Ch:
-    ms = soup(url)
-    ch = ms.select_one(&#34;#wp-manga-current-chap&#34;)[&#34;value&#34;].split(&#34;-&#34;)[-1]
-    return Ch(
-        url              = url,
-        ch               = ch,
-        vol              = None,
-        title            = f&#34;Chapter {ch}&#34;,
-        scanlator_groups = &#34;Mangasushi&#34;,
-        imgs             = [sanitize_text(i[&#34;data-src&#34;]) for i in ms.select(&#34;.page-break img&#34;)],
-    )</code></pre>
+<pre><code class="python">def rch_fn(url):
+    url = f&#34;{base_url}/manga/{urel(url).parts[2]}/ajax/chapters/&#34;
+    return soup(url, method=&#34;post&#34;)</code></pre>
 </details>
 </dd>
-<dt id="mangdl.api.providers.mangasushi.chdls"><code class="name flex">
-<span>def <span class="ident">chdls</span></span>(<span>url: str) ‑> List[Dict[Union[float, int, ForwardRef(None)], str]]</span>
+<dt id="mangdl.api.providers.mangasushi.rch_num_fun"><code class="name flex">
+<span>def <span class="ident">rch_num_fun</span></span>(<span>url)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -177,139 +90,8 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def chdls(url: str) -&gt; List[Dict[Union[float, int, None], str]]:
-    op = []
-    rch = soup(f&#34;https://mangasushi.net/manga/{urel(url).parts[2]}/ajax/chapters/&#34;, method=&#34;post&#34;)
-    for c in rch.select(&#34;li.wp-manga-chapter    a&#34;):
-        op.append({ast.literal_eval(urel(c[&#34;href&#34;]).parts[3].split(&#34;-&#34;)[-1]): c[&#34;href&#34;]})
-    return op</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.mangasushi.cli_dl"><code class="name flex">
-<span>def <span class="ident">cli_dl</span></span>(<span>title: str, **kwargs: Dict[str, Any])</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def cli_dl(title: str, **kwargs: Dict[str, Any]):
-    Downloader(ch_fn, **kwargs).cli(cli_search, chdls, title)</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.mangasushi.cli_search"><code class="name flex">
-<span>def <span class="ident">cli_search</span></span>(<span>title: str, **kwargs: Dict[str, Any]) ‑> Dict[str, str]</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def cli_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
-    return dl_search(title, **kwargs)</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.mangasushi.dl"><code class="name flex">
-<span>def <span class="ident">dl</span></span>(<span>url: str, **kwargs: Dict[str, Any])</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def dl(url: str, **kwargs: Dict[str, Any]):
-    ms = soup(url)
-    Downloader(ch_fn, **kwargs).dl_chdls(chdls(url), sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text))</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.mangasushi.dl_search"><code class="name flex">
-<span>def <span class="ident">dl_search</span></span>(<span>title: str, **kwargs: Dict[str, Any]) ‑> Dict[str, str]</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def dl_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
-    sr = {}
-    def pr(num: int):
-        url = f&#34;https://mangasushi.net/page/{num}?s={urllib.parse.quote_plus(title)}&amp;post_type=wp-manga&#34;
-        ts = soup(url).select(&#34;div.post-title a&#34;)
-        for r in ts:
-            sr[r.text] = r[&#34;href&#34;]
-        return len(ts)
-    i = 1
-    cp = pr(i)
-    while cp // 12:
-        i += 1
-        cp = pr(i)
-    return sr</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.mangasushi.manga"><code class="name flex">
-<span>def <span class="ident">manga</span></span>(<span>url: str, chs: int = 0) ‑> <a title="mangdl.api.base.Manga" href="../base.html#mangdl.api.base.Manga">Manga</a></span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def manga(url: str, chs: int=0) -&gt; Manga:
-    ms = soup(url)
-    meta = {}
-    for c in [&#34;post-content_item&#34;, &#34;post-status&#34;]:
-        for m in ms.select(f&#34;div.{c}&#34;):
-            v = m.select_one(&#34;.summary-content&#34;)
-            idx = sanitize_text(m.select_one(&#34;h5&#34;).text)
-            if v:
-                meta[idx] = sanitize_text(v.text)
-            else:
-                meta[idx] = [sanitize_text(i.text) for i in m.select(&#34;a&#34;)]
-
-    def mst(s: str, pp: Callable[[str], List[Any]]=lambda x: x):
-        return pp(sanitize_text(meta.get(s))) if meta.get(s) else []
-
-    rch = soup(f&#34;https://mangasushi.net/manga/{urel(url).parts[2]}/ajax/chapters/&#34;, method=&#34;post&#34;)
-    dates = [sanitize_text(i.text) for i in rch.select(&#34;.chapter-release-date&#34;)]
-    chap_dict={}
-    if chs:
-        for c in rch.select(&#34;li.wp-manga-chapter    a&#34;):
-            cch = c[&#34;href&#34;]
-            if chs == 2:
-                cch = chapter(cch)
-            chap_dict[ast.literal_eval(urel(c[&#34;href&#34;]).parts[3].split(&#34;-&#34;)[-1])] = cch
-    return Manga(
-        url             = url,
-        covers          = [ms.select_one(&#34;.summary_image img&#34;)[&#34;src&#34;]],
-        title           = sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
-        alt_titles      = mst(&#34;Alternative&#34;),
-        author          = mst(&#34;Author(s)&#34;, lambda x: x.split(&#34;,&#34;)),
-        artist          = mst(&#34;Artist(s)&#34;, lambda x: x.split(&#34;,&#34;)),
-        status          = {k: v for v, k in enumerate([&#34;OnGoing&#34;, &#34;Completed&#34;, &#34;On Hold&#34;])}.get(meta[&#34;Status&#34;], -1),
-        genres          = mst(&#34;Genre(s)&#34;, lambda x: x.split(&#34;,&#34;)),
-        updated_at      = dt(dates[0], r&#34;%B %d, %Y&#34;) if dates else &#34;1970-01-01T00:00:00&#34;,
-        created_at      = dt(dates[-1], r&#34;%B %d, %Y&#34;) if dates else &#34;1970-01-01T00:00:00&#34;,
-        description     = sanitize_text(ms.select_one(&#34;.summary__content&#34;).text),
-        chapters        = chap_dict,
-    )</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.mangasushi.search"><code class="name flex">
-<span>def <span class="ident">search</span></span>(<span>s: <a title="mangdl.api.base.Search" href="../base.html#mangdl.api.base.Search">Search</a>) ‑> List[<a title="mangdl.api.base.Manga" href="../base.html#mangdl.api.base.Manga">Manga</a>]</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def search(s: Search) -&gt; List[Manga]:
-    return [manga(i) for i in dl_search(**s.__dict__).values()]</code></pre>
+<pre><code class="python">def rch_num_fun(url):
+    return literal_eval(&#34;.&#34;.join(urel(url).parts[3].split(&#34;-&#34;)[1:]))</code></pre>
 </details>
 </dd>
 </dl>
@@ -395,16 +177,10 @@ setTimeout(() => input.focus(), 100);
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
-<ul class="two-column">
-<li><code><a title="mangdl.api.providers.mangasushi.ch_fn" href="#mangdl.api.providers.mangasushi.ch_fn">ch_fn</a></code></li>
-<li><code><a title="mangdl.api.providers.mangasushi.chapter" href="#mangdl.api.providers.mangasushi.chapter">chapter</a></code></li>
-<li><code><a title="mangdl.api.providers.mangasushi.chdls" href="#mangdl.api.providers.mangasushi.chdls">chdls</a></code></li>
-<li><code><a title="mangdl.api.providers.mangasushi.cli_dl" href="#mangdl.api.providers.mangasushi.cli_dl">cli_dl</a></code></li>
-<li><code><a title="mangdl.api.providers.mangasushi.cli_search" href="#mangdl.api.providers.mangasushi.cli_search">cli_search</a></code></li>
-<li><code><a title="mangdl.api.providers.mangasushi.dl" href="#mangdl.api.providers.mangasushi.dl">dl</a></code></li>
-<li><code><a title="mangdl.api.providers.mangasushi.dl_search" href="#mangdl.api.providers.mangasushi.dl_search">dl_search</a></code></li>
-<li><code><a title="mangdl.api.providers.mangasushi.manga" href="#mangdl.api.providers.mangasushi.manga">manga</a></code></li>
-<li><code><a title="mangdl.api.providers.mangasushi.search" href="#mangdl.api.providers.mangasushi.search">search</a></code></li>
+<ul class="">
+<li><code><a title="mangdl.api.providers.mangasushi.ch_num_fn" href="#mangdl.api.providers.mangasushi.ch_num_fn">ch_num_fn</a></code></li>
+<li><code><a title="mangdl.api.providers.mangasushi.rch_fn" href="#mangdl.api.providers.mangasushi.rch_fn">rch_fn</a></code></li>
+<li><code><a title="mangdl.api.providers.mangasushi.rch_num_fun" href="#mangdl.api.providers.mangasushi.rch_num_fun">rch_num_fun</a></code></li>
 </ul>
 </li>
 </ul>

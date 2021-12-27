@@ -37,6 +37,8 @@ from ...utils.settings import stg
 from ...utils.utils import ddir, de, dnrp, parse_list
 from ..base import Ch, Downloader, Manga, Search, Vls, req
 
+template = &#34;generic&#34;
+
 op_links = {
     &#34;al&#34;: &#34;https://anilist.co/manga/{}&#34;,
     &#34;ap&#34;: &#34;https://www.anime-planet.com/manga/{}&#34;,
@@ -145,12 +147,13 @@ def manga(url: str, chs: int=0) -&gt; Manga:
         chapters        = chap_dict,
     )
 
-def dl_search(s: Search) -&gt; Dict[str, str]:
+def dl_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
+    local = {&#34;title&#34;: title, **kwargs}
     params = []
     sr = {}
     ad = stg(f&#34;mangadex/search&#34;, f&#34;{dnrp(__file__, 3)}/utils/config.yaml&#34;)
-    for k in s.__dataclass_fields__:
-        v = getattr(s, k)
+    for k in local:
+        v = local.get(k)
         if type(v) is str:
             params.append(f&#34;{k}={v}&#34;)
         elif type(v) is list:
@@ -395,7 +398,7 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 </details>
 </dd>
 <dt id="mangdl.api.providers.mangadex.dl_search"><code class="name flex">
-<span>def <span class="ident">dl_search</span></span>(<span>s: <a title="mangdl.api.base.Search" href="../base.html#mangdl.api.base.Search">Search</a>) ‑> Dict[str, str]</span>
+<span>def <span class="ident">dl_search</span></span>(<span>title: str, **kwargs: Dict[str, Any]) ‑> Dict[str, str]</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -403,12 +406,13 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def dl_search(s: Search) -&gt; Dict[str, str]:
+<pre><code class="python">def dl_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
+    local = {&#34;title&#34;: title, **kwargs}
     params = []
     sr = {}
     ad = stg(f&#34;mangadex/search&#34;, f&#34;{dnrp(__file__, 3)}/utils/config.yaml&#34;)
-    for k in s.__dataclass_fields__:
-        v = getattr(s, k)
+    for k in local:
+        v = local.get(k)
         if type(v) is str:
             params.append(f&#34;{k}={v}&#34;)
         elif type(v) is list:

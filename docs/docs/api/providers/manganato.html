@@ -33,8 +33,9 @@ from typing import Any, Callable, Dict, List, Union
 
 from ..base import Ch, Downloader, Manga, Search, soup
 
+template = &#34;generic&#34;
 
-def chapter(url: str) -&gt; Ch:
+def chapter(url):
     c = soup(&#34;/&#34;.join(url.split(&#34;/&#34;)[:-1])).select_one(f&#39;a[href=&#34;{url}&#34;]&#39;).find_parent()
     a = c.select_one(&#34;a&#34;)
     ch = a[&#34;href&#34;].split(&#34;-&#34;)[-1]
@@ -49,7 +50,7 @@ def chapter(url: str) -&gt; Ch:
         imgs            = [i[&#34;src&#34;] for i in soup(url).select(&#34;.container-chapter-reader img&#34;)]
     )
 
-def manga(url: str, chs: int=0) -&gt; Manga:
+def manga(url, chs=0):
     ms = soup(url)
     ti = [i[&#34;class&#34;][0] for i in ms.select(&#34;.table-label i&#34;)]
     si = [i[&#34;class&#34;][0] for i in ms.select(&#34;.stre-label i&#34;)]
@@ -92,8 +93,8 @@ def manga(url: str, chs: int=0) -&gt; Manga:
         chapters        = chap_dict,
     )
 
-def search(s: Search):
-    title = re.sub(r&#39;[^A-Za-z0-9 ]+&#39;, &#39;&#39;, s.title).replace(&#34; &#34;, &#34;_&#34;)
+def dl_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
+    title = re.sub(r&#39;[^A-Za-z0-9 ]+&#39;, &#39;&#39;, title).replace(&#34; &#34;, &#34;_&#34;)
     sr = {}
     ms = soup(f&#34;https://manganato.com/search/story/{title}&#34;)
     gp = ms.select_one(&#34;.group-page&#34;)
@@ -105,6 +106,9 @@ def search(s: Search):
         for r in ms.select(&#34;.a-h.text-nowrap.item-title&#34;):
             sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
     return sr
+
+def search(s: Search) -&gt; List[Manga]:
+    return [manga(i) for i in dl_search(**s.__dict__).values()]
 
 def cli_search(title: str, **kwargs: Dict[str, Any]):
     return search(Search(title, **kwargs))
@@ -147,7 +151,7 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 </details>
 </dd>
 <dt id="mangdl.api.providers.manganato.chapter"><code class="name flex">
-<span>def <span class="ident">chapter</span></span>(<span>url: str) ‑> <a title="mangdl.api.base.Ch" href="../base.html#mangdl.api.base.Ch">Ch</a></span>
+<span>def <span class="ident">chapter</span></span>(<span>url)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -155,7 +159,7 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def chapter(url: str) -&gt; Ch:
+<pre><code class="python">def chapter(url):
     c = soup(&#34;/&#34;.join(url.split(&#34;/&#34;)[:-1])).select_one(f&#39;a[href=&#34;{url}&#34;]&#39;).find_parent()
     a = c.select_one(&#34;a&#34;)
     ch = a[&#34;href&#34;].split(&#34;-&#34;)[-1]
@@ -227,8 +231,8 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
     Downloader(ch_fn, headers={&#34;Referer&#34;: &#34;https://readmanganato.com/&#34;}, **kwargs).dl_chdls(chdls(url), soup(url).select_one(&#34;.story-info-right h1&#34;).text)</code></pre>
 </details>
 </dd>
-<dt id="mangdl.api.providers.manganato.manga"><code class="name flex">
-<span>def <span class="ident">manga</span></span>(<span>url: str, chs: int = 0) ‑> <a title="mangdl.api.base.Manga" href="../base.html#mangdl.api.base.Manga">Manga</a></span>
+<dt id="mangdl.api.providers.manganato.dl_search"><code class="name flex">
+<span>def <span class="ident">dl_search</span></span>(<span>title: str, **kwargs: Dict[str, Any]) ‑> Dict[str, str]</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -236,7 +240,31 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def manga(url: str, chs: int=0) -&gt; Manga:
+<pre><code class="python">def dl_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
+    title = re.sub(r&#39;[^A-Za-z0-9 ]+&#39;, &#39;&#39;, title).replace(&#34; &#34;, &#34;_&#34;)
+    sr = {}
+    ms = soup(f&#34;https://manganato.com/search/story/{title}&#34;)
+    gp = ms.select_one(&#34;.group-page&#34;)
+    if gp:
+        for p in range(len(gp.select(&#34;a&#34;)) - 2):
+            for r in soup(f&#34;https://manganato.com/search/story/hello?page={p+1}&#34;).select(&#34;.a-h.text-nowrap.item-title&#34;):
+                sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
+    else:
+        for r in ms.select(&#34;.a-h.text-nowrap.item-title&#34;):
+            sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
+    return sr</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.manganato.manga"><code class="name flex">
+<span>def <span class="ident">manga</span></span>(<span>url, chs=0)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def manga(url, chs=0):
     ms = soup(url)
     ti = [i[&#34;class&#34;][0] for i in ms.select(&#34;.table-label i&#34;)]
     si = [i[&#34;class&#34;][0] for i in ms.select(&#34;.stre-label i&#34;)]
@@ -281,7 +309,7 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 </details>
 </dd>
 <dt id="mangdl.api.providers.manganato.search"><code class="name flex">
-<span>def <span class="ident">search</span></span>(<span>s: <a title="mangdl.api.base.Search" href="../base.html#mangdl.api.base.Search">Search</a>)</span>
+<span>def <span class="ident">search</span></span>(<span>s: <a title="mangdl.api.base.Search" href="../base.html#mangdl.api.base.Search">Search</a>) ‑> List[<a title="mangdl.api.base.Manga" href="../base.html#mangdl.api.base.Manga">Manga</a>]</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -289,19 +317,8 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def search(s: Search):
-    title = re.sub(r&#39;[^A-Za-z0-9 ]+&#39;, &#39;&#39;, s.title).replace(&#34; &#34;, &#34;_&#34;)
-    sr = {}
-    ms = soup(f&#34;https://manganato.com/search/story/{title}&#34;)
-    gp = ms.select_one(&#34;.group-page&#34;)
-    if gp:
-        for p in range(len(gp.select(&#34;a&#34;)) - 2):
-            for r in soup(f&#34;https://manganato.com/search/story/hello?page={p+1}&#34;).select(&#34;.a-h.text-nowrap.item-title&#34;):
-                sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
-    else:
-        for r in ms.select(&#34;.a-h.text-nowrap.item-title&#34;):
-            sr[r[&#34;title&#34;]] = r[&#34;href&#34;]
-    return sr</code></pre>
+<pre><code class="python">def search(s: Search) -&gt; List[Manga]:
+    return [manga(i) for i in dl_search(**s.__dict__).values()]</code></pre>
 </details>
 </dd>
 </dl>
@@ -394,6 +411,7 @@ setTimeout(() => input.focus(), 100);
 <li><code><a title="mangdl.api.providers.manganato.cli_dl" href="#mangdl.api.providers.manganato.cli_dl">cli_dl</a></code></li>
 <li><code><a title="mangdl.api.providers.manganato.cli_search" href="#mangdl.api.providers.manganato.cli_search">cli_search</a></code></li>
 <li><code><a title="mangdl.api.providers.manganato.dl" href="#mangdl.api.providers.manganato.dl">dl</a></code></li>
+<li><code><a title="mangdl.api.providers.manganato.dl_search" href="#mangdl.api.providers.manganato.dl_search">dl_search</a></code></li>
 <li><code><a title="mangdl.api.providers.manganato.manga" href="#mangdl.api.providers.manganato.manga">manga</a></code></li>
 <li><code><a title="mangdl.api.providers.manganato.search" href="#mangdl.api.providers.manganato.search">search</a></code></li>
 </ul>
