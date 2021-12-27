@@ -112,16 +112,6 @@ def ch_fn(url: str) -&gt; List[str]:
     op = [sanitize_text(i[&#34;src&#34;]) for i in soup(url).select(&#34;.page-break img&#34;)]
     return op
 
-def chdls(url: str) -&gt; List[Dict[Union[float, int, None], str]]:
-    op = []
-    cdata = soup(url).select_one(&#34;#wp-manga-js-extra&#34;).text
-    manga_id = ast.literal_eval(cdata[29:-12])[&#34;manga_id&#34;]
-    data = {&#34;action&#34;: &#34;manga_get_chapters&#34;, &#34;manga&#34;: str(manga_id)}
-    rch = soup(&#34;https://paeanscans.com/wp-admin/admin-ajax.php&#34;, method=&#34;post&#34;, data=data)
-    for c in rch.select(&#34;li.wp-manga-chapter    a&#34;):
-        op.append({ast.literal_eval(urel(c[&#34;href&#34;]).parts[3]): c[&#34;href&#34;]})
-    return op
-
 def dl(url: str, **kwargs: Dict[str, Any]):
     ms = soup(url)
     Downloader(ch_fn, **kwargs).dl_chdls(chdls(url), sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text))
@@ -171,26 +161,6 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
         scanlator_groups = &#34;Paean Scans&#34;,
         imgs             = [sanitize_text(i[&#34;src&#34;]) for i in ms.select(&#34;.page-break img&#34;)],
     )</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.paeanscans.chdls"><code class="name flex">
-<span>def <span class="ident">chdls</span></span>(<span>url: str) ‑> List[Dict[Union[float, int, ForwardRef(None)], str]]</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def chdls(url: str) -&gt; List[Dict[Union[float, int, None], str]]:
-    op = []
-    cdata = soup(url).select_one(&#34;#wp-manga-js-extra&#34;).text
-    manga_id = ast.literal_eval(cdata[29:-12])[&#34;manga_id&#34;]
-    data = {&#34;action&#34;: &#34;manga_get_chapters&#34;, &#34;manga&#34;: str(manga_id)}
-    rch = soup(&#34;https://paeanscans.com/wp-admin/admin-ajax.php&#34;, method=&#34;post&#34;, data=data)
-    for c in rch.select(&#34;li.wp-manga-chapter    a&#34;):
-        op.append({ast.literal_eval(urel(c[&#34;href&#34;]).parts[3]): c[&#34;href&#34;]})
-    return op</code></pre>
 </details>
 </dd>
 <dt id="mangdl.api.providers.paeanscans.cli_dl"><code class="name flex">
@@ -408,7 +378,6 @@ setTimeout(() => input.focus(), 100);
 <ul class="two-column">
 <li><code><a title="mangdl.api.providers.paeanscans.ch_fn" href="#mangdl.api.providers.paeanscans.ch_fn">ch_fn</a></code></li>
 <li><code><a title="mangdl.api.providers.paeanscans.chapter" href="#mangdl.api.providers.paeanscans.chapter">chapter</a></code></li>
-<li><code><a title="mangdl.api.providers.paeanscans.chdls" href="#mangdl.api.providers.paeanscans.chdls">chdls</a></code></li>
 <li><code><a title="mangdl.api.providers.paeanscans.cli_dl" href="#mangdl.api.providers.paeanscans.cli_dl">cli_dl</a></code></li>
 <li><code><a title="mangdl.api.providers.paeanscans.cli_search" href="#mangdl.api.providers.paeanscans.cli_search">cli_search</a></code></li>
 <li><code><a title="mangdl.api.providers.paeanscans.dl" href="#mangdl.api.providers.paeanscans.dl">dl</a></code></li>

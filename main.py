@@ -122,8 +122,9 @@ All other copyright for project [{Vars.project_name}](https://github.com/{Vars.u
             if logo:
                 logo["style"] = "display: block; margin: auto;"
             if RM:
-                if toc:
-                    html = str(soup).replace(str(soup.select_one(".toc")), f'{str(soup.select_one(".toc"))}<div class="toc"><ul><li><h3><a href="#table-of-contents">Table of Contents</a></h3>{str(toc.find_next("ul"))}</li></ul>')
+                print(spl[-1][1:].split(".")[0])
+                print(RM)
+                html = str(soup).replace(str(soup.select_one(".toc")), f'{str(soup.select_one(".toc"))}<div class="toc"><ul><li><h3><a href="#table-of-contents">Table of Contents</a></h3>{str(toc.find_next("ul"))}</li></ul>')
             quote = r"""
 <blockquote style='background:hsla(0 0% 100% / 5%);padding:0 20px 5px 20px;margin:30px 0 0;'>
 <span style='font-size:150px;line-height:70px;margin-left:-20px;opacity:0.2'>❝</span>
