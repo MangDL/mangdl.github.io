@@ -22,10 +22,68 @@
     CHANGELOG
 </h1>
 <h2>
+<a id="mangdl-v200" class="anchor" href="#mangdl-v200" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.2.0.0</strong>
+</h2>
+<p>NOW, THIS IS A PROVIDER SPREE!</p>
+<h3>
+<a id="added" class="anchor" href="#added" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+</h3>
+<ul>
+<li>
+<p><a href="https://www.cmreader.info" rel="nofollow">Chibimanga</a> provider</p>
+</li>
+<li>
+<p><a href="https://1stkissmanga.io" rel="nofollow">1ST Kiss MANGA</a> provider</p>
+</li>
+<li>
+<p><a href="https://mangakomi.com" rel="nofollow">Manga Komi</a> provider</p>
+</li>
+<li>
+<p><a href="https://mangazuki.me" rel="nofollow">manga ZUKI</a> provider</p>
+</li>
+<li>
+<p><a href="https://vinload.com" rel="nofollow">vinmanga</a> provider</p>
+</li>
+<li>
+<p><a href="https://zinmanga.com" rel="nofollow">Zinmanga</a> provider</p>
+</li>
+</ul>
+<h3>
+<a id="changed" class="anchor" href="#changed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
+</h3>
+<ul>
+<li>
+<p><code>cloudflare</code> must be set to <code>True</code> in the provider script if the said provider is protected by cloudflare's UAM. This is in case a method of bypassing it has been found out.</p>
+</li>
+<li>
+<p>Use <code>generic</code> as a template for providers who does not use a template.</p>
+</li>
+<li>
+<p>Removed <code>Search</code> dataclass. You can now use <code>search</code> function without passing it, instead you pass the arguments directly.</p>
+</li>
+<li>
+<p><code>dt</code> function in <code>utils/utils.py</code> will now "dehumanize" the datetime passed if it contains the word "ago".</p>
+</li>
+<li>
+<p><code>provider</code> option for the CLI commands does not verify the input now.</p>
+</li>
+</ul>
+<h2>
+<a id="mangdl-v101" class="anchor" href="#mangdl-v101" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.1.0.1</strong>
+</h2>
+<h3>
+<a id="fixed" class="anchor" href="#fixed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+</h3>
+<ul>
+<li>
+<code>setup.py</code> fixed as the pip installation for Windows OS not working due to the said OS apparently reading the <code>docs/README.html</code> in <code>cp1252</code> encoding instead of <code>utf-8</code>
+</li>
+</ul>
+<h2>
 <a id="mangdl-v100" class="anchor" href="#mangdl-v100" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.1.0.0</strong>
 </h2>
 <h3>
-<a id="added" class="anchor" href="#added" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-1" class="anchor" href="#added-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
@@ -33,7 +91,7 @@
 <li>Description metadata for providers using the wordpress template.</li>
 </ul>
 <h3>
-<a id="fixed" class="anchor" href="#fixed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-1" class="anchor" href="#fixed-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Title of the search results from the providers using the wordpress template.</li>
@@ -42,7 +100,7 @@
 <a id="mangdl-v100-alpha1" class="anchor" href="#mangdl-v100-alpha1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.1.0.0-alpha.1</strong>
 </h2>
 <h3>
-<a id="added-1" class="anchor" href="#added-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-2" class="anchor" href="#added-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
@@ -52,19 +110,19 @@
 <a id="mangdl-v100-alpha0" class="anchor" href="#mangdl-v100-alpha0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.1.0.0-alpha.0</strong>
 </h2>
 <h3>
-<a id="added-2" class="anchor" href="#added-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-3" class="anchor" href="#added-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>Templates for sites that uses Wordpress and other variants, and <a href="https://github.com/appu1232/guyamoe">guya.moe</a> manga reading framework.</li>
 </ul>
 <h3>
-<a id="changed" class="anchor" href="#changed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
+<a id="changed-1" class="anchor" href="#changed-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
 </h3>
 <ul>
 <li>Rewrote provider scripts to use a template if they have one.</li>
 </ul>
 <h3>
-<a id="fixed-1" class="anchor" href="#fixed-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-2" class="anchor" href="#fixed-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Lack of manganato provider script's <code>dl_search</code> function (literally wondering right now how that script works despite lacking one).</li>
@@ -74,14 +132,14 @@
 <a id="mangdl-v010" class="anchor" href="#mangdl-v010" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.1.0</strong>
 </h2>
 <h3>
-<a id="added-3" class="anchor" href="#added-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-4" class="anchor" href="#added-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
 <a href="https://paeanscans.com" rel="nofollow">Paean Scans</a> provider</li>
 </ul>
 <h3>
-<a id="changed-1" class="anchor" href="#changed-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
+<a id="changed-2" class="anchor" href="#changed-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
 </h3>
 <ul>
 <li>Removed light novel checking for Mangasushi and Ace Scans provider scripts.</li>
@@ -90,20 +148,20 @@
 <a id="mangdl-v001" class="anchor" href="#mangdl-v001" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.1</strong>
 </h2>
 <h3>
-<a id="added-4" class="anchor" href="#added-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-5" class="anchor" href="#added-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
 <a href="https://mangasushi.net" rel="nofollow">Mangasushi</a> provider</li>
 </ul>
 <h3>
-<a id="changed-2" class="anchor" href="#changed-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
+<a id="changed-3" class="anchor" href="#changed-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
 </h3>
 <ul>
 <li>Refactor Setsu Scans' manga function.</li>
 </ul>
 <h3>
-<a id="fixed-2" class="anchor" href="#fixed-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-3" class="anchor" href="#fixed-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Replace the version number in the <code>setup.py</code> to reflect the real version of the app.</li>
@@ -113,20 +171,20 @@
 <a id="mangdl-v000-beta1" class="anchor" href="#mangdl-v000-beta1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-beta.1</strong>
 </h2>
 <h3>
-<a id="added-5" class="anchor" href="#added-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-6" class="anchor" href="#added-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
 <a href="https://setsuscans.com" rel="nofollow">Setsu Scans</a> provider</li>
 </ul>
 <h3>
-<a id="changed-3" class="anchor" href="#changed-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
+<a id="changed-4" class="anchor" href="#changed-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
 </h3>
 <ul>
 <li>Removed logging.</li>
 </ul>
 <h3>
-<a id="fixed-3" class="anchor" href="#fixed-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-4" class="anchor" href="#fixed-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Mangadex provider (I actually forgot what I fixed there, don't ask me and my shitty memory).</li>
@@ -135,13 +193,13 @@
 <a id="mangdl-v000-beta0" class="anchor" href="#mangdl-v000-beta0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-beta.0</strong>
 </h2>
 <h3>
-<a id="added-6" class="anchor" href="#added-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-7" class="anchor" href="#added-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>Scripts for setting up portable packages in Windows.</li>
 </ul>
 <h3>
-<a id="fixed-4" class="anchor" href="#fixed-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-5" class="anchor" href="#fixed-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Windows packages should now work.</li>
@@ -150,13 +208,13 @@
 <a id="mangdl-v000-alpha4" class="anchor" href="#mangdl-v000-alpha4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-alpha.4</strong>
 </h2>
 <h3>
-<a id="added-7" class="anchor" href="#added-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-8" class="anchor" href="#added-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>Installation and download scripts for linux and windows packages. Instructions coming soon!</li>
 </ul>
 <h3>
-<a id="fixed-5" class="anchor" href="#fixed-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-6" class="anchor" href="#fixed-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Windows packages should now work</li>
@@ -166,7 +224,7 @@
 </h2>
 <p>FIRST PACKAGE PRERELEASE.</p>
 <h3>
-<a id="changed-4" class="anchor" href="#changed-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
+<a id="changed-5" class="anchor" href="#changed-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
 </h3>
 <ul>
 <li>For programmatic usage of the function <code>manga</code> in every provider scripts, you can now change whether the function return the chapters and its metadata (which is significantly slower), just the link to the chapters, or none at all.
@@ -182,14 +240,14 @@ Ex.:</li>
 </h2>
 <p>PROVIDERS SPREE.</p>
 <h3>
-<a id="added-8" class="anchor" href="#added-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-9" class="anchor" href="#added-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
 <a href="https://acescans.xyz" rel="nofollow">Ace Scans</a> provider</li>
 </ul>
 <h3>
-<a id="fixed-6" class="anchor" href="#fixed-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-7" class="anchor" href="#fixed-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Flamescans' chapter function throwing an error from untested code</li>
@@ -198,7 +256,7 @@ Ex.:</li>
 <a id="mangdl-v000-alpha1" class="anchor" href="#mangdl-v000-alpha1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-alpha.1</strong>
 </h2>
 <h3>
-<a id="added-9" class="anchor" href="#added-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-10" class="anchor" href="#added-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
@@ -209,14 +267,14 @@ Ex.:</li>
 </h2>
 <p>START OF SEMANTIC VERSIONING.</p>
 <h3>
-<a id="added-10" class="anchor" href="#added-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-11" class="anchor" href="#added-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
 <a href="https://hachirumi.com" rel="nofollow">Hachirumi</a> provider</li>
 </ul>
 <h3>
-<a id="changed-5" class="anchor" href="#changed-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
+<a id="changed-6" class="anchor" href="#changed-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
 </h3>
 <ul>
 <li>An intermediary script between the provider scripts and the cli has been made, which can also be used thru programmatic usage.</li>

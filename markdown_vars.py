@@ -33,7 +33,7 @@ class Vars:
     project_name = "MangDL"
     organization = project_name
     user = "whinee"
-    site = "mangdl.rf.gd"
+    site = "mdl.pages.dev"
     dc_acc = "whi_ne#5135"
     dc_link = "https://discord.com/users/867696753434951732"
     dc_inv = "JbAtUxGcJZ"

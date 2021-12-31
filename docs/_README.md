@@ -27,7 +27,7 @@
     <a href="https://github.com/${organization}/${repo_name}/graphs/contributors">
         <img src="https://img.shields.io/github/contributors/${organization}/${repo_name}.svg?style=flat-square&logo=data:image/png;base64,${contributors_b64}">
     </a>
-    <a href="http://${site}/license.html">
+    <a href="https://${site}/license.html">
         <img src="https://img.shields.io/badge/LICENSE-A31F34?style=flat-square&logoWidth=25&logo=data:image/png;base64,${license_b64}">
     </a>
 </p>
@@ -67,13 +67,13 @@ The most inefficient manga downloader for PC (and soon, also a reader)
 
 Github: [github.com/${organization}/${repo_name}](https://github.com/${organization}/${repo_name})
 
-Website: [${site}](http://${site})
+Website: [${site}](https://${site})
 
 ## **Downloads**
 
 Since people are looking for the download first, here you go:
 
-Follow [this link](http://mangdl.rf.gd/installation.html) to install MangDL in your machine.
+Follow [this link](https://${site}/installation.html) to install MangDL in your machine.
 
 ## **Important**
 
@@ -99,6 +99,7 @@ For the terms of usage and legals, visit [license](license.md) and [terms of usa
 ## **Sites**
 
 - [acescans.xyz](https://acescans.xyz)
+- [cmreader.info](https://www.cmreader.info)
 - [danke.moe](https://danke.moe)
 - [flamescans.org](https://flamescans.org)
 - [hachirumi.com](https://hachirumi.com)
@@ -107,6 +108,7 @@ For the terms of usage and legals, visit [license](license.md) and [terms of usa
 - [mangasushi.net](https://mangasushi.net/)
 - [paeanscans.com](https://paeanscans.com/)
 - [setsuscans.com](https://setsuscans.com/)
+- [xunscans.xyz](https://xunscans.xyz/)
 
 ### Coming soon™
 
@@ -118,7 +120,8 @@ For the terms of usage and legals, visit [license](license.md) and [terms of usa
 - [mangarock.to](https://mangarock.to/)
 - [web-ace.jp/youngaceup](https://web-ace.jp/youngaceup/)
 - [windyfall.com](https://windyfall.com/)
-- [xunscans.xyz](https://xunscans.xyz/)
+
+And oh, expect some sites in [this list](https://piracy.moe/library/manga) to be added.
 
 <!-- TOC section. Update when adding sections and subsections fitted in TOC. -->
 ## **Table of Contents**
@@ -157,7 +160,7 @@ Downloading:
 mangdl dl <title> [OPTIONS]
 ```
 
-For programmatic use, visit the documentation: [${site}/docs](http://${site}/docs/index.html)
+For programmatic use, visit the documentation: [${site}/docs](https://${site}/docs/index.html)
 
 ## **Getting Started**
 
@@ -270,7 +273,7 @@ The following are the required programs and/or packages to run this project:
 
 ### **Setup**
 
-Follow [this link](http://mangdl.rf.gd/installation.html) to install MangDL in your machine.
+Follow [this link](https://${site}/installation.html) to install MangDL in your machine.
 
 ${TODO}
 ## **Contributions**
