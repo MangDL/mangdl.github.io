@@ -64,6 +64,7 @@ def fping(item):
         "pf": vm.get(pf, pf) or "N/A",
         "flag": v.get("flag", [])
     }
+    print(op[k])
 
 with ThreadPool(30) as pool:
     pool.map(fping, fyml["sites"].items())
