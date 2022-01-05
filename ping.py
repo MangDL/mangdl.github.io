@@ -24,8 +24,6 @@ def fping(item):
     pf = v.get("pf", "")
     notes = []
     nf = vn.get(pf)
-    stat = False
-    alive = False
 
     if nf:
         notes.append(nf)
@@ -41,6 +39,7 @@ def fping(item):
         for i in zip(["manga", "chapter", "dl_search"]):
             getattr(prov, i)
         test = True
+        print([url, test])
     except:
         test = False
 
@@ -50,6 +49,8 @@ def fping(item):
         stat = alive and test
         avg = p.avg_rtt
     except:
+        alive = False
+        stat = False
         avg = 0
 
     op[k] = {
