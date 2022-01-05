@@ -1,6 +1,6 @@
 <!-- Repository Name. Preferrably 1-5 words long. -->
 <h1 align="center" style="font-weight: bold">
-    mangdl.rf.gd
+    mdl
 </h1>
 
 <!-- Description. Preferrably 1 sentence long. -->

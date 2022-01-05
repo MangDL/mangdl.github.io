@@ -2,9 +2,9 @@
     <a target="_blank" href="https://choosealicense.com/licenses/mit/">MIT LICENSE</a>
 </h1>
 
-Copyright for portions of project mangdl.rf.gd are held by [Codepen Account [Aaron Luna](https://codepen.io/a-luna) Owner, 2021] as part of project "Add Copy Button to Chroma (Hugo) Code Blocks".
+Copyright for portions of project [mdl](https://github.com/MangDL/mdl) is held by [Codepen Account [Aaron Luna](https://codepen.io/a-luna) Owner, 2021] as part of project "[Add Copy Button to Chroma (Hugo) Code Blocks](https://codepen.io/a-luna/pen/JjYrejL)".
 
-All other copyright for project mangdl.rf.gd are held by [Github Account [whinee](https://github.com/whinee) Owner, 2021].
+All other copyright for project [mdl](https://github.com/MangDL/mdl) is held by [Github Account [whinee](https://github.com/whinee) Owner, 2021].
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

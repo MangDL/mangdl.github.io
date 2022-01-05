@@ -1,4 +1,28 @@
 html {
+    font-family:
+        system-ui,
+        /* macOS 10.11-10.12 */
+        -apple-system,
+        /* Windows 6+ */
+        "Segoe UI",
+        /* Android 4+ */
+        "Roboto",
+        /* Ubuntu 10.10+ */
+        "Ubuntu",
+        /* Gnome 3+ */
+        "Cantarell",
+        /* KDE Plasma 5+ */
+        "Noto Sans",
+        /* fallback */
+        sans-serif,
+        /* macOS emoji */
+        "Apple Color Emoji",
+        /* Windows emoji */
+        "Segoe UI Emoji",
+        /* Windows emoji */
+        "Segoe UI Symbol",
+        /* Linux emoji */
+        "Noto Color Emoji";
     scrollbar-face-color: #646464;
     scrollbar-base-color: #646464;
     scrollbar-3dlight-color: #646464;
@@ -7,6 +31,41 @@ html {
     scrollbar-arrow-color: #000;
     scrollbar-shadow-color: #646464;
     scrollbar-dark-shadow-color: #866a6a;
+}
+
+/**
+   * Use the default monospace user interface font in all browsers (opinionated).
+   */
+
+code,
+kbd,
+samp,
+pre {
+    font-family:
+        /* macOS 10.10+ */
+        "Menlo",
+        /* Windows 6+ */
+        "Consolas",
+        /* Android 4+ */
+        "Roboto Mono",
+        /* Ubuntu 10.10+ */
+        "Ubuntu Monospace",
+        /* KDE Plasma 5+ */
+        "Noto Mono",
+        /* KDE Plasma 4+ */
+        "Oxygen Mono",
+        /* Linux/OpenOffice fallback */
+        "Liberation Mono",
+        /* fallback */
+        monospace,
+        /* macOS emoji */
+        "Apple Color Emoji",
+        /* Windows emoji */
+        "Segoe UI Emoji",
+        /* Windows emoji */
+        "Segoe UI Symbol",
+        /* Linux emoji */
+        "Noto Color Emoji";
 }
 
 ::-webkit-scrollbar {
@@ -156,14 +215,14 @@ ul li img {
 
 
 @media (max-width: 1000px) {
-	ul li img {
+    ul li img {
         display: block;
         max-width: 75%;
     }
 }
 
 @media (max-width: 500px) {
-	ul li img {
+    ul li img {
         display: block;
         max-width: 100%;
     }
@@ -172,23 +231,23 @@ ul li img {
 kbd {
     display: inline-block;
     padding: 3px 5px;
-    font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+    font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
     line-height: normal;
     line-height: 10px;
     color: #c9d1d9;
     vertical-align: middle;
     background-color: #161b22;
-    border: solid 1px rgba(110,118,129,0.4);
-    border-bottom-color: rgba(110,118,129,0.4);
+    border: solid 1px rgba(110, 118, 129, 0.4);
+    border-bottom-color: rgba(110, 118, 129, 0.4);
     border-radius: 6px;
-    box-shadow: inset 0 -1px 0 rgba(110,118,129,0.4);
+    box-shadow: inset 0 -1px 0 rgba(110, 118, 129, 0.4);
 }
 
 code {
     padding: .2em .4em;
     margin: 0;
     font-size: 85%;
-    background-color: rgba(110,118,129,0.4);
+    background-color: rgba(110, 118, 129, 0.4);
     border-radius: 6px;
 }
 
@@ -197,7 +256,7 @@ code {
     display: none;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(0, 0, 0, 0.9);
     cursor: pointer;
     align-content: center;
     top: 0;
@@ -212,7 +271,7 @@ code {
     align-self: center;
     max-width: 100%;
     max-height: 90vh;
-    width:auto;
+    width: auto;
     size: contain;
 }
 
@@ -221,17 +280,91 @@ code {
     margin: 0.2em 0 0 0;
 }
 
-#overlay a:link{
+#overlay a:link {
     color: white;
 }
 
-#overlay a:visited{
-    color: white;
-}
-#overlay a:active{
+#overlay a:visited {
     color: white;
 }
 
-#overlay a:hover{
+#overlay a:active {
     color: white;
+}
+
+#overlay a:hover {
+    color: white;
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #1c1c1c;
+    margin: auto;
+    padding: 20px;
+    border: 0;
+    width: 80%;
+}
+
+/* The Close Button */
+#close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#close:hover,
+#close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+    table-layout: fixed ;
+    width: 100% ;
+}
+
+td, th {
+    text-align: center;
+    padding: 0.5em;
+}
+
+tr:nth-child(even) {
+    background-color: #262626;
+}
+
+td img {
+    padding: 0;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+td btn {
+    margin: auto;
 }

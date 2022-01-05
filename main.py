@@ -1,5 +1,8 @@
 import importlib
 import os
+import shlex
+import shutil
+import subprocess
 from pathlib import Path
 
 import httpx
@@ -8,9 +11,6 @@ import yaml
 from bs4 import BeautifulSoup
 from mako.lookup import TemplateLookup
 from selenium_driver_updater import DriverUpdater
-import subprocess
-import shlex
-import shutil
 
 import markdown_vars
 from src import terminal
@@ -40,8 +40,8 @@ def main():
         if len(copyright) > 1:
             copyright[-2] += f", and {copyright[-1]}"
             del copyright[-1]
-        cholder = f"""Copyright for portions of project [{Vars.project_name}](https://github.com/{Vars.project_name}/{Vars.repo_name}) are held {', '.join(copyright)}.\n
-All other copyright for project [{Vars.project_name}](https://github.com/{Vars.user}/{Vars.repo_name}) are held by [Github Account [{Vars.user}](https://github.com/{Vars.user}) Owner, 2021]."""
+        cholder = f"""Copyright for portions of project [{Vars.project_name}](https://github.com/{Vars.organization}/{Vars.project_name}) are held {', '.join(copyright)}.\n
+All other copyright for project [{Vars.project_name}](https://github.com/{Vars.organization}/{Vars.project_name}) are held by [Github Account [{Vars.user}](https://github.com/{Vars.user}) Owner, 2021]."""
     else:
         cholder = f"Copyright (c) 2021 Github Account [{Vars.project_name}](https://github.com/{Vars.user}) Owner"
     Vars.conditions = ("" if license["conditions"][0] is None else "\n" + "\n\n".join(license["conditions"]) + "\n")
@@ -122,8 +122,6 @@ All other copyright for project [{Vars.project_name}](https://github.com/{Vars.u
             if logo:
                 logo["style"] = "display: block; margin: auto;"
             if RM:
-                print(spl[-1][1:].split(".")[0])
-                print(RM)
                 html = str(soup).replace(str(soup.select_one(".toc")), f'{str(soup.select_one(".toc"))}<div class="toc"><ul><li><h3><a href="#table-of-contents">Table of Contents</a></h3>{str(toc.find_next("ul"))}</li></ul>')
             quote = r"""
 <blockquote style='background:hsla(0 0% 100% / 5%);padding:0 20px 5px 20px;margin:30px 0 0;'>
@@ -139,7 +137,7 @@ All other copyright for project [{Vars.project_name}](https://github.com/{Vars.u
             html = html.replace(str(soup.select_one("#quotes")), quote)
             hout.write(html)
     shutil.rmtree("./docs/docs")
-    subprocess.run(shlex.split(f"pdoc --html --template-dir template -o docs --force ../MangDL/mangdl"))
+    subprocess.call(shlex.split(f"pdoc --html --template-dir template -o docs --force ../MangDL/mangdl"))
     shutil.move('./docs/mangdl', './docs/docs')
 
 if __name__ == "__main__":
