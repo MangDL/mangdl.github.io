@@ -44,7 +44,7 @@ def fping(item):
         test = False
 
     try:
-        p = ping(url, count=4)
+        p = ping(URL(url).host, count=4, privileged=False)
         alive = p.is_alive
         stat = alive and test
         avg = p.avg_rtt
