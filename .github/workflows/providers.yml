@@ -9,12 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Setup
+    - name: Ping
       run: |-
-        sudo python3 -m pip install --upgrade pip
-        sudo python3 -m pip install -r requirements_ping.txt
-    - name: Run ping.py
-      run: |-
-        sudo python t.py
+        ping hachirumi.com
