@@ -19,4 +19,4 @@ jobs:
       run: python -m pip install -r requirements_ping.txt
     - name: Run ping.py
       run: |-
-        python t.py
+        sudo python t.py
