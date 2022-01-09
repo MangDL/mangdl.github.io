@@ -22,18 +22,43 @@
     CHANGELOG
 </h1>
 <h2>
-<a id="mangdl-v201" class="anchor" href="#mangdl-v201" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.2.0.1</strong>
+<a id="mangdl-v202" class="anchor" href="#mangdl-v202" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.2.0.2</strong>
 </h2>
+<h3>
+<a id="added" class="anchor" href="#added" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+</h3>
+<ul>
+<li>Added logging back with the <code>rich</code> library.</li>
+</ul>
 <h3>
 <a id="changed" class="anchor" href="#changed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
 </h3>
 <ul>
-<li>Removed <code>search</code> function in <code>mangdl/api/providers/templates/guya.py</code>, <code>mangdl/api/providers/mangadex.py</code>, and <code>mangdl/api/providers/manganato.py</code>.</li>
+<li>Changed <code>mangdl/api/base.py</code>'s <code>tblp</code> function to use the <code>rich</code> library for easier formatting and making more aesthetically pleasing tables.</li>
+<li>Added <code>cookies</code> in the arguments of <code>mangdl/api/base.py</code>'s <code>Downloader.__init__</code> function for the downloader to be able to use custom cookies.</li>
+<li>Honestly, who reads this. Anyways, using the <code>rich</code> library with the <code>yachalk</code> library for colorful printing and beautiful formatting.</li>
+<li>Added <code>de</code> in the arguments of <code>mangdl/utils/utils.py</code>'s <code>ddir</code> function to be able to return that value in case the output evaluates to <code>False</code>.</li>
 </ul>
 <h3>
 <a id="fixed" class="anchor" href="#fixed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
+<li>Fixed <code>mangdl/api/providers/templates/guya.py</code>'s <code>template.ch_fn</code> function to get the image links from the first group.</li>
+<li>Fixed <code>mangdl/api/providers/templates/guya.py</code>'s <code>template.chapter</code> function to use <code>self.ch_fn</code> instead of its own implementation for fetching the image links.</li>
+<li>Added <code>template.cli_dl</code> in <code>mangdl/api/providers/templates/guya.py</code>.</li>
+<li>Fixed <code>mangdl/api/providers/mangadex.py</code>'s <code>ch_fn</code> function to be able to fetch image links on the new version on mangadex v5 API.</li>
+<li>Fixed <code>mangdl/api/providers/mangadex.py</code>'s <code>chapter</code> function to use <code>ch_fn</code> instead of its own implementation for fetching the image links.</li>
+<li>Fixed the spelling of "colour" in <code>mangdl/utils/stg.json</code> to use the British English spelling instead of the American English spelling.</li>
+</ul>
+<h2>
+<a id="mangdl-v201" class="anchor" href="#mangdl-v201" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.2.0.1</strong>
+</h2>
+<p>NOW, THIS IS A BUGFIX!</p>
+<h3>
+<a id="fixed-1" class="anchor" href="#fixed-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+</h3>
+<ul>
+<li>Removed <code>search</code> function in <code>mangdl/api/providers/templates/guya.py</code>, <code>mangdl/api/providers/mangadex.py</code>, and <code>mangdl/api/providers/manganato.py</code>.</li>
 <li>Removed <code>from ...base import Search</code> in <code>mangdl/api/providers/templates/guya.py</code>.</li>
 <li>Removed <code>from ..base import Search</code> in <code>mangdl/api/providers/mangadex.py</code> and <code>mangdl/api/providers/manganato.py</code>.</li>
 <li>Fixed description metadata in <code>mangdl/api/providers/templates/wordpress.py</code>'s <code>manga</code> function to output "No description available." when the description is not available.</li>
@@ -46,7 +71,7 @@
 </h2>
 <p>NOW, THIS IS A PROVIDER SPREE!</p>
 <h3>
-<a id="added" class="anchor" href="#added" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-1" class="anchor" href="#added-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
@@ -93,7 +118,7 @@ d</p>
 <a id="mangdl-v101" class="anchor" href="#mangdl-v101" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.1.0.1</strong>
 </h2>
 <h3>
-<a id="fixed-1" class="anchor" href="#fixed-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-2" class="anchor" href="#fixed-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>
@@ -104,7 +129,7 @@ d</p>
 <a id="mangdl-v100" class="anchor" href="#mangdl-v100" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.1.0.0</strong>
 </h2>
 <h3>
-<a id="added-1" class="anchor" href="#added-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-2" class="anchor" href="#added-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
@@ -112,7 +137,7 @@ d</p>
 <li>Description metadata for providers using the wordpress template.</li>
 </ul>
 <h3>
-<a id="fixed-2" class="anchor" href="#fixed-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-3" class="anchor" href="#fixed-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Title of the search results from the providers using the wordpress template.</li>
@@ -121,7 +146,7 @@ d</p>
 <a id="mangdl-v100-alpha1" class="anchor" href="#mangdl-v100-alpha1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.1.0.0-alpha.1</strong>
 </h2>
 <h3>
-<a id="added-2" class="anchor" href="#added-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-3" class="anchor" href="#added-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
@@ -131,7 +156,7 @@ d</p>
 <a id="mangdl-v100-alpha0" class="anchor" href="#mangdl-v100-alpha0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.1.0.0-alpha.0</strong>
 </h2>
 <h3>
-<a id="added-3" class="anchor" href="#added-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-4" class="anchor" href="#added-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>Templates for sites that uses Wordpress and other variants, and <a href="https://github.com/appu1232/guyamoe">guya.moe</a> manga reading framework.</li>
@@ -143,7 +168,7 @@ d</p>
 <li>Rewrote provider scripts to use a template if they have one.</li>
 </ul>
 <h3>
-<a id="fixed-3" class="anchor" href="#fixed-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-4" class="anchor" href="#fixed-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Lack of manganato provider script's <code>dl_search</code> function (literally wondering right now how that script works despite lacking one).</li>
@@ -153,7 +178,7 @@ d</p>
 <a id="mangdl-v010" class="anchor" href="#mangdl-v010" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.1.0</strong>
 </h2>
 <h3>
-<a id="added-4" class="anchor" href="#added-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-5" class="anchor" href="#added-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
@@ -169,7 +194,7 @@ d</p>
 <a id="mangdl-v001" class="anchor" href="#mangdl-v001" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.1</strong>
 </h2>
 <h3>
-<a id="added-5" class="anchor" href="#added-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-6" class="anchor" href="#added-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
@@ -182,7 +207,7 @@ d</p>
 <li>Refactor Setsu Scans' manga function.</li>
 </ul>
 <h3>
-<a id="fixed-4" class="anchor" href="#fixed-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-5" class="anchor" href="#fixed-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Replace the version number in the <code>setup.py</code> to reflect the real version of the app.</li>
@@ -192,7 +217,7 @@ d</p>
 <a id="mangdl-v000-beta1" class="anchor" href="#mangdl-v000-beta1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-beta.1</strong>
 </h2>
 <h3>
-<a id="added-6" class="anchor" href="#added-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-7" class="anchor" href="#added-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
@@ -205,7 +230,7 @@ d</p>
 <li>Removed logging.</li>
 </ul>
 <h3>
-<a id="fixed-5" class="anchor" href="#fixed-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-6" class="anchor" href="#fixed-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Mangadex provider (I actually forgot what I fixed there, don't ask me and my shitty memory).</li>
@@ -214,13 +239,13 @@ d</p>
 <a id="mangdl-v000-beta0" class="anchor" href="#mangdl-v000-beta0" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-beta.0</strong>
 </h2>
 <h3>
-<a id="added-7" class="anchor" href="#added-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-8" class="anchor" href="#added-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>Scripts for setting up portable packages in Windows.</li>
 </ul>
 <h3>
-<a id="fixed-6" class="anchor" href="#fixed-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-7" class="anchor" href="#fixed-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Windows packages should now work.</li>
@@ -229,13 +254,13 @@ d</p>
 <a id="mangdl-v000-alpha4" class="anchor" href="#mangdl-v000-alpha4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-alpha.4</strong>
 </h2>
 <h3>
-<a id="added-8" class="anchor" href="#added-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-9" class="anchor" href="#added-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>Installation and download scripts for linux and windows packages. Instructions coming soon!</li>
 </ul>
 <h3>
-<a id="fixed-7" class="anchor" href="#fixed-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-8" class="anchor" href="#fixed-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Windows packages should now work</li>
@@ -261,14 +286,14 @@ Ex.:</li>
 </h2>
 <p>PROVIDERS SPREE.</p>
 <h3>
-<a id="added-9" class="anchor" href="#added-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-10" class="anchor" href="#added-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
 <a href="https://acescans.xyz" rel="nofollow">Ace Scans</a> provider</li>
 </ul>
 <h3>
-<a id="fixed-8" class="anchor" href="#fixed-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-9" class="anchor" href="#fixed-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Flamescans' chapter function throwing an error from untested code</li>
@@ -277,7 +302,7 @@ Ex.:</li>
 <a id="mangdl-v000-alpha1" class="anchor" href="#mangdl-v000-alpha1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.0.0.0-alpha.1</strong>
 </h2>
 <h3>
-<a id="added-10" class="anchor" href="#added-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-11" class="anchor" href="#added-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
@@ -288,7 +313,7 @@ Ex.:</li>
 </h2>
 <p>START OF SEMANTIC VERSIONING.</p>
 <h3>
-<a id="added-11" class="anchor" href="#added-11" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
+<a id="added-12" class="anchor" href="#added-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
 <ul>
 <li>
