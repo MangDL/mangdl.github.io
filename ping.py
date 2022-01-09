@@ -7,6 +7,9 @@ import httpx
 import yaml
 from mangdl.providers import Provider
 from yarl import URL
+from functools import partial
+
+from typing import Callable, Dict, List, Any
 
 kv_url = "https://kv.whi-ne.workers.dev"
 
@@ -16,6 +19,33 @@ vm = fyml["ac"]
 vn = fyml["notes"]
 
 op = {}
+
+METHODS = ["get", "options", "head", "post", "put", "patch", "delete"]
+SESSION = httpx.Client()
+
+def _req(
+        url: str,
+        ra: Callable[[httpx.Response], int]=None,
+        method: str = "get",
+        *args: List[Any],
+        **kwargs: Dict[str, Any]
+    ) -> httpx.Response:
+    try:
+        resp = getattr(SESSION, method)(url, follow_redirects=True, *args, **kwargs)
+        if resp.status_code in [503, 429]:
+            if ra:
+                time.sleep(2)
+                return _req(url, ra, method, *args, **kwargs)
+    except:
+        time.sleep(2)
+        return _req(url, ra, method, *args, **kwargs)
+    return resp
+
+class req:
+    pass
+
+for i in METHODS:
+    setattr(req, i, partial(_req, method=i))
 
 def fping(item):
     k, v = item
@@ -42,12 +72,13 @@ def fping(item):
     except:
         test = False
 
-    pr = httpx.get(f'https://api.justyy.workers.dev/api/ping/?host={host}&cached', timeout=10).text
+    pr = req.get(f'https://api.justyy.workers.dev/api/ping/?host={host}&cached', timeout=10).text
     if pr == "null":
         ping = 0
         ol = False
     else:
-        ping = pr.split(r'\/')[-3]
+        print(pr)
+        ping = pr.split('\/')[-3]
         ol = True
 
     op[k] = {
@@ -68,4 +99,4 @@ with ThreadPool(20) as pool:
     pool.close()
     pool.join()
 
-httpx.post(kv_url, json={"all": json.dumps(dict(sorted(op.items(), key=itemgetter(0))), indent=None)})
+req.post(kv_url, json={"all": json.dumps(dict(sorted(op.items(), key=itemgetter(0))), indent=None)})
