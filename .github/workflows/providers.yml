@@ -1,12 +1,22 @@
 name: Providers
 
 on:
+  schedule:
+    - cron:  '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Ping
-      run: |-
-        python -c "import httpx;from yarl import URL;host=URL('https://hachirumi.com').host;resp=httpx.get(f'https://api.justyy.workers.dev/api/ping/?host={host}&cached').text;print(0 if resp == 'null' else resp.split('\/')[-3])"
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Python3.10
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.10"
+    - name: Setup
+      run: python -m pip install -r requirements_ping.txt
+    - name: Run ping.py
+      run: |
+        python ping.py

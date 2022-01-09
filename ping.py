@@ -5,7 +5,6 @@ from operator import itemgetter
 
 import httpx
 import yaml
-from icmplib import ping
 from mangdl.providers import Provider
 from yarl import URL
 
@@ -21,6 +20,7 @@ op = {}
 def fping(item):
     k, v = item
     url = v["url"]
+    host = URL(url).host
     pf = v.get("pf", "")
     notes = []
     nf = vn.get(pf)
@@ -36,29 +36,26 @@ def fping(item):
         prov.manga(m)
         prov.chapter(ch)
         prov.dl_search(dls)
-        for i in zip(["manga", "chapter", "dl_search"]):
+        for i in ["manga", "chapter", "dl_search"]:
             getattr(prov, i)
         test = True
-        print([url, test])
     except:
         test = False
 
-    try:
-        p = ping(URL(url).host, count=4, privileged=False)
-        alive = p.is_alive
-        stat = alive and test
-        avg = p.avg_rtt
-    except:
-        alive = False
-        stat = False
-        avg = 0
+    pr = httpx.get(f'https://api.justyy.workers.dev/api/ping/?host={host}&cached', timeout=10).text
+    if pr == "null":
+        ping = 0
+        ol = False
+    else:
+        ping = pr.split(r'\/')[-3]
+        ol = True
 
     op[k] = {
         "url": url,
-        "stat": stat,
-        "ol": alive,
+        "stat": ol & test,
+        "ol": ol,
         "test": test,
-        "ping": avg,
+        "ping": ping,
         "ud": int(time.time()),
         "notes": " ".join(notes),
         "pf": vm.get(pf, pf) or "N/A",
@@ -66,7 +63,7 @@ def fping(item):
     }
     print(op[k])
 
-with ThreadPool(30) as pool:
+with ThreadPool(20) as pool:
     pool.map(fping, fyml["sites"].items())
     pool.close()
     pool.join()
