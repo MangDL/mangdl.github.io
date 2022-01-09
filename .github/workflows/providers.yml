@@ -1,8 +1,6 @@
 name: Providers
 
 on:
-  schedule:
-    - cron:  '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -11,4 +9,4 @@ jobs:
     steps:
     - name: Ping
       run: |-
-        ping hachirumi.com
+        python -c "import httpx;from yarl import URL;host=URL('https://hachirumi.com').host;resp=httpx.get(f'https://api.justyy.workers.dev/api/ping/?host={host}&cached').text;print(0 if resp == 'null' else resp.split('\/')[-3])"
