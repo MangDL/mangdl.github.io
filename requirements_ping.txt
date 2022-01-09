@@ -1,5 +1,5 @@
 httpx
 icmplib
-MangDL==2.0.2a4
+MangDL
 pyyaml
 yarl
