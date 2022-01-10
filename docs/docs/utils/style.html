@@ -67,7 +67,7 @@ class ct:
     def panel(text: str):
         console.print(Align.center(Panel(text, **ddir(syml, &#34;styles/panel&#34;), **SA)))
 
-    def table(cols: List[str], rows: List[str]):
+    def table(cols: List[str], rows: List[List[str]]):
         stb = table
         box = getattr(rich.box, stb.pop(&#34;box&#34;))
 
@@ -202,7 +202,7 @@ def pprint(t):
     def panel(text: str):
         console.print(Align.center(Panel(text, **ddir(syml, &#34;styles/panel&#34;), **SA)))
 
-    def table(cols: List[str], rows: List[str]):
+    def table(cols: List[str], rows: List[List[str]]):
         stb = table
         box = getattr(rich.box, stb.pop(&#34;box&#34;))
 
@@ -233,7 +233,7 @@ def pprint(t):
 </details>
 </dd>
 <dt id="mangdl.utils.style.ct.table"><code class="name flex">
-<span>def <span class="ident">table</span></span>(<span>cols: List[str], rows: List[str])</span>
+<span>def <span class="ident">table</span></span>(<span>cols: List[str], rows: List[List[str]])</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -241,7 +241,7 @@ def pprint(t):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def table(cols: List[str], rows: List[str]):
+<pre><code class="python">def table(cols: List[str], rows: List[List[str]]):
     stb = table
     box = getattr(rich.box, stb.pop(&#34;box&#34;))
 
