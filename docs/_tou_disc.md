@@ -64,4 +64,4 @@ By no means harassing the **Developer** including, but not limited to the follow
 
 The **Developer** will act legally against those who have done anything illegal against the said **Developer**, including, but not limited to the following above.
 
-For any concerns regarding the legality of the project, begin by creating a new issue or through emailing me at **<a target="_blank" href="${$email}"/>** or contacting me in Discord at **<a target="_blank" href="${dc_link}">${dc_acc}</a>**.
+For any concerns regarding the legality of the project, begin by creating a new issue or through emailing me at **<a target="_blank" href="${email}">${email}</a>** or contacting me in Discord at **<a target="_blank" href="${dc_link}">${dc_acc}</a>**.
