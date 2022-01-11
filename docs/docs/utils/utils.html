@@ -80,7 +80,8 @@ def de(a: Any, d: Any) -&gt; Any:
         return d
 
 def dd(default: Dict[Any, Any], d: Union[Dict[Any, Any], None]) -&gt; Dict[Any, Any]:
-    &#34;&#34;&#34;Defaults dictionary. Overwrite the items in the default dict with the
+    &#34;&#34;&#34;
+    Defaults dictionary. Overwrite the items in the default dict with the
     items in the d dict.
 
     Args:
@@ -97,7 +98,8 @@ def dd(default: Dict[Any, Any], d: Union[Dict[Any, Any], None]) -&gt; Dict[Any, 
     return op
 
 def ddir(d: Dict[Any, Any], dir: str, de: Any={}) -&gt; Any:
-    &#34;&#34;&#34;Retrieve dictionary value using recursive indexing with a string.
+    &#34;&#34;&#34;
+    Retrieve dictionary value using recursive indexing with a string.
     ex.:
         `ddir({&#34;data&#34;: {&#34;attr&#34;: {&#34;ch&#34;: 1}}}, &#34;data/attr/ch&#34;)`
         will return `1`
@@ -180,7 +182,8 @@ def parse_list(opt: Union[str, None]):
         return None
 
 def squery(query: str, possibilities: List[str], cutoff: int=0.6, *, processor: Callable[[Any], Any]=lambda r: r):
-    &#34;&#34;&#34;Custom search query.
+    &#34;&#34;&#34;
+    Custom search query.
 
     Args:
         query (str): String to search for in the possibilities.
@@ -234,7 +237,8 @@ items in the d dict.</p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def dd(default: Dict[Any, Any], d: Union[Dict[Any, Any], None]) -&gt; Dict[Any, Any]:
-    &#34;&#34;&#34;Defaults dictionary. Overwrite the items in the default dict with the
+    &#34;&#34;&#34;
+    Defaults dictionary. Overwrite the items in the default dict with the
     items in the d dict.
 
     Args:
@@ -273,7 +277,8 @@ will return <code>1</code></p>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def ddir(d: Dict[Any, Any], dir: str, de: Any={}) -&gt; Any:
-    &#34;&#34;&#34;Retrieve dictionary value using recursive indexing with a string.
+    &#34;&#34;&#34;
+    Retrieve dictionary value using recursive indexing with a string.
     ex.:
         `ddir({&#34;data&#34;: {&#34;attr&#34;: {&#34;ch&#34;: 1}}}, &#34;data/attr/ch&#34;)`
         will return `1`
@@ -521,7 +526,8 @@ before comparing it with the query. Defaults to lambda r:r.</dd>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def squery(query: str, possibilities: List[str], cutoff: int=0.6, *, processor: Callable[[Any], Any]=lambda r: r):
-    &#34;&#34;&#34;Custom search query.
+    &#34;&#34;&#34;
+    Custom search query.
 
     Args:
         query (str): String to search for in the possibilities.

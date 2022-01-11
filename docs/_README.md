@@ -32,6 +32,9 @@
     </a>
 </p>
 <p align="center">
+    <a href="https://app.codacy.com/gh/${organization}/${repo_name}/dashboard?branch=master">
+        <img alt="Codacy Badge" src="https://img.shields.io/codacy/grade/${codacy_id}/?style=flat-square">
+    </a>
     <a href="https://github.com/${organization}/${repo_name}/releases">
         <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/${organization}/${repo_name}?include_prereleases&style=flat-square">
     </a>

@@ -35,6 +35,8 @@ Attempted to add the `rich` library as a required library and failed.
 **CHANGED**
 
 - Using a modified semantic versioning system, which functions like the old semver but has two major versions for the breaking change visible to the user and the other for developers.
+- Minimized the length of provider scripts further by making templates for `ch_num_fn` and `rch_num_fn` functions, defaulting to `ch_num_fn.breadcrumb` and `rch_num_fn.tdo` functions respectively.
+- Fixed name inconsistencies for the function `rch_num_fn` which for some instances are named `rch_num_fun`.
 
 ## **MangDL v.2.0.2**
 

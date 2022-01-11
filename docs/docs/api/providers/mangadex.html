@@ -151,7 +151,7 @@ def dl_search(title: str, **kwargs: Dict[str, Any]) -&gt; Dict[str, str]:
     local = {&#34;title&#34;: title, **kwargs}
     params = []
     sr = {}
-    ad = stg(f&#34;mangadex/search&#34;, f&#34;{dnrp(__file__, 3)}/utils/config.yaml&#34;)
+    ad = stg(&#34;mangadex/search&#34;, f&#34;{dnrp(__file__, 3)}/utils/config.yaml&#34;)
     for k in local:
         v = local.get(k)
         if type(v) is str:
@@ -397,7 +397,7 @@ def cli_dl(title: str, **kwargs: Dict[str, Any]):
     local = {&#34;title&#34;: title, **kwargs}
     params = []
     sr = {}
-    ad = stg(f&#34;mangadex/search&#34;, f&#34;{dnrp(__file__, 3)}/utils/config.yaml&#34;)
+    ad = stg(&#34;mangadex/search&#34;, f&#34;{dnrp(__file__, 3)}/utils/config.yaml&#34;)
     for k in local:
         v = local.get(k)
         if type(v) is str:

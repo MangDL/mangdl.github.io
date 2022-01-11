@@ -48,7 +48,7 @@ def readcfg(file: str) -&gt; Any:
     with open(file, &#34;r&#34;) as f:
         d = {
             &#34;json&#34;: lambda f: json.load(f),
-            &#34;yaml&#34;: lambda f: yaml.load(f.read(), yaml.SafeLoader),
+            &#34;yaml&#34;: lambda f: yaml.safe_load(f.read()),
             &#34;toml&#34;: lambda f: toml.load(f)
         }
         return d[file.split(&#34;.&#34;)[-1]](f)
@@ -158,7 +158,7 @@ def wr_stg(stg: str, value: Any, file: str = path.join(dn(ap(__file__)), &#34;st
     with open(file, &#34;r&#34;) as f:
         d = {
             &#34;json&#34;: lambda f: json.load(f),
-            &#34;yaml&#34;: lambda f: yaml.load(f.read(), yaml.SafeLoader),
+            &#34;yaml&#34;: lambda f: yaml.safe_load(f.read()),
             &#34;toml&#34;: lambda f: toml.load(f)
         }
         return d[file.split(&#34;.&#34;)[-1]](f)</code></pre>

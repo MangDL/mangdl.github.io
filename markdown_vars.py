@@ -39,6 +39,7 @@ class Vars:
     dc_link = "https://discord.com/users/867696753434951732"
     dc_inv = "JbAtUxGcJZ"
     dc_serv = 889508240495366184
+    codacy_id = "93418e488727439bb71f3f779860ced2"
     python_ver = "3.10.0"
     os = "Arch Linux"
     # variables

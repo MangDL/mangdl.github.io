@@ -85,7 +85,8 @@ pprint(&#34;[#D2748D bold]The most inefficient, non user-friendly and colorful m
 pprint(&#34;[#3279a1]Chat with whi~nyaan at https://discord.com/invite/JbAtUxGcJZ\n&#34;)
 
 def cao(group: click.group, cmd: str) -&gt; List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]:
-    &#34;&#34;&#34;Retruns wrappers for a click command evaluated from the given arguments.
+    &#34;&#34;&#34;
+    Retruns wrappers for a click command evaluated from the given arguments.
 
     Args:
         group (click.group): Command group of the command to be under.
@@ -98,7 +99,8 @@ def cao(group: click.group, cmd: str) -&gt; List[Callable[[Callable[[Any], Any]]
     arguments = cmd[&#34;arguments&#34;]
 
     def c(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-        &#34;&#34;&#34;The command wrapper.
+        &#34;&#34;&#34;
+        The command wrapper.
         Args:
             f (Callable[[Any], Any]): The command function to be decorated.
         Returns:
@@ -116,7 +118,8 @@ def cao(group: click.group, cmd: str) -&gt; List[Callable[[Callable[[Any], Any]]
         return group.command(*de(cmd[&#34;args&#34;], []), **dd({&#34;context_settings&#34;: {&#39;help_option_names&#39;: [&#39;-h&#39;, &#39;--help&#39;]}, &#34;short_help&#34;: s, &#34;help&#34;: f&#34;\b\n{h}\n{tabulate(help, tablefmt=&#39;plain&#39;)}&#34;}, cmd[&#34;kwargs&#34;]))(f)
 
     def a(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-        &#34;&#34;&#34;The arguments wrapper.
+        &#34;&#34;&#34;
+        The arguments wrapper.
         Args:
             f (Callable[[Any], Any]): The command function to be decorated.
         Returns:
@@ -134,7 +137,8 @@ def cao(group: click.group, cmd: str) -&gt; List[Callable[[Callable[[Any], Any]]
         return f
 
     def o(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-        &#34;&#34;&#34;The options wrapper.
+        &#34;&#34;&#34;
+        The options wrapper.
         Args:
             f (Callable[[Any], Any]): The command function to be decorated.
         Returns:
@@ -174,7 +178,8 @@ def cao(group: click.group, cmd: str) -&gt; List[Callable[[Callable[[Any], Any]]
     return c, a, o
 
 def command(group: click.group) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-    &#34;&#34;&#34;Wrapper for click commands.
+    &#34;&#34;&#34;
+    Wrapper for click commands.
 
     Args:
         group (click.group): Command group of the command to be under.
@@ -191,14 +196,13 @@ def command(group: click.group) -&gt; Callable[[Callable[[Any], Any]], Callable[
 
 @click.group(context_settings={&#39;help_option_names&#39;: [&#39;-h&#39;, &#39;--help&#39;]})
 def cli():
-    &#34;&#34;&#34;
-    Main command group.
-    &#34;&#34;&#34;
+    &#34;&#34;&#34;Main command group.&#34;&#34;&#34;
     pass
 
 @command(cli)
 def dl(title: str, **kwargs: dict[str, Any]):
-    &#34;&#34;&#34;Download command.
+    &#34;&#34;&#34;
+    Download command.
 
     Args:
         title (str): The title of the manga to be search for and download.
@@ -208,8 +212,7 @@ def dl(title: str, **kwargs: dict[str, Any]):
 
 @command(cli)
 def credits():
-    &#34;&#34;&#34;Credits command. Display credits.
-    &#34;&#34;&#34;
+    &#34;&#34;&#34;Credits command. Display credits.&#34;&#34;&#34;
     print(chalk.hex(&#34;D2748D&#34;).bold(r&#34;&#34;&#34;
  ______  ______  ______  _____   __  ______  ______
 /\  ___\/\  == \/\  ___\/\  __-./\ \/\__  _\/\  ___\
@@ -232,7 +235,7 @@ def credits():
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="mangdl.cli.cao"><code class="name flex">
-<span>def <span class="ident">cao</span></span>(<span>group: <function group at 0x7f837c9b5480>, cmd: str) ‑> List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]</span>
+<span>def <span class="ident">cao</span></span>(<span>group: <function group at 0x7fc80c98d480>, cmd: str) ‑> List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Retruns wrappers for a click command evaluated from the given arguments.</p>
@@ -253,7 +256,8 @@ def credits():
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def cao(group: click.group, cmd: str) -&gt; List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]:
-    &#34;&#34;&#34;Retruns wrappers for a click command evaluated from the given arguments.
+    &#34;&#34;&#34;
+    Retruns wrappers for a click command evaluated from the given arguments.
 
     Args:
         group (click.group): Command group of the command to be under.
@@ -266,7 +270,8 @@ def credits():
     arguments = cmd[&#34;arguments&#34;]
 
     def c(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-        &#34;&#34;&#34;The command wrapper.
+        &#34;&#34;&#34;
+        The command wrapper.
         Args:
             f (Callable[[Any], Any]): The command function to be decorated.
         Returns:
@@ -284,7 +289,8 @@ def credits():
         return group.command(*de(cmd[&#34;args&#34;], []), **dd({&#34;context_settings&#34;: {&#39;help_option_names&#39;: [&#39;-h&#39;, &#39;--help&#39;]}, &#34;short_help&#34;: s, &#34;help&#34;: f&#34;\b\n{h}\n{tabulate(help, tablefmt=&#39;plain&#39;)}&#34;}, cmd[&#34;kwargs&#34;]))(f)
 
     def a(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-        &#34;&#34;&#34;The arguments wrapper.
+        &#34;&#34;&#34;
+        The arguments wrapper.
         Args:
             f (Callable[[Any], Any]): The command function to be decorated.
         Returns:
@@ -302,7 +308,8 @@ def credits():
         return f
 
     def o(f: Callable[[Any], Any]) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-        &#34;&#34;&#34;The options wrapper.
+        &#34;&#34;&#34;
+        The options wrapper.
         Args:
             f (Callable[[Any], Any]): The command function to be decorated.
         Returns:
@@ -343,7 +350,7 @@ def credits():
 </details>
 </dd>
 <dt id="mangdl.cli.command"><code class="name flex">
-<span>def <span class="ident">command</span></span>(<span>group: <function group at 0x7f837c9b5480>) ‑> Callable[[Callable[[Any], Any]], Callable[[Any], Any]]</span>
+<span>def <span class="ident">command</span></span>(<span>group: <function group at 0x7fc80c98d480>) ‑> Callable[[Callable[[Any], Any]], Callable[[Any], Any]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Wrapper for click commands.</p>
@@ -359,7 +366,8 @@ def credits():
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def command(group: click.group) -&gt; Callable[[Callable[[Any], Any]], Callable[[Any], Any]]:
-    &#34;&#34;&#34;Wrapper for click commands.
+    &#34;&#34;&#34;
+    Wrapper for click commands.
 
     Args:
         group (click.group): Command group of the command to be under.
