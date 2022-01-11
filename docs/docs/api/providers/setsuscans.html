@@ -30,8 +30,6 @@
 
 from mangdl.utils.utils import sanitize_text
 
-from ..base import urel
-
 scanlator = &#34;Setsu Scans&#34;
 base_url = &#34;https://setsuscans.com&#34;
 template = &#34;wordpress&#34;
@@ -40,11 +38,11 @@ cs_manga = &#34;div.tab-summary&#34;
 rch_fn = &#34;setsu&#34;
 src = &#34;data-src&#34;
 
+def manga_title(ms):
+    sanitize_text(ms.select_one(&#34;#manga-title h1&#34;).text)
+
 def ch_num_fn(soup):
     return literal_eval(soup.select_one(&#34;#chapter-heading&#34;).text.split(&#34;-&#34;)[-1][9:])
-
-def rch_num_fun(url: str):
-    return literal_eval(&#34;.&#34;.join(urel(url).parts[3].split(&#34;-&#34;)[1:]))
 
 def manga_id_fn(soup) -&gt; str:
     return soup.select_one(&#34;#manga-chapters-holder&#34;)[&#34;data-id&#34;]
@@ -118,8 +116,8 @@ def link_fn(soup):
     return soup.select_one(&#34;#manga-chapters-holder&#34;)[&#34;data-id&#34;]</code></pre>
 </details>
 </dd>
-<dt id="mangdl.api.providers.setsuscans.rch_num_fun"><code class="name flex">
-<span>def <span class="ident">rch_num_fun</span></span>(<span>url: str)</span>
+<dt id="mangdl.api.providers.setsuscans.manga_title"><code class="name flex">
+<span>def <span class="ident">manga_title</span></span>(<span>ms)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -127,8 +125,8 @@ def link_fn(soup):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def rch_num_fun(url: str):
-    return literal_eval(&#34;.&#34;.join(urel(url).parts[3].split(&#34;-&#34;)[1:]))</code></pre>
+<pre><code class="python">def manga_title(ms):
+    sanitize_text(ms.select_one(&#34;#manga-title h1&#34;).text)</code></pre>
 </details>
 </dd>
 <dt id="mangdl.api.providers.setsuscans.title_fn"><code class="name flex">
@@ -233,7 +231,7 @@ setTimeout(() => input.focus(), 100);
 <li><code><a title="mangdl.api.providers.setsuscans.link_fn" href="#mangdl.api.providers.setsuscans.link_fn">link_fn</a></code></li>
 <li><code><a title="mangdl.api.providers.setsuscans.manga_check" href="#mangdl.api.providers.setsuscans.manga_check">manga_check</a></code></li>
 <li><code><a title="mangdl.api.providers.setsuscans.manga_id_fn" href="#mangdl.api.providers.setsuscans.manga_id_fn">manga_id_fn</a></code></li>
-<li><code><a title="mangdl.api.providers.setsuscans.rch_num_fun" href="#mangdl.api.providers.setsuscans.rch_num_fun">rch_num_fun</a></code></li>
+<li><code><a title="mangdl.api.providers.setsuscans.manga_title" href="#mangdl.api.providers.setsuscans.manga_title">manga_title</a></code></li>
 <li><code><a title="mangdl.api.providers.setsuscans.title_fn" href="#mangdl.api.providers.setsuscans.title_fn">title_fn</a></code></li>
 </ul>
 </li>

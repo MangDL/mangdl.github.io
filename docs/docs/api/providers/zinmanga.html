@@ -26,21 +26,11 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from ast import literal_eval
-
-from ..base import urel
-
-scanlator = &#34;Zinmanga&#34;
+<pre><code class="python">scanlator = &#34;Zinmanga&#34;
 base_url = &#34;https://zinmanga.com&#34;
 template = &#34;wordpress&#34;
 
-src = &#34;data-src&#34;
-
-def ch_num_fn(soup):
-    return literal_eval(soup.select_one(&#34;ol.breadcrumb .active&#34;).text.split()[-1])
-
-def rch_num_fun(url: str):
-    return literal_eval(&#34;.&#34;.join(urel(url).parts[3].split(&#34;-&#34;)[1:]))</code></pre>
+src = &#34;data-src&#34;</code></pre>
 </details>
 </section>
 <section>
@@ -48,35 +38,6 @@ def rch_num_fun(url: str):
 <section>
 </section>
 <section>
-<h2 class="section-title" id="header-functions">Functions</h2>
-<dl>
-<dt id="mangdl.api.providers.zinmanga.ch_num_fn"><code class="name flex">
-<span>def <span class="ident">ch_num_fn</span></span>(<span>soup)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def ch_num_fn(soup):
-    return literal_eval(soup.select_one(&#34;ol.breadcrumb .active&#34;).text.split()[-1])</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.zinmanga.rch_num_fun"><code class="name flex">
-<span>def <span class="ident">rch_num_fun</span></span>(<span>url: str)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def rch_num_fun(url: str):
-    return literal_eval(&#34;.&#34;.join(urel(url).parts[3].split(&#34;-&#34;)[1:]))</code></pre>
-</details>
-</dd>
-</dl>
 </section>
 <section>
 </section>
@@ -157,12 +118,6 @@ setTimeout(() => input.focus(), 100);
 <li><h3>Super-module</h3>
 <ul>
 <li><code><a title="mangdl.api.providers" href="index.html">mangdl.api.providers</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-functions">Functions</a></h3>
-<ul class="">
-<li><code><a title="mangdl.api.providers.zinmanga.ch_num_fn" href="#mangdl.api.providers.zinmanga.ch_num_fn">ch_num_fn</a></code></li>
-<li><code><a title="mangdl.api.providers.zinmanga.rch_num_fun" href="#mangdl.api.providers.zinmanga.rch_num_fun">rch_num_fun</a></code></li>
 </ul>
 </li>
 </ul>

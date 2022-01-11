@@ -31,24 +31,37 @@ from importlib import import_module
 from types import ModuleType
 from typing import Any, Callable, Dict, List, Union
 from urllib.parse import quote_plus
+from ast import literal_eval
 
 from bs4 import BeautifulSoup
 
 from ....utils.utils import dt, sanitize_text
-from ...base import Ch, Downloader, Manga, soup
+from ...base import Ch, Downloader, Manga, soup, urel
 
+class ch_num_fn:
+    def breadcrumb(soup):
+        return literal_eval(soup.select_one(&#34;ol.breadcrumb .active&#34;).text.split()[-1])
+
+    def wmcc(soup):
+        return literal_eval(&#34;.&#34;.join(soup.select_one(&#34;#wp-manga-current-chap&#34;)[&#34;value&#34;].split(&#34;-&#34;)[1:]))
 
 class rch_fn:
     def setsu(url: str, base_url: str, manga_id_fn: Callable[[BeautifulSoup], Union[int, float]]):
         data = {&#34;action&#34;: &#34;manga_get_chapters&#34;, &#34;manga&#34;: str(manga_id_fn(soup(url)))}
         return soup(f&#34;{base_url}/wp-admin/admin-ajax.php&#34;, method=&#34;post&#34;, data=data)
 
+class rch_num_fn:
+    def tdo(url):
+        return literal_eval(&#34;.&#34;.join(urel(url).parts[3].split(&#34;-&#34;)[1:]))
+
 class template:
     def __init__(self, prov: ModuleType) -&gt; None:
         attr = {
             &#34;base_url&#34;: None,
             &#34;cover_src&#34;: &#34;src&#34;,
+            &#34;ch_num_fn&#34;: ch_num_fn.breadcrumb,
             &#34;rch_fn&#34;: soup,
+            &#34;rch_num_fn&#34;: rch_num_fn.tdo,
             &#34;scanlator&#34;: None,
             &#34;search_query_string&#34;: &#34;post_type=wp-manga&#34;,
             &#34;src&#34;: &#34;src&#34;,
@@ -63,6 +76,11 @@ class template:
                 base_url=self.base_url,
                 manga_id_fn=self.prov.manga_id_fn
             )
+        for i in [&#34;ch_num_fn&#34;, &#34;rch_num_fn&#34;]:
+            gi = getattr(self, i)
+            if type(gi) == str:
+                setattr(self, i, getattr(globals()[i], getattr(prov, i, gi), gi))
+
         self.template = import_module(f&#34;.{self.prov.template}&#34;, &#34;mangdl.api.providers.templates&#34;).template
 
     def ch_fn(self, url: str) -&gt; List[str]:
@@ -75,7 +93,7 @@ class template:
         ms = soup(url)
         return Ch(
             url              = url,
-            ch               = self.prov.ch_num_fn(ms),
+            ch               = self.ch_num_fn(ms),
             vol              = None,
             title            = sanitize_text(ms.select_one(&#34;ol.breadcrumb .active&#34;).text.split(&#34;-&#34;)[-1]),
             scanlator_groups = [self.scanlator],
@@ -88,7 +106,7 @@ class template:
             cch = c[&#34;href&#34;]
             if chs == 2:
                 cch = self.chapter(cch)
-            op.append({self.prov.rch_num_fun(c[&#34;href&#34;]): cch})
+            op.append({self.rch_num_fn(c[&#34;href&#34;]): cch})
         return op
 
     def manga(self, url: str, chs: int=0) -&gt; Manga:
@@ -106,6 +124,8 @@ class template:
         def mst(s: str, pp: Callable[[str], List[Any]]=lambda x: x):
             return pp(sanitize_text(meta.get(s))) if meta.get(s) else []
 
+        title_fn = getattr(self.prov, &#34;manga_title&#34;, None)
+
         rd = [sanitize_text(i.text) for i in self.rch_fn(url).select(&#34;.chapter-release-date&#34;)]
         def dates(idx: int):
             op = &#34;1970-01-01T00:00:00&#34;
@@ -117,7 +137,7 @@ class template:
         return Manga(
             url             = url,
             covers          = [ms.select_one(&#34;.summary_image img&#34;)[self.cover_src]],
-            title           = sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
+            title           = title_fn(ms) if title_fn else sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
             alt_titles      = mst(&#34;Alternative&#34;),
             author          = mst(&#34;Author(s)&#34;, lambda x: x.split(&#34;,&#34;)),
             artist          = mst(&#34;Artist(s)&#34;, lambda x: x.split(&#34;,&#34;)),
@@ -176,6 +196,52 @@ class template:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
+<dt id="mangdl.api.providers.templates.wordpress.ch_num_fn"><code class="flex name class">
+<span>class <span class="ident">ch_num_fn</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ch_num_fn:
+    def breadcrumb(soup):
+        return literal_eval(soup.select_one(&#34;ol.breadcrumb .active&#34;).text.split()[-1])
+
+    def wmcc(soup):
+        return literal_eval(&#34;.&#34;.join(soup.select_one(&#34;#wp-manga-current-chap&#34;)[&#34;value&#34;].split(&#34;-&#34;)[1:]))</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="mangdl.api.providers.templates.wordpress.ch_num_fn.breadcrumb"><code class="name flex">
+<span>def <span class="ident">breadcrumb</span></span>(<span>soup)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def breadcrumb(soup):
+    return literal_eval(soup.select_one(&#34;ol.breadcrumb .active&#34;).text.split()[-1])</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.templates.wordpress.ch_num_fn.wmcc"><code class="name flex">
+<span>def <span class="ident">wmcc</span></span>(<span>soup)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def wmcc(soup):
+    return literal_eval(&#34;.&#34;.join(soup.select_one(&#34;#wp-manga-current-chap&#34;)[&#34;value&#34;].split(&#34;-&#34;)[1:]))</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
 <dt id="mangdl.api.providers.templates.wordpress.rch_fn"><code class="flex name class">
 <span>class <span class="ident">rch_fn</span></span>
 </code></dt>
@@ -208,6 +274,36 @@ class template:
 </dd>
 </dl>
 </dd>
+<dt id="mangdl.api.providers.templates.wordpress.rch_num_fn"><code class="flex name class">
+<span>class <span class="ident">rch_num_fn</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class rch_num_fn:
+    def tdo(url):
+        return literal_eval(&#34;.&#34;.join(urel(url).parts[3].split(&#34;-&#34;)[1:]))</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="mangdl.api.providers.templates.wordpress.rch_num_fn.tdo"><code class="name flex">
+<span>def <span class="ident">tdo</span></span>(<span>url)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def tdo(url):
+    return literal_eval(&#34;.&#34;.join(urel(url).parts[3].split(&#34;-&#34;)[1:]))</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
 <dt id="mangdl.api.providers.templates.wordpress.template"><code class="flex name class">
 <span>class <span class="ident">template</span></span>
 <span>(</span><span>prov: module)</span>
@@ -223,7 +319,9 @@ class template:
         attr = {
             &#34;base_url&#34;: None,
             &#34;cover_src&#34;: &#34;src&#34;,
+            &#34;ch_num_fn&#34;: ch_num_fn.breadcrumb,
             &#34;rch_fn&#34;: soup,
+            &#34;rch_num_fn&#34;: rch_num_fn.tdo,
             &#34;scanlator&#34;: None,
             &#34;search_query_string&#34;: &#34;post_type=wp-manga&#34;,
             &#34;src&#34;: &#34;src&#34;,
@@ -238,6 +336,11 @@ class template:
                 base_url=self.base_url,
                 manga_id_fn=self.prov.manga_id_fn
             )
+        for i in [&#34;ch_num_fn&#34;, &#34;rch_num_fn&#34;]:
+            gi = getattr(self, i)
+            if type(gi) == str:
+                setattr(self, i, getattr(globals()[i], getattr(prov, i, gi), gi))
+
         self.template = import_module(f&#34;.{self.prov.template}&#34;, &#34;mangdl.api.providers.templates&#34;).template
 
     def ch_fn(self, url: str) -&gt; List[str]:
@@ -250,7 +353,7 @@ class template:
         ms = soup(url)
         return Ch(
             url              = url,
-            ch               = self.prov.ch_num_fn(ms),
+            ch               = self.ch_num_fn(ms),
             vol              = None,
             title            = sanitize_text(ms.select_one(&#34;ol.breadcrumb .active&#34;).text.split(&#34;-&#34;)[-1]),
             scanlator_groups = [self.scanlator],
@@ -263,7 +366,7 @@ class template:
             cch = c[&#34;href&#34;]
             if chs == 2:
                 cch = self.chapter(cch)
-            op.append({self.prov.rch_num_fun(c[&#34;href&#34;]): cch})
+            op.append({self.rch_num_fn(c[&#34;href&#34;]): cch})
         return op
 
     def manga(self, url: str, chs: int=0) -&gt; Manga:
@@ -281,6 +384,8 @@ class template:
         def mst(s: str, pp: Callable[[str], List[Any]]=lambda x: x):
             return pp(sanitize_text(meta.get(s))) if meta.get(s) else []
 
+        title_fn = getattr(self.prov, &#34;manga_title&#34;, None)
+
         rd = [sanitize_text(i.text) for i in self.rch_fn(url).select(&#34;.chapter-release-date&#34;)]
         def dates(idx: int):
             op = &#34;1970-01-01T00:00:00&#34;
@@ -292,7 +397,7 @@ class template:
         return Manga(
             url             = url,
             covers          = [ms.select_one(&#34;.summary_image img&#34;)[self.cover_src]],
-            title           = sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
+            title           = title_fn(ms) if title_fn else sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
             alt_titles      = mst(&#34;Alternative&#34;),
             author          = mst(&#34;Author(s)&#34;, lambda x: x.split(&#34;,&#34;)),
             artist          = mst(&#34;Artist(s)&#34;, lambda x: x.split(&#34;,&#34;)),
@@ -372,7 +477,7 @@ class template:
     ms = soup(url)
     return Ch(
         url              = url,
-        ch               = self.prov.ch_num_fn(ms),
+        ch               = self.ch_num_fn(ms),
         vol              = None,
         title            = sanitize_text(ms.select_one(&#34;ol.breadcrumb .active&#34;).text.split(&#34;-&#34;)[-1]),
         scanlator_groups = [self.scanlator],
@@ -395,7 +500,7 @@ class template:
         cch = c[&#34;href&#34;]
         if chs == 2:
             cch = self.chapter(cch)
-        op.append({self.prov.rch_num_fun(c[&#34;href&#34;]): cch})
+        op.append({self.rch_num_fn(c[&#34;href&#34;]): cch})
     return op</code></pre>
 </details>
 </dd>
@@ -500,6 +605,8 @@ class template:
     def mst(s: str, pp: Callable[[str], List[Any]]=lambda x: x):
         return pp(sanitize_text(meta.get(s))) if meta.get(s) else []
 
+    title_fn = getattr(self.prov, &#34;manga_title&#34;, None)
+
     rd = [sanitize_text(i.text) for i in self.rch_fn(url).select(&#34;.chapter-release-date&#34;)]
     def dates(idx: int):
         op = &#34;1970-01-01T00:00:00&#34;
@@ -511,7 +618,7 @@ class template:
     return Manga(
         url             = url,
         covers          = [ms.select_one(&#34;.summary_image img&#34;)[self.cover_src]],
-        title           = sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
+        title           = title_fn(ms) if title_fn else sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
         alt_titles      = mst(&#34;Alternative&#34;),
         author          = mst(&#34;Author(s)&#34;, lambda x: x.split(&#34;,&#34;)),
         artist          = mst(&#34;Artist(s)&#34;, lambda x: x.split(&#34;,&#34;)),
@@ -610,9 +717,22 @@ setTimeout(() => input.focus(), 100);
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
+<h4><code><a title="mangdl.api.providers.templates.wordpress.ch_num_fn" href="#mangdl.api.providers.templates.wordpress.ch_num_fn">ch_num_fn</a></code></h4>
+<ul class="">
+<li><code><a title="mangdl.api.providers.templates.wordpress.ch_num_fn.breadcrumb" href="#mangdl.api.providers.templates.wordpress.ch_num_fn.breadcrumb">breadcrumb</a></code></li>
+<li><code><a title="mangdl.api.providers.templates.wordpress.ch_num_fn.wmcc" href="#mangdl.api.providers.templates.wordpress.ch_num_fn.wmcc">wmcc</a></code></li>
+</ul>
+</li>
+<li>
 <h4><code><a title="mangdl.api.providers.templates.wordpress.rch_fn" href="#mangdl.api.providers.templates.wordpress.rch_fn">rch_fn</a></code></h4>
 <ul class="">
 <li><code><a title="mangdl.api.providers.templates.wordpress.rch_fn.setsu" href="#mangdl.api.providers.templates.wordpress.rch_fn.setsu">setsu</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="mangdl.api.providers.templates.wordpress.rch_num_fn" href="#mangdl.api.providers.templates.wordpress.rch_num_fn">rch_num_fn</a></code></h4>
+<ul class="">
+<li><code><a title="mangdl.api.providers.templates.wordpress.rch_num_fn.tdo" href="#mangdl.api.providers.templates.wordpress.rch_num_fn.tdo">tdo</a></code></li>
 </ul>
 </li>
 <li>

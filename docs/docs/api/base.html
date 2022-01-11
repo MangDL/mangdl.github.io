@@ -263,6 +263,7 @@ class Downloader:
         threads: int=30,
         **kwargs: Dict[str, Any]
     ):
+        self.kwargs = kwargs
         local = locals()
         for i in [&#34;ch_fn&#34;, &#34;ra&#34;, &#34;headers&#34;, &#34;cookies&#34;, &#34;overwrite&#34;, &#34;delfolder&#34;, &#34;retry&#34;, &#34;retryprompt&#34;, &#34;threads&#34;]:
             setattr(self, i, local[i])
@@ -399,7 +400,7 @@ class Downloader:
         chdls: Callable[[str], List[Dict[Union[float, int, None], str]]],
         title: str,
     ):
-        sr = cli_search(title)
+        sr = cli_search(title, **self.kwargs)
         if sr:
             ls = list(sr.keys())
             title = ls[int(tblp(ls))]
@@ -747,6 +748,7 @@ class Ch:
         threads: int=30,
         **kwargs: Dict[str, Any]
     ):
+        self.kwargs = kwargs
         local = locals()
         for i in [&#34;ch_fn&#34;, &#34;ra&#34;, &#34;headers&#34;, &#34;cookies&#34;, &#34;overwrite&#34;, &#34;delfolder&#34;, &#34;retry&#34;, &#34;retryprompt&#34;, &#34;threads&#34;]:
             setattr(self, i, local[i])
@@ -883,7 +885,7 @@ class Ch:
         chdls: Callable[[str], List[Dict[Union[float, int, None], str]]],
         title: str,
     ):
-        sr = cli_search(title)
+        sr = cli_search(title, **self.kwargs)
         if sr:
             ls = list(sr.keys())
             title = ls[int(tblp(ls))]
@@ -908,7 +910,7 @@ class Ch:
     chdls: Callable[[str], List[Dict[Union[float, int, None], str]]],
     title: str,
 ):
-    sr = cli_search(title)
+    sr = cli_search(title, **self.kwargs)
     if sr:
         ls = list(sr.keys())
         title = ls[int(tblp(ls))]

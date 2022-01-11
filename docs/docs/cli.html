@@ -204,7 +204,7 @@ def dl(title: str, **kwargs: dict[str, Any]):
         title (str): The title of the manga to be search for and download.
     &#34;&#34;&#34;
     fn_log(kwargs.pop(&#34;loglevel&#34;))
-    Provider(kwargs.pop(&#34;provider&#34;, &#34;mangadex&#34;)).cli_dl(title, **kwargs)
+    Provider(kwargs.pop(&#34;provider&#34;)).cli_dl(title, **kwargs)
 
 @command(cli)
 def credits():
@@ -232,7 +232,7 @@ def credits():
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="mangdl.cli.cao"><code class="name flex">
-<span>def <span class="ident">cao</span></span>(<span>group: <function group at 0x7fc71e81d480>, cmd: str) ‑> List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]</span>
+<span>def <span class="ident">cao</span></span>(<span>group: <function group at 0x7fc48c185480>, cmd: str) ‑> List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Retruns wrappers for a click command evaluated from the given arguments.</p>
@@ -343,7 +343,7 @@ def credits():
 </details>
 </dd>
 <dt id="mangdl.cli.command"><code class="name flex">
-<span>def <span class="ident">command</span></span>(<span>group: <function group at 0x7fc71e81d480>) ‑> Callable[[Callable[[Any], Any]], Callable[[Any], Any]]</span>
+<span>def <span class="ident">command</span></span>(<span>group: <function group at 0x7fc48c185480>) ‑> Callable[[Callable[[Any], Any]], Callable[[Any], Any]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Wrapper for click commands.</p>

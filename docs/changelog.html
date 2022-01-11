@@ -22,6 +22,44 @@
     CHANGELOG
 </h1>
 <h2>
+<a id="mangdl-v3004" class="anchor" href="#mangdl-v3004" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.3.0.0.4</strong>
+</h2>
+<p><strong>CHANGED</strong></p>
+<ul>
+<li>Changed <code>mangdl/api/providers/templates/wordpress.py</code>'s <code>template.manga</code> function to check if a provider script declares a <code>manga_title</code>, if which it did will pass the <code>ms</code> or master soup to it and use the returned value as the title of the manga.</li>
+</ul>
+<p><strong>FIXED</strong></p>
+<ul>
+<li>Removed duplicate <code>chdls</code> function in <code>mangdl/api/providers/mangadex.py</code>.</li>
+<li>Fixed Setsu Scans provider by adding a <code>manga_title</code> function which returns the appropriate title when given the correct the master soup.</li>
+<li>The option <code>provider</code> for the command <code>dl</code> will now fallback to mangadex in case a value has not been declared by the user.</li>
+<li>Fixed <code>mangdl/api/base.py</code>'s <code>Downloader.cli</code> function by passing the keyword arguments the class have received to the given <code>cli_search</code> function.</li>
+</ul>
+<h2>
+<a id="mangdl-v3003" class="anchor" href="#mangdl-v3003" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.3.0.0.3</strong>
+</h2>
+<h3>
+<a id="fixed" class="anchor" href="#fixed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+</h3>
+<ul>
+<li>Added the <code>rich</code> library as a required library.</li>
+</ul>
+<h2>
+<a id="mangdl-v3002" class="anchor" href="#mangdl-v3002" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.3.0.0.2</strong>
+</h2>
+<p>Attempted to add the <code>rich</code> library as a required library and failed... again.</p>
+<h2>
+<a id="mangdl-v3001" class="anchor" href="#mangdl-v3001" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.3.0.0.1</strong>
+</h2>
+<p>Attempted to add the <code>rich</code> library as a required library and failed.</p>
+<h2>
+<a id="mangdl-v3000" class="anchor" href="#mangdl-v3000" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.3.0.0.0</strong>
+</h2>
+<p><strong>CHANGED</strong></p>
+<ul>
+<li>Using a modified semantic versioning system, which functions like the old semver but has two major versions for the breaking change visible to the user and the other for developers.</li>
+</ul>
+<h2>
 <a id="mangdl-v202" class="anchor" href="#mangdl-v202" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.2.0.2</strong>
 </h2>
 <h3>
@@ -40,7 +78,7 @@
 <li>Added <code>de</code> in the arguments of <code>mangdl/utils/utils.py</code>'s <code>ddir</code> function to be able to return that value in case the output evaluates to <code>False</code>.</li>
 </ul>
 <h3>
-<a id="fixed" class="anchor" href="#fixed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-1" class="anchor" href="#fixed-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Fixed <code>mangdl/api/providers/templates/guya.py</code>'s <code>template.ch_fn</code> function to get the image links from the first group.</li>
@@ -55,7 +93,7 @@
 </h2>
 <p>NOW, THIS IS A BUGFIX!</p>
 <h3>
-<a id="fixed-1" class="anchor" href="#fixed-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-2" class="anchor" href="#fixed-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Removed <code>search</code> function in <code>mangdl/api/providers/templates/guya.py</code>, <code>mangdl/api/providers/mangadex.py</code>, and <code>mangdl/api/providers/manganato.py</code>.</li>
@@ -118,7 +156,7 @@ d</p>
 <a id="mangdl-v101" class="anchor" href="#mangdl-v101" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.1.0.1</strong>
 </h2>
 <h3>
-<a id="fixed-2" class="anchor" href="#fixed-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-3" class="anchor" href="#fixed-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>
@@ -137,7 +175,7 @@ d</p>
 <li>Description metadata for providers using the wordpress template.</li>
 </ul>
 <h3>
-<a id="fixed-3" class="anchor" href="#fixed-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-4" class="anchor" href="#fixed-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Title of the search results from the providers using the wordpress template.</li>
@@ -168,7 +206,7 @@ d</p>
 <li>Rewrote provider scripts to use a template if they have one.</li>
 </ul>
 <h3>
-<a id="fixed-4" class="anchor" href="#fixed-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-5" class="anchor" href="#fixed-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Lack of manganato provider script's <code>dl_search</code> function (literally wondering right now how that script works despite lacking one).</li>
@@ -207,7 +245,7 @@ d</p>
 <li>Refactor Setsu Scans' manga function.</li>
 </ul>
 <h3>
-<a id="fixed-5" class="anchor" href="#fixed-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-6" class="anchor" href="#fixed-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Replace the version number in the <code>setup.py</code> to reflect the real version of the app.</li>
@@ -230,7 +268,7 @@ d</p>
 <li>Removed logging.</li>
 </ul>
 <h3>
-<a id="fixed-6" class="anchor" href="#fixed-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-7" class="anchor" href="#fixed-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Mangadex provider (I actually forgot what I fixed there, don't ask me and my shitty memory).</li>
@@ -245,7 +283,7 @@ d</p>
 <li>Scripts for setting up portable packages in Windows.</li>
 </ul>
 <h3>
-<a id="fixed-7" class="anchor" href="#fixed-7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-8" class="anchor" href="#fixed-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Windows packages should now work.</li>
@@ -260,7 +298,7 @@ d</p>
 <li>Installation and download scripts for linux and windows packages. Instructions coming soon!</li>
 </ul>
 <h3>
-<a id="fixed-8" class="anchor" href="#fixed-8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-9" class="anchor" href="#fixed-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Windows packages should now work</li>
@@ -293,7 +331,7 @@ Ex.:</li>
 <a href="https://acescans.xyz" rel="nofollow">Ace Scans</a> provider</li>
 </ul>
 <h3>
-<a id="fixed-9" class="anchor" href="#fixed-9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
+<a id="fixed-10" class="anchor" href="#fixed-10" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
 <ul>
 <li>Flamescans' chapter function throwing an error from untested code</li>

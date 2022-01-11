@@ -40,7 +40,7 @@ rpa = 10
 def ch_num_fn(soup):
     return literal_eval(&#34;.&#34;.join(soup.select_one(&#34;#chapter-heading&#34;).text.split(&#34;-&#34;)[1:]))
 
-def rch_num_fun(url):
+def rch_num_fn(url):
     return literal_eval(urel(url).parts[3].replace(&#34;-&#34;, &#34;.&#34;))
 
 def manga_id_fn(soup) -&gt; str:
@@ -100,8 +100,8 @@ def rch_fn(url):
     return soup(f&#34;{base_url}/wp-admin/admin-ajax.php&#34;, method=&#34;post&#34;, data=data)</code></pre>
 </details>
 </dd>
-<dt id="mangdl.api.providers.paeanscans.rch_num_fun"><code class="name flex">
-<span>def <span class="ident">rch_num_fun</span></span>(<span>url)</span>
+<dt id="mangdl.api.providers.paeanscans.rch_num_fn"><code class="name flex">
+<span>def <span class="ident">rch_num_fn</span></span>(<span>url)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -109,7 +109,7 @@ def rch_fn(url):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def rch_num_fun(url):
+<pre><code class="python">def rch_num_fn(url):
     return literal_eval(urel(url).parts[3].replace(&#34;-&#34;, &#34;.&#34;))</code></pre>
 </details>
 </dd>
@@ -201,7 +201,7 @@ setTimeout(() => input.focus(), 100);
 <li><code><a title="mangdl.api.providers.paeanscans.ch_num_fn" href="#mangdl.api.providers.paeanscans.ch_num_fn">ch_num_fn</a></code></li>
 <li><code><a title="mangdl.api.providers.paeanscans.manga_id_fn" href="#mangdl.api.providers.paeanscans.manga_id_fn">manga_id_fn</a></code></li>
 <li><code><a title="mangdl.api.providers.paeanscans.rch_fn" href="#mangdl.api.providers.paeanscans.rch_fn">rch_fn</a></code></li>
-<li><code><a title="mangdl.api.providers.paeanscans.rch_num_fun" href="#mangdl.api.providers.paeanscans.rch_num_fun">rch_num_fun</a></code></li>
+<li><code><a title="mangdl.api.providers.paeanscans.rch_num_fn" href="#mangdl.api.providers.paeanscans.rch_num_fn">rch_num_fn</a></code></li>
 </ul>
 </li>
 </ul>

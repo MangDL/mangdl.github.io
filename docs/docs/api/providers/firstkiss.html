@@ -28,7 +28,7 @@
 </summary>
 <pre><code class="python">from ast import literal_eval
 
-from ..base import soup, urel
+from ..base import soup
 
 cloudflare = True
 
@@ -38,9 +38,6 @@ template = &#34;wordpress&#34;
 
 def ch_num_fn(soup):
     return literal_eval(&#34;.&#34;.join(soup.select_one(&#34;#wp-manga-current-chap&#34;)[&#34;value&#34;].split(&#34;-&#34;)[1:]))
-
-def rch_num_fun(url):
-    return literal_eval(&#34;.&#34;.join(urel(url).parts[3].split(&#34;-&#34;)[1:]))
 
 def manga_id_fn(soup) -&gt; str:
     cdata = soup.select_one(&#34;#wp-manga-js-extra&#34;).text
@@ -97,19 +94,6 @@ def rch_fn(url):
 <pre><code class="python">def rch_fn(url):
     data = {&#34;action&#34;: &#34;manga_get_chapters&#34;, &#34;manga&#34;: str(manga_id_fn(soup(url)))}
     return soup(f&#34;{base_url}/wp-admin/admin-ajax.php&#34;, method=&#34;post&#34;, data=data)</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.firstkiss.rch_num_fun"><code class="name flex">
-<span>def <span class="ident">rch_num_fun</span></span>(<span>url)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def rch_num_fun(url):
-    return literal_eval(&#34;.&#34;.join(urel(url).parts[3].split(&#34;-&#34;)[1:]))</code></pre>
 </details>
 </dd>
 </dl>
@@ -200,7 +184,6 @@ setTimeout(() => input.focus(), 100);
 <li><code><a title="mangdl.api.providers.firstkiss.ch_num_fn" href="#mangdl.api.providers.firstkiss.ch_num_fn">ch_num_fn</a></code></li>
 <li><code><a title="mangdl.api.providers.firstkiss.manga_id_fn" href="#mangdl.api.providers.firstkiss.manga_id_fn">manga_id_fn</a></code></li>
 <li><code><a title="mangdl.api.providers.firstkiss.rch_fn" href="#mangdl.api.providers.firstkiss.rch_fn">rch_fn</a></code></li>
-<li><code><a title="mangdl.api.providers.firstkiss.rch_num_fun" href="#mangdl.api.providers.firstkiss.rch_num_fun">rch_num_fun</a></code></li>
 </ul>
 </li>
 </ul>
