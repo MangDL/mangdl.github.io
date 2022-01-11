@@ -4,11 +4,11 @@
 
 ## **MangDL v.3.0.0.4**
 
-**CHANGED**
+### **CHANGED**
 
 - Changed `mangdl/api/providers/templates/wordpress.py`'s `template.manga` function to check if a provider script declares a `manga_title`, if which it did will pass the `ms` or master soup to it and use the returned value as the title of the manga.
 
-**FIXED**
+### **FIXED**
 
 - Removed duplicate `chdls` function in `mangdl/api/providers/mangadex.py`.
 - Fixed Setsu Scans provider by adding a `manga_title` function which returns the appropriate title when given the correct the master soup.
@@ -32,10 +32,13 @@ Attempted to add the `rich` library as a required library and failed.
 
 ## **MangDL v.3.0.0.0**
 
-**CHANGED**
+### **CHANGED**
 
 - Using a modified semantic versioning system, which functions like the old semver but has two major versions for the breaking change visible to the user and the other for developers.
 - Minimized the length of provider scripts further by making templates for `ch_num_fn` and `rch_num_fn` functions, defaulting to `ch_num_fn.breadcrumb` and `rch_num_fn.tdo` functions respectively.
+
+### **FIXED**
+
 - Fixed name inconsistencies for the function `rch_num_fn` which for some instances are named `rch_num_fun`.
 
 ## **MangDL v.2.0.2**
