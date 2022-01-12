@@ -26,18 +26,13 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from ..base import soup, urel
-
-scanlator = &#34;Manga Komi&#34;
+<pre><code class="python">scanlator = &#34;Manga Komi&#34;
 base_url = &#34;https://mangakomi.com&#34;
 template = &#34;wordpress&#34;
 
 ch_num_fn = &#34;wmcc&#34;
-src = &#34;data-src&#34;
-
-def rch_fn(url):
-    url = f&#34;{base_url}/manga/{urel(url).parts[2]}/ajax/chapters/&#34;
-    return soup(url, method=&#34;post&#34;)</code></pre>
+rch_fn = &#34;msa&#34;
+src = &#34;data-src&#34;</code></pre>
 </details>
 </section>
 <section>
@@ -45,23 +40,6 @@ def rch_fn(url):
 <section>
 </section>
 <section>
-<h2 class="section-title" id="header-functions">Functions</h2>
-<dl>
-<dt id="mangdl.api.providers.mangakomi.rch_fn"><code class="name flex">
-<span>def <span class="ident">rch_fn</span></span>(<span>url)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def rch_fn(url):
-    url = f&#34;{base_url}/manga/{urel(url).parts[2]}/ajax/chapters/&#34;
-    return soup(url, method=&#34;post&#34;)</code></pre>
-</details>
-</dd>
-</dl>
 </section>
 <section>
 </section>
@@ -142,11 +120,6 @@ setTimeout(() => input.focus(), 100);
 <li><h3>Super-module</h3>
 <ul>
 <li><code><a title="mangdl.api.providers" href="index.html">mangdl.api.providers</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-functions">Functions</a></h3>
-<ul class="">
-<li><code><a title="mangdl.api.providers.mangakomi.rch_fn" href="#mangdl.api.providers.mangakomi.rch_fn">rch_fn</a></code></li>
 </ul>
 </li>
 </ul>

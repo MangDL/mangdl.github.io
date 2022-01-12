@@ -2,6 +2,25 @@
     CHANGELOG
 </h1>
 
+## **MangDL v.3.0.1.0**
+
+### **ADDED**
+
+- <a target="_blank" href="https://mangaweeaboo.com/">Weeaboo Scans</a> provider
+- Added `msa` function in the `mangdl/api/providers/templates/wordpress.py`'s `rch_fn` templates for the providers to use.
+
+### **CHANGED**
+
+- Changed `mangdl/api/providers/templates/wordpress.py`'s `template.manga` function to check if a provider script declares a `manga_title`, if which it did will pass the `ms` or master soup to it and use the returned value as the title of the manga.
+- In `mangdl/api/providers/firstkiss.py`, changed the `rch_fn`' value to `setsu` and removed the current `rch_fn` function and its imports.
+- In `mangdl/api/providers/mangadex.py` L126, changed the f-string to normal string as it lacks an f-string placeholder.
+- In `mangdl/api/providers/mangakomi.py`, `mangdl/api/providers/mangasushi.py`, `mangdl/api/providers/vinmanga.py`, and `mangdl/api/providers/xunscans.py`, changed the `rch_fn`' value to `msa` and removed the current `rch_fn` function and its imports.
+
+### **FIXED**
+
+- Removed `rch_fn` and its imports in `mangdl/api/providers/paeanscans.py`.
+- Fixed `mangdl/utils/settings.py`'s `readcfg` function to load `yaml` files safely.
+
 ## **MangDL v.3.0.0.4**
 
 ### **CHANGED**
@@ -97,7 +116,7 @@ NOW, THIS IS A PROVIDER SPREE!
 ### **CHANGED**
 
 - `cloudflare` must be set to `True` in the provider script if the said provider is protected by cloudflare's UAM. This is in case a method of bypassing it has been found out.
-d
+
 - Use `generic` as a template for providers who does not use a template.
 
 - Removed `Search` dataclass. You can now use `search` function without passing it, instead you pass the arguments directly.

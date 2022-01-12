@@ -28,24 +28,20 @@
 </summary>
 <pre><code class="python">from ast import literal_eval
 
-from ..base import soup
-
 cloudflare = True
 
 scanlator = &#34;1ST Kiss MANGA&#34;
 base_url = &#34;https://1stkissmanga.io&#34;
 template = &#34;wordpress&#34;
 
+rch_fn = &#34;setsu&#34;
+
 def ch_num_fn(soup):
     return literal_eval(&#34;.&#34;.join(soup.select_one(&#34;#wp-manga-current-chap&#34;)[&#34;value&#34;].split(&#34;-&#34;)[1:]))
 
 def manga_id_fn(soup) -&gt; str:
     cdata = soup.select_one(&#34;#wp-manga-js-extra&#34;).text
-    return literal_eval(cdata[29:-12])[&#34;manga_id&#34;]
-
-def rch_fn(url):
-    data = {&#34;action&#34;: &#34;manga_get_chapters&#34;, &#34;manga&#34;: str(manga_id_fn(soup(url)))}
-    return soup(f&#34;{base_url}/wp-admin/admin-ajax.php&#34;, method=&#34;post&#34;, data=data)</code></pre>
+    return literal_eval(cdata[29:-12])[&#34;manga_id&#34;]</code></pre>
 </details>
 </section>
 <section>
@@ -80,20 +76,6 @@ def rch_fn(url):
 <pre><code class="python">def manga_id_fn(soup) -&gt; str:
     cdata = soup.select_one(&#34;#wp-manga-js-extra&#34;).text
     return literal_eval(cdata[29:-12])[&#34;manga_id&#34;]</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.firstkiss.rch_fn"><code class="name flex">
-<span>def <span class="ident">rch_fn</span></span>(<span>url)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def rch_fn(url):
-    data = {&#34;action&#34;: &#34;manga_get_chapters&#34;, &#34;manga&#34;: str(manga_id_fn(soup(url)))}
-    return soup(f&#34;{base_url}/wp-admin/admin-ajax.php&#34;, method=&#34;post&#34;, data=data)</code></pre>
 </details>
 </dd>
 </dl>
@@ -183,7 +165,6 @@ setTimeout(() => input.focus(), 100);
 <ul class="">
 <li><code><a title="mangdl.api.providers.firstkiss.ch_num_fn" href="#mangdl.api.providers.firstkiss.ch_num_fn">ch_num_fn</a></code></li>
 <li><code><a title="mangdl.api.providers.firstkiss.manga_id_fn" href="#mangdl.api.providers.firstkiss.manga_id_fn">manga_id_fn</a></code></li>
-<li><code><a title="mangdl.api.providers.firstkiss.rch_fn" href="#mangdl.api.providers.firstkiss.rch_fn">rch_fn</a></code></li>
 </ul>
 </li>
 </ul>

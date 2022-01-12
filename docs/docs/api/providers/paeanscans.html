@@ -28,7 +28,7 @@
 </summary>
 <pre><code class="python">from ast import literal_eval
 
-from ..base import soup, urel
+from ..base import urel
 
 scanlator = &#34;Paean Scans&#34;
 base_url = &#34;https://paeanscans.com&#34;
@@ -45,11 +45,7 @@ def rch_num_fn(url):
 
 def manga_id_fn(soup) -&gt; str:
     cdata = soup.select_one(&#34;#wp-manga-js-extra&#34;).text
-    return literal_eval(cdata[29:-12])[&#34;manga_id&#34;]
-
-def rch_fn(url):
-    data = {&#34;action&#34;: &#34;manga_get_chapters&#34;, &#34;manga&#34;: str(manga_id_fn(soup(url)))}
-    return soup(f&#34;{base_url}/wp-admin/admin-ajax.php&#34;, method=&#34;post&#34;, data=data)</code></pre>
+    return literal_eval(cdata[29:-12])[&#34;manga_id&#34;]</code></pre>
 </details>
 </section>
 <section>
@@ -84,20 +80,6 @@ def rch_fn(url):
 <pre><code class="python">def manga_id_fn(soup) -&gt; str:
     cdata = soup.select_one(&#34;#wp-manga-js-extra&#34;).text
     return literal_eval(cdata[29:-12])[&#34;manga_id&#34;]</code></pre>
-</details>
-</dd>
-<dt id="mangdl.api.providers.paeanscans.rch_fn"><code class="name flex">
-<span>def <span class="ident">rch_fn</span></span>(<span>url)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def rch_fn(url):
-    data = {&#34;action&#34;: &#34;manga_get_chapters&#34;, &#34;manga&#34;: str(manga_id_fn(soup(url)))}
-    return soup(f&#34;{base_url}/wp-admin/admin-ajax.php&#34;, method=&#34;post&#34;, data=data)</code></pre>
 </details>
 </dd>
 <dt id="mangdl.api.providers.paeanscans.rch_num_fn"><code class="name flex">
@@ -200,7 +182,6 @@ setTimeout(() => input.focus(), 100);
 <ul class="">
 <li><code><a title="mangdl.api.providers.paeanscans.ch_num_fn" href="#mangdl.api.providers.paeanscans.ch_num_fn">ch_num_fn</a></code></li>
 <li><code><a title="mangdl.api.providers.paeanscans.manga_id_fn" href="#mangdl.api.providers.paeanscans.manga_id_fn">manga_id_fn</a></code></li>
-<li><code><a title="mangdl.api.providers.paeanscans.rch_fn" href="#mangdl.api.providers.paeanscans.rch_fn">rch_fn</a></code></li>
 <li><code><a title="mangdl.api.providers.paeanscans.rch_num_fn" href="#mangdl.api.providers.paeanscans.rch_num_fn">rch_num_fn</a></code></li>
 </ul>
 </li>

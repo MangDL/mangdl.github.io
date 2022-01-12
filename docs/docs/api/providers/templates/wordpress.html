@@ -46,7 +46,10 @@ class ch_num_fn:
         return literal_eval(&#34;.&#34;.join(soup.select_one(&#34;#wp-manga-current-chap&#34;)[&#34;value&#34;].split(&#34;-&#34;)[1:]))
 
 class rch_fn:
-    def setsu(url: str, base_url: str, manga_id_fn: Callable[[BeautifulSoup], Union[int, float]]):
+    def msa(url: str, base_url: str, **kwargs: Dict[str, Any]):
+        url = f&#34;{base_url}/manga/{urel(url).parts[2]}/ajax/chapters/&#34;
+        return soup(url, method=&#34;post&#34;)
+    def setsu(url: str, base_url: str, manga_id_fn: Callable[[BeautifulSoup], Union[int, float]], **kwargs: Dict[str, Any]):
         data = {&#34;action&#34;: &#34;manga_get_chapters&#34;, &#34;manga&#34;: str(manga_id_fn(soup(url)))}
         return soup(f&#34;{base_url}/wp-admin/admin-ajax.php&#34;, method=&#34;post&#34;, data=data)
 
@@ -70,11 +73,12 @@ class template:
         self.prov = prov
         for k, v in attr.items():
             setattr(self, k, getattr(prov, k, v))
+        rfk = [&#34;manga_id_fn&#34;]
         if type(self.rch_fn) == str:
             self.rch_fn = partial(
                 getattr(rch_fn, self.rch_fn),
                 base_url=self.base_url,
-                manga_id_fn=self.prov.manga_id_fn
+                **{i: getattr(self.prov, i, None) for i in rfk}
             )
         for i in [&#34;ch_num_fn&#34;, &#34;rch_num_fn&#34;]:
             gi = getattr(self, i)
@@ -85,7 +89,7 @@ class template:
 
     def ch_fn(self, url: str) -&gt; List[str]:
         op = []
-        for i in soup(url).select(&#34;.page-break img&#34;):
+        for i in soup(f&#34;{url}?style=list&#34;).select(&#34;.page-break img&#34;):
             op.append(sanitize_text(i[self.src]))
         return op
 
@@ -252,14 +256,17 @@ class template:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class rch_fn:
-    def setsu(url: str, base_url: str, manga_id_fn: Callable[[BeautifulSoup], Union[int, float]]):
+    def msa(url: str, base_url: str, **kwargs: Dict[str, Any]):
+        url = f&#34;{base_url}/manga/{urel(url).parts[2]}/ajax/chapters/&#34;
+        return soup(url, method=&#34;post&#34;)
+    def setsu(url: str, base_url: str, manga_id_fn: Callable[[BeautifulSoup], Union[int, float]], **kwargs: Dict[str, Any]):
         data = {&#34;action&#34;: &#34;manga_get_chapters&#34;, &#34;manga&#34;: str(manga_id_fn(soup(url)))}
         return soup(f&#34;{base_url}/wp-admin/admin-ajax.php&#34;, method=&#34;post&#34;, data=data)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
-<dt id="mangdl.api.providers.templates.wordpress.rch_fn.setsu"><code class="name flex">
-<span>def <span class="ident">setsu</span></span>(<span>url: str, base_url: str, manga_id_fn: Callable[[bs4.BeautifulSoup], Union[int, float]])</span>
+<dt id="mangdl.api.providers.templates.wordpress.rch_fn.msa"><code class="name flex">
+<span>def <span class="ident">msa</span></span>(<span>url: str, base_url: str, **kwargs: Dict[str, Any])</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -267,7 +274,21 @@ class template:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def setsu(url: str, base_url: str, manga_id_fn: Callable[[BeautifulSoup], Union[int, float]]):
+<pre><code class="python">def msa(url: str, base_url: str, **kwargs: Dict[str, Any]):
+    url = f&#34;{base_url}/manga/{urel(url).parts[2]}/ajax/chapters/&#34;
+    return soup(url, method=&#34;post&#34;)</code></pre>
+</details>
+</dd>
+<dt id="mangdl.api.providers.templates.wordpress.rch_fn.setsu"><code class="name flex">
+<span>def <span class="ident">setsu</span></span>(<span>url: str, base_url: str, manga_id_fn: Callable[[bs4.BeautifulSoup], Union[int, float]], **kwargs: Dict[str, Any])</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setsu(url: str, base_url: str, manga_id_fn: Callable[[BeautifulSoup], Union[int, float]], **kwargs: Dict[str, Any]):
     data = {&#34;action&#34;: &#34;manga_get_chapters&#34;, &#34;manga&#34;: str(manga_id_fn(soup(url)))}
     return soup(f&#34;{base_url}/wp-admin/admin-ajax.php&#34;, method=&#34;post&#34;, data=data)</code></pre>
 </details>
@@ -330,11 +351,12 @@ class template:
         self.prov = prov
         for k, v in attr.items():
             setattr(self, k, getattr(prov, k, v))
+        rfk = [&#34;manga_id_fn&#34;]
         if type(self.rch_fn) == str:
             self.rch_fn = partial(
                 getattr(rch_fn, self.rch_fn),
                 base_url=self.base_url,
-                manga_id_fn=self.prov.manga_id_fn
+                **{i: getattr(self.prov, i, None) for i in rfk}
             )
         for i in [&#34;ch_num_fn&#34;, &#34;rch_num_fn&#34;]:
             gi = getattr(self, i)
@@ -345,7 +367,7 @@ class template:
 
     def ch_fn(self, url: str) -&gt; List[str]:
         op = []
-        for i in soup(url).select(&#34;.page-break img&#34;):
+        for i in soup(f&#34;{url}?style=list&#34;).select(&#34;.page-break img&#34;):
             op.append(sanitize_text(i[self.src]))
         return op
 
@@ -459,7 +481,7 @@ class template:
 </summary>
 <pre><code class="python">def ch_fn(self, url: str) -&gt; List[str]:
     op = []
-    for i in soup(url).select(&#34;.page-break img&#34;):
+    for i in soup(f&#34;{url}?style=list&#34;).select(&#34;.page-break img&#34;):
         op.append(sanitize_text(i[self.src]))
     return op</code></pre>
 </details>
@@ -726,6 +748,7 @@ setTimeout(() => input.focus(), 100);
 <li>
 <h4><code><a title="mangdl.api.providers.templates.wordpress.rch_fn" href="#mangdl.api.providers.templates.wordpress.rch_fn">rch_fn</a></code></h4>
 <ul class="">
+<li><code><a title="mangdl.api.providers.templates.wordpress.rch_fn.msa" href="#mangdl.api.providers.templates.wordpress.rch_fn.msa">msa</a></code></li>
 <li><code><a title="mangdl.api.providers.templates.wordpress.rch_fn.setsu" href="#mangdl.api.providers.templates.wordpress.rch_fn.setsu">setsu</a></code></li>
 </ul>
 </li>
