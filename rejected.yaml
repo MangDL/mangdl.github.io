@@ -1,0 +1,44 @@
+flag:
+  cf: Cloudflare UAM
+  do: DL only
+  el: External links
+  fm: Freemium
+  lc: Doesn't have a list of all comics
+  pc: Paid content
+  sc: No search capability
+  tdo: Torrent/DL only
+  to: Torrent only
+sites:
+  https://1stkissmanga.io/:
+    - cf
+  https://akuma.moe/:
+    - lc
+  https://doki.co:
+    - el
+  https://doujins.com:
+    - lc
+  https://e-hentai.org/:
+    - lc
+  https://genkan.io:
+    - cf
+  https://isekaiscan.com:
+    - cf
+  https://itazuraneko.neocities.org:
+    - lc
+  https://mangakakalot.com/:
+    - el
+  https://mangasyuri.net/:
+    - lc
+    - pc
+  https://nyaa.si/:
+    - lc
+    - tdo
+  https://readmanhua.net/:
+    - el
+  http://www.vn-meido.com:
+    - lc
+  https://wuxiaworld.site/:
+    - cf
+  https://yourewelcomescans.wordpress.com/:
+    - lc
+    - sc

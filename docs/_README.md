@@ -44,7 +44,7 @@
 </p>
 <p align="center">
     <a target="_blank" href="https://discord.com/invite/${dc_inv}">
-        <img src="https://img.shields.io/discord/${dc_serv}.svg?style=flat-square&logo=data:image/png;base64,${discord_b64}">
+        <img src="https://invidget.switchblade.xyz/${dc_inv}">
     </a>
 </p>
 
@@ -76,7 +76,7 @@ Website: [${site}](https://${site})
 
 Since people are looking for the download first, here you go:
 
-Follow [this link](https://${site}/installation.html) to install MangDL in your machine.
+Follow [this link](https://${site}/installation) to install MangDL in your machine.
 
 ## **Important**
 
@@ -101,7 +101,7 @@ For the terms of usage and legals, visit [license](license.md) and [terms of usa
 
 ## **Sites**
 
-For the full list of providers, visit [this link](providers.md).
+For the full list of providers, visit [this link](https://${site}/providers).
 
 <!-- TOC section. Update when adding sections and subsections fitted in TOC. -->
 ## **Table of Contents**

@@ -305,7 +305,12 @@
         <ul>
             <li><a href="/index.html"><strong>Homepage</strong></a></li>
             <li><a href="/installation.html"><strong>Installation</strong></a></li>
-            <li><a href="/providers.html"><strong>Providers</strong></a></li>
+            <li>
+                <a href="/providers.html"><strong>Providers</strong></a>
+                <ul>
+                    <li><a href="/rejected.html"><strong>Terms of Usage & Disclaimer</strong></a></li>
+                </ul>
+            </li>
             <li><a href="/tou_disc.html"><strong>Terms of Usage & Disclaimer</strong></a></li>
             <li><a href="/docs/index.html"><strong>Documentation</strong></a></li>
             <li><a href="/changelog.html"><strong>Changelog</strong></a></li>

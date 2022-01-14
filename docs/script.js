@@ -1,77 +1,3 @@
-var items = {
-    "Installable": {
-        "Windows": { '': [] },
-        "MacOS": { '': [] },
-        "Linux": { "Distro": ["Debian", "Arch"] }
-    },
-    "Portable": {
-        "Windows": { '': [] },
-        "Linux": { "Distro": ["Debian", "Arch"] }
-    },
-    "Programmatic": {
-        "Windows": { "": [] },
-        "MacOS": { '': [] },
-        "Linux": { "Distro": ["Debian", "Arch"] }
-    },
-}
-window.onload = function () {
-    var firstSel = document.getElementById("first");
-    var secSel = document.getElementById("second");
-    var thirdSel = document.getElementById("third");
-    var ts = document.getElementById("ss");
-    var ts = document.getElementById("ts");
-    var rel = $("#rel")
-    for (var x in items) {
-        firstSel.options[firstSel.options.length] = new Option(x, x);
-    }
-    rel.load('./installation/index.html');
-    firstSel.onchange = function () {
-        rel.empty()
-        if (firstSel.value == "") {
-            rel.load('./installation/index.html');
-            secSel.style = "display: none;";
-            ss.style = "display: none;";
-            thirdSel.style = "display: none;";
-            ts.style = "display: none;";
-        } else {
-            rel.load(`./installation/OS.html`);
-            ss.style = "display: block;";
-            secSel.style = "display: block;"
-            thirdSel.length = 1;
-            secSel.length = 1;
-            for (var y in items[this.value]) {
-                secSel.options[secSel.options.length] = new Option(y, y);
-            }
-        }
-        if (secSel.value == "") {
-            thirdSel.style = "display: none;";
-            ts.style = "display: none;";
-        }
-    }
-    secSel.onchange = function () {
-        rel.empty()
-        var z = Object.values(items[firstSel.value][this.value])[0];
-        if (!z.length) {
-            thirdSel.style = "display: none;";
-            ts.style = "display: none;";
-            rel.load(`./installation/${this.value}/${firstSel.value}.html`);
-        } else {
-            rel.load(`./installation/${secSel.value}/index.html`);
-            ts.textContent = Object.keys(items[firstSel.value][this.value])[0];
-            ts.style = "display: block;"
-            thirdSel.style = "display: block;"
-            thirdSel.length = 1;
-            for (var i = 0; i < z.length; i++) {
-                thirdSel.options[thirdSel.options.length] = new Option(z[i], z[i]);
-            }
-        }
-    }
-    thirdSel.onchange = function () {
-        rel.empty()
-        rel.load(`./installation/${secSel.value}/${firstSel.value}/${thirdSel.value}.html`);
-    }
-}
-
 function createCopyButton(highlightDiv) {
     const button = document.createElement("button");
     button.className = "copy-code-button";
@@ -139,6 +65,7 @@ document
 
 function on() {
     document.getElementById("overlay").style.display = "grid";
+    document.getElementById("overlay").innerHTML = '<img id="ol-img"><p>Click anywhere to zoom out.</p><p>Image not zooming in enough? Create a pull request at <a href=https://github.com/MangDL/mdl>github.com/MangDL/mdl</a> and fix the issue yourself.</p>';
 }
 
 function off() {
@@ -147,7 +74,8 @@ function off() {
 
 function enlarge(item) {
     on();
-    document.getElementById("ol-img").src = item.src;
+    document.getElementById("overlay").style.display = "grid";
+    document.getElementById("overlay").innerHTML = `<img id="ol-img" src="${item.src}"><p>Click anywhere to zoom out.</p><p>Image not zooming in enough? Create a pull request at <a href=https://github.com/MangDL/mdl>github.com/MangDL/mdl</a> and fix the issue yourself.</p>`;
 }
 
 function addEnlarge(enlargeDiv) {
@@ -159,5 +87,5 @@ for (var i of document.querySelectorAll("ul li img")) {
 }
 
 document
-    .querySelectorAll(".el-img")
+    .querySelectorAll("img")
     .forEach((enlargeDiv) => addEnlarge(enlargeDiv));

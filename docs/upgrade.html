@@ -536,34 +536,43 @@
     <script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/script.js"></script>
-    <script src="/ping.js"></script>
+    <script src="/upgrade.js"></script>
     </meta>
 </head>
 
 <body>
     <main>
         <article id="content">
-            <h1>Providers</h1>
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span id="close">&times;</span>
-                    <p id="mod-p"></p>
+            <h1>Upgrade</h1>
+            <div class="form1">
+                <div>
+                    <span id="fs">Method</span>
+                </div>
+
+                <div>
+                    <select name="first" id="first">
+                        <option value=""></option>
+                    </select>
+                </div>
+
+                <div>
+                    <span id="ss" style="display: none;">Family OS</span>
+                </div>
+
+                <div>
+                    <select name="second" id="second" style="display: none;">
+                    </select>
+                </div>
+
+                <div>
+                    <span id="ts"></span>
+                </div>
+
+                <div>
+                    <select name="third" id="third" style="display: none;">
+                    </select>
                 </div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Status</th>
-                        <th>Online</th>
-                        <th>Test</th>
-                        <th>Provider</th>
-                        <th>Platform</th>
-                        <th>Cloudflare UAM</th>
-                    </tr>
-                </thead>
-                <tbody id="providers">
-                </tbody>
-            </table>
             <div id="rel"></div>
         </article>
         <nav id="sidebar">
@@ -639,17 +648,12 @@
                 <ul>
                     <li><a href="/index.html"><strong>Homepage</strong></a></li>
                     <li><a href="/installation.html"><strong>Installation</strong></a></li>
-                    <li>
-                        <a href="/providers.html"><strong>Providers</strong></a>
-                        <ul>
-                            <li><a href="/rejected.html"><strong>Terms of Usage & Disclaimer</strong></a></li>
-                        </ul>
-                    </li>
+                    <li><a href="/providers.html"><strong>Providers</strong></a></li>
                     <li><a href="/tou_disc.html"><strong>Terms of Usage & Disclaimer</strong></a></li>
                     <li><a href="/docs/index.html"><strong>Documentation</strong></a></li>
                     <li><a href="/changelog.html"><strong>Changelog</strong></a></li>
                     <li><a href="/license.html"><strong>License</strong></a></li>
-                <ul>
+                </ul>
             </div>
             <div class="toc">
                 <ul></ul>

@@ -368,3 +368,7 @@ td img {
 td btn {
     margin: auto;
 }
+
+thead {
+    border-bottom: #646464 solid .25em;
+}

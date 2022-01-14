@@ -15,9 +15,6 @@ def b64(name: str):
 def todo():
     str_repl = {
         "TODO\n====": "## TODO",
-        "## Main": "### Main",
-        "## Side": "### Side",
-        "## Done": "### Done",
     }
 
     with open(f"docs/TODO.md", "r") as file:

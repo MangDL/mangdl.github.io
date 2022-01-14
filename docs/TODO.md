@@ -1,35 +1,50 @@
-# TODO
+TODO
+====
 
-## Main to do
+### Legend
 
-- [ ] Documentation
+- 🟢: Completed
+- 🟡: In progress
+- 🟠: Paused, not a priority
+- 🔴: Yet to be done
+- 🔵: Halted, considered completed despite not being done
 
-    - [x] Bare-bones sites
+---
 
-    - [ ] Migrate every .md file to https://mangdl.github.io
+- 🟢 Create portables
+    - 🟢 Linux
+    - 🟢 Windows
+    - 🟢 MacOS
+        (Not really satisfied with the solution)
 
-- [ ] Library
+- 🟡 Add features
+    - 🔵 Saving command options to config file
+    - 🔴 Submission of new color theme
+    - 🔴 Returning/Downloading translated languages using locale of the machine
+        (and an option to override it)
+    - 🔴 Fully opt-in 99% configurable analytics
+        (for new and some sampled features)
 
-    - [ ] Manga Update notifier
+- 🟢 Create installables
+    - 🟢 Linux
+    - 🟢 Windows
+    - 🟢 MacOS
+        (Not really satisfied with the solution)
 
-    - [ ] Backupable library with an option to store an offsite backup in [supabase.io](https://supabase.io)
+- 🟡 Documentation
+    - 🟢 Bare-bones sites
+    - 🟢 Migrate to https://mdl.pages.dev/
+    - 🟢 Complete documentation
+    - 🟢 Installation instructions
+    - 🔴 Examples of programmatic usage
 
-- [ ] GUI
+- 🔴 Library
+    - 🔴 Manga Update notifier
+    - 🔴 Backupable library
+        (with an option to store an offsite backup in https://supabase.io/)
+    - 🔴 MAL / Anilist sync
 
-    - [ ] Reader
-
-- [ ] MAL / Anilist sync
-
-- [ ] Fully opt-in 99% configureable (mostly opinionated) analytics for new and some sampled features
-
-## Side Quests
-
-- [ ] Installation instructions for Android users
-
-- [ ] Package update notifier
-
-- [ ] Saving command options to config file
-
-- [ ] Submission of new color theme for the CLI and possibly for the future GUI
-
-- [ ] Returning/Downloading translated languages using locale of the machine and an option to override it
+- 🟡 GUI
+    - 🟡 Homepage
+    - 🔴 Reader
+    - 🔴 Backend

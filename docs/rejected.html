@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>mangdl.api.providers.mangakomi API documentation</title>
+<title>MangDL API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,32 +19,91 @@
 </head>
 <body>
 <main>
-<article id="content">
-<header>
-<h1 class="title">Module <code>mangdl.api.providers.mangakomi</code></h1>
-</header>
-<section id="section-intro">
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">scanlator = &#34;Manga Komi&#34;
-base_url = &#34;https://mangakomi.com&#34;
-template = &#34;wordpress&#34;
-
-ch_num_fn = &#34;wmcc&#34;
-rch_fn = &#34;msa&#34;
-src = &#34;data-src&#34;</code></pre>
-</details>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
-</section>
+<article id="content"><h1 align="center">
+<a id="----list-of-rejected-sites" class="anchor" href="#----list-of-rejected-sites" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>
+    LIST OF REJECTED SITES
+</h1>
+<p>A site will not be accepted if it:</p>
+<ul>
+<li>does not have a list of all comics</li>
+<li>has duplicate links</li>
+<li>has external links redirecting to other sites</li>
+<li>has no search capability</li>
+<li>is geo-blocked</li>
+<li>is protected by an anti-DDoS mechanism except for DDoS Guard</li>
+<li>is torrent and/or download only; and</li>
+<li>serves paid content</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Site</th>
+<th align="center">Reason/s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="https://1stkissmanga.io/" rel="nofollow">1stkissmanga.io</a></td>
+<td align="center">Cloudflare UAM</td>
+</tr>
+<tr>
+<td align="center"><a href="https://akuma.moe/" rel="nofollow">akuma.moe</a></td>
+<td align="center">Doesn't have a list of all comics</td>
+</tr>
+<tr>
+<td align="center"><a href="https://doki.co" rel="nofollow">doki.co</a></td>
+<td align="center">External links</td>
+</tr>
+<tr>
+<td align="center"><a href="https://doujins.com" rel="nofollow">doujins.com</a></td>
+<td align="center">Doesn't have a list of all comics</td>
+</tr>
+<tr>
+<td align="center"><a href="https://e-hentai.org/" rel="nofollow">e-hentai.org</a></td>
+<td align="center">Doesn't have a list of all comics</td>
+</tr>
+<tr>
+<td align="center"><a href="https://genkan.io" rel="nofollow">genkan.io</a></td>
+<td align="center">Cloudflare UAM</td>
+</tr>
+<tr>
+<td align="center"><a href="https://isekaiscan.com" rel="nofollow">isekaiscan.com</a></td>
+<td align="center">Cloudflare UAM</td>
+</tr>
+<tr>
+<td align="center"><a href="https://itazuraneko.neocities.org" rel="nofollow">itazuraneko.neocities.org</a></td>
+<td align="center">Doesn't have a list of all comics</td>
+</tr>
+<tr>
+<td align="center"><a href="https://mangakakalot.com/" rel="nofollow">mangakakalot.com</a></td>
+<td align="center">External links</td>
+</tr>
+<tr>
+<td align="center"><a href="https://mangasyuri.net/" rel="nofollow">mangasyuri.net</a></td>
+<td align="center">Doesn't have a list of all comics, Paid content</td>
+</tr>
+<tr>
+<td align="center"><a href="https://nyaa.si/" rel="nofollow">nyaa.si</a></td>
+<td align="center">Doesn't have a list of all comics, Torrent/DL only</td>
+</tr>
+<tr>
+<td align="center"><a href="https://readmanhua.net/" rel="nofollow">readmanhua.net</a></td>
+<td align="center">External links</td>
+</tr>
+<tr>
+<td align="center"><a href="http://www.vn-meido.com" rel="nofollow">www.vn-meido.com</a></td>
+<td align="center">Doesn't have a list of all comics</td>
+</tr>
+<tr>
+<td align="center"><a href="https://wuxiaworld.site/" rel="nofollow">wuxiaworld.site</a></td>
+<td align="center">Cloudflare UAM</td>
+</tr>
+<tr>
+<td align="center"><a href="https://yourewelcomescans.wordpress.com/" rel="nofollow">yourewelcomescans.wordpress.com</a></td>
+<td align="center">Doesn't have a list of all comics, No search capability</td>
+</tr>
+</tbody>
+</table>
 </article>
 <nav id="sidebar">
 <h1>MangDL</h1>
@@ -91,7 +150,7 @@ const query = new URL(window.location).searchParams.get('q');
 if (query)
 search(query);
 function search(query) {
-const url = '../../../doc-search.html#' + encodeURIComponent(query);
+const url = 'doc-search.html#' + encodeURIComponent(query);
 new tingle.modal({
 cssClass: ['modal-dialog'],
 onClose: () => {
@@ -124,11 +183,6 @@ setTimeout(() => input.focus(), 100);
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3>Super-module</h3>
-<ul>
-<li><code><a title="mangdl.api.providers" href="index.html">mangdl.api.providers</a></code></li>
-</ul>
-</li>
 </ul>
 </nav>
 </main>
