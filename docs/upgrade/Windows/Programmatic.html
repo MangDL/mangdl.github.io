@@ -1,0 +1,41 @@
+<link as="style" crossorigin=""
+    href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css"
+    integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" rel="preload stylesheet" />
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/prism.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/prism.js"></script>
+<script src="/script.js"></script>
+<div id="overlay" onclick="off()">
+</div>
+<h2>Programmatic - Windows 7 and up</h2>
+<ul>
+    <li>
+        Press <kbd>Windows</kbd> + <kbd>R</kbd> (Press <kbd>Windows</kbd> and <kbd>R</kbd> keys simultaneously)
+    </li>
+    <li>
+        A window with a title <code>Run</code> should appear. Focus to the said window in the <code>Open:</code>
+        text field by hovering the mouse towards the said text field and left-clicking the mouse and type
+        <code>powershell</code> like illustrated below:
+        <img alt="run_box_cmd" src="/assets/images/run_box_ps.png" />
+    </li>
+    <li>
+        Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd> (Press <kbd>Ctrl</kbd>, <kbd>Shift</kbd>, and
+        <kbd>Enter</kbd> keys simultaneously).
+    </li>
+    <li>
+        A window with a title <code>User Account Control</code> should appear like illustrated below:
+        <img alt="run_box_cmd" src="/assets/images/UAC_ps.png" />
+        Focus to the said window and press the <code>Yes</code> button by hovering the mouse towards the said button
+        and left-clicking the mouse.
+    </li>
+    <li>
+        A window with a title <code>Windows Powershell</code> should appear. Focus to the said window by hovering
+        the mouse towards the said window and left-clicking the mouse and type the following command:
+        <div class="highlight"><pre><code class="language-powershell">python -m pip install -U MangDL</code></pre>
+        </div>
+    </li>
+    <li>
+        You can now use the latest version of MangDL.
+    </li>
+</ul>

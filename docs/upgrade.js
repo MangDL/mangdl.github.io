@@ -24,17 +24,17 @@ window.onload = function () {
     for (var x in items) {
         firstSel.options[firstSel.options.length] = new Option(x, x);
     }
-    rel.load('./installation/index.html');
+    rel.load('./upgrade/index.html');
     firstSel.onchange = function () {
         rel.empty()
         if (firstSel.value == "") {
-            rel.load('./installation/index.html');
+            rel.load('./upgrade/index.html');
             secSel.style = "display: none;";
             ss.style = "display: none;";
             thirdSel.style = "display: none;";
             ts.style = "display: none;";
         } else {
-            rel.load(`./installation/OS.html`);
+            rel.load(`./upgrade/OS.html`);
             ss.style = "display: block;";
             secSel.style = "display: block;"
             thirdSel.length = 1;

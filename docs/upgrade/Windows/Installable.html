@@ -33,31 +33,27 @@ Part of the following is a summary of <a
         and left-clicking the mouse.
     </li>
     <li>
-        A window with a title <code>Windows Powershell</code> should appear. Focus to the said window by hovering
-        the mouse towards the said window and left-clicking the mouse.
-    </li>
-    <li>
         Now, there are two choices: 64-bit and 32-bit installation, the former is recommended. Run the command
         corresponding your choice.
         <ul>
             <li>
                 64-bit:
                 <div class="highlight">
-                    <pre><code class="language-powershell">Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/MangDL/MangDL/master/assets/port-winx64.ps1'))</code></pre>
+                    <pre><code class="language-powershell">Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/MangDL/MangDL/master/assets/inst-winx64.ps1'))</code></pre>
                 </div>
             </li>
             <li>
                 32-bit:
                 <div class="highlight">
-                    <pre><code class="language-powershell">Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/MangDL/MangDL/master/assets/port-winx86.ps1'))</code></pre>
+                    <pre><code class="language-powershell">Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/MangDL/MangDL/master/assets/inst-winx86.ps1'))</code></pre>
                 </div>
             </li>
         </ul>
     </li>
     <li>
-        You can now use MangDL by running the following command:
+        You can now use the latest version of MangDL by running the following command:
         <div class="highlight">
-            <pre><code class="language-shell">.\mangdl\mangdl.bat</code></pre>
+            <pre><code class="language-shell">mangdl</code></pre>
         </div>
     </li>
 </ul>
