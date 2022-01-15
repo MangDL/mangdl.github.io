@@ -176,7 +176,7 @@ The following are the required programs and/or packages to run this project:
 
         </details>
 
-    ![uni](assets/images/prereq_uni.png)
+    ![uni](assets/images/prereq.png)
 
 - For windows:
     - [Chocolatey](https://chocolatey.org)
@@ -199,11 +199,6 @@ The following are the required programs and/or packages to run this project:
 
         </details>
 
-    <details>
-    <summary>You should get a similar output like the following image:</summary>
-    <img src="assets/images/prereq_1.png" alt="1">
-    </details>
-
 - For [macOS](https://www.apple.com/mac/):
     - [Homebrew](https://brew.sh)
         <details>
@@ -225,11 +220,6 @@ The following are the required programs and/or packages to run this project:
 
         </details>
 
-    <details>
-    <summary>You should get a similar output like the following image:</summary>
-    <img src="assets/images/prereq_2.png" alt="2">
-    </details>
-
 - For [Linux](https://www.linux.org/)
     - [p7zip](https://github.com/jinfeihan57/p7zip)
         <details>
@@ -240,11 +230,6 @@ The following are the required programs and/or packages to run this project:
         ```
 
         </details>
-
-    <details>
-    <summary>You should get a similar output like the following image:</summary>
-    <img src="assets/images/prereq_3.png" alt="3">
-    </details>
 
 ### **Setup**
 
