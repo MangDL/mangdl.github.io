@@ -395,7 +395,7 @@ class Downloader:
         for r in chdls:
             ch, arg = list(r.items())[0]
             if ch:
-                if isinstance(ch, int) or isinstance(ch, float):
+                if isinstance(ch, Union[int, float]):
                     k = ch
                 else:
                     k = ast.literal_eval(ch)
@@ -889,7 +889,7 @@ class Ch:
         for r in chdls:
             ch, arg = list(r.items())[0]
             if ch:
-                if isinstance(ch, int) or isinstance(ch, float):
+                if isinstance(ch, Union[int, float]):
                     k = ch
                 else:
                     k = ast.literal_eval(ch)
@@ -973,7 +973,7 @@ class Ch:
     for r in chdls:
         ch, arg = list(r.items())[0]
         if ch:
-            if isinstance(ch, int) or isinstance(ch, float):
+            if isinstance(ch, Union[int, float]):
                 k = ch
             else:
                 k = ast.literal_eval(ch)

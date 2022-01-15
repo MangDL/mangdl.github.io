@@ -2,6 +2,14 @@
     CHANGELOG
 </h1>
 
+## **MangDL v.3.1.0.0**
+
+### **ADDED**
+
+### **CHANGED**
+
+### **FIXED**
+
 ## **MangDL v.3.0.1.0**
 
 ### **ADDED**

@@ -44,9 +44,7 @@ def manga_title(ms):
     sanitize_text(ms.select_one(&#34;#manga-title h1&#34;).text)
 
 def ch_num_fn(soup):
-    op = soup.select_one(&#34;#chapter-heading&#34;).text.split(&#34;-&#34;)
-    print(op)
-    return literal_eval(op[-1][9:])
+    return literal_eval(soup.select_one(&#34;#chapter-heading&#34;).text.split(&#34;-&#34;)[-1][9:])
 
 def manga_id_fn(soup) -&gt; str:
     return soup.select_one(&#34;#manga-chapters-holder&#34;)[&#34;data-id&#34;]
@@ -78,9 +76,7 @@ def link_fn(soup):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def ch_num_fn(soup):
-    op = soup.select_one(&#34;#chapter-heading&#34;).text.split(&#34;-&#34;)
-    print(op)
-    return literal_eval(op[-1][9:])</code></pre>
+    return literal_eval(soup.select_one(&#34;#chapter-heading&#34;).text.split(&#34;-&#34;)[-1][9:])</code></pre>
 </details>
 </dd>
 <dt id="mangdl.api.providers.setsuscans.link_fn"><code class="name flex">

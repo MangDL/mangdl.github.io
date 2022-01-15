@@ -41,7 +41,7 @@ from ....utils.utils import dt, sanitize_text
 from ...base import Ch, Downloader, Manga, soup, urel
 
 class ch_num_fn:
-    def breadcrumb(soup):
+    def breadcrumb(soup: BeautifulSoup):
         return literal_eval(soup.select_one(&#34;ol.breadcrumb .active&#34;).text.split()[-1])
 
     def wmcc(soup):
@@ -65,11 +65,13 @@ class template:
             &#34;base_url&#34;: None,
             &#34;cover_src&#34;: &#34;src&#34;,
             &#34;ch_num_fn&#34;: ch_num_fn.breadcrumb,
+            &#34;date_format&#34;: r&#34;%B %d, %Y&#34;,
             &#34;rch_fn&#34;: soup,
             &#34;rch_num_fn&#34;: rch_num_fn.tdo,
             &#34;scanlator&#34;: None,
             &#34;search_query_string&#34;: &#34;post_type=wp-manga&#34;,
             &#34;src&#34;: &#34;src&#34;,
+            &#34;title_fn&#34;: None,
             &#34;total_cs&#34;: &#34;.c-blog__heading h1&#34;,
         }
         self.prov = prov
@@ -130,20 +132,18 @@ class template:
         def mst(s: str, pp: Callable[[str], List[Any]]=lambda x: x):
             return pp(sanitize_text(meta.get(s))) if meta.get(s) else []
 
-        title_fn = getattr(self.prov, &#34;manga_title&#34;, None)
-
         rd = [sanitize_text(i.text) for i in self.rch_fn(url).select(&#34;.chapter-release-date&#34;)]
         def dates(idx: int):
             op = &#34;1970-01-01T00:00:00&#34;
             if rd:
                 rop = rd[idx]
                 if rop:
-                    op = dt(rop, r&#34;%B %d, %Y&#34;)
+                    op = dt(rop, self.date_format)
             return op
         return Manga(
             url             = url,
             covers          = [ms.select_one(&#34;.summary_image img&#34;)[self.cover_src]],
-            title           = title_fn(ms) if title_fn else sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
+            title           = self.title_fn(ms) if self.title_fn else sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
             alt_titles      = mst(&#34;Alternative&#34;),
             author          = mst(&#34;Author(s)&#34;, lambda x: x.split(&#34;,&#34;)),
             artist          = mst(&#34;Artist(s)&#34;, lambda x: x.split(&#34;,&#34;)),
@@ -212,7 +212,7 @@ class template:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class ch_num_fn:
-    def breadcrumb(soup):
+    def breadcrumb(soup: BeautifulSoup):
         return literal_eval(soup.select_one(&#34;ol.breadcrumb .active&#34;).text.split()[-1])
 
     def wmcc(soup):
@@ -221,7 +221,7 @@ class template:
 <h3>Methods</h3>
 <dl>
 <dt id="mangdl.api.providers.templates.wordpress.ch_num_fn.breadcrumb"><code class="name flex">
-<span>def <span class="ident">breadcrumb</span></span>(<span>soup)</span>
+<span>def <span class="ident">breadcrumb</span></span>(<span>soup: bs4.BeautifulSoup)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -229,7 +229,7 @@ class template:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def breadcrumb(soup):
+<pre><code class="python">def breadcrumb(soup: BeautifulSoup):
     return literal_eval(soup.select_one(&#34;ol.breadcrumb .active&#34;).text.split()[-1])</code></pre>
 </details>
 </dd>
@@ -343,11 +343,13 @@ class template:
             &#34;base_url&#34;: None,
             &#34;cover_src&#34;: &#34;src&#34;,
             &#34;ch_num_fn&#34;: ch_num_fn.breadcrumb,
+            &#34;date_format&#34;: r&#34;%B %d, %Y&#34;,
             &#34;rch_fn&#34;: soup,
             &#34;rch_num_fn&#34;: rch_num_fn.tdo,
             &#34;scanlator&#34;: None,
             &#34;search_query_string&#34;: &#34;post_type=wp-manga&#34;,
             &#34;src&#34;: &#34;src&#34;,
+            &#34;title_fn&#34;: None,
             &#34;total_cs&#34;: &#34;.c-blog__heading h1&#34;,
         }
         self.prov = prov
@@ -408,20 +410,18 @@ class template:
         def mst(s: str, pp: Callable[[str], List[Any]]=lambda x: x):
             return pp(sanitize_text(meta.get(s))) if meta.get(s) else []
 
-        title_fn = getattr(self.prov, &#34;manga_title&#34;, None)
-
         rd = [sanitize_text(i.text) for i in self.rch_fn(url).select(&#34;.chapter-release-date&#34;)]
         def dates(idx: int):
             op = &#34;1970-01-01T00:00:00&#34;
             if rd:
                 rop = rd[idx]
                 if rop:
-                    op = dt(rop, r&#34;%B %d, %Y&#34;)
+                    op = dt(rop, self.date_format)
             return op
         return Manga(
             url             = url,
             covers          = [ms.select_one(&#34;.summary_image img&#34;)[self.cover_src]],
-            title           = title_fn(ms) if title_fn else sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
+            title           = self.title_fn(ms) if self.title_fn else sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
             alt_titles      = mst(&#34;Alternative&#34;),
             author          = mst(&#34;Author(s)&#34;, lambda x: x.split(&#34;,&#34;)),
             artist          = mst(&#34;Artist(s)&#34;, lambda x: x.split(&#34;,&#34;)),
@@ -629,20 +629,18 @@ class template:
     def mst(s: str, pp: Callable[[str], List[Any]]=lambda x: x):
         return pp(sanitize_text(meta.get(s))) if meta.get(s) else []
 
-    title_fn = getattr(self.prov, &#34;manga_title&#34;, None)
-
     rd = [sanitize_text(i.text) for i in self.rch_fn(url).select(&#34;.chapter-release-date&#34;)]
     def dates(idx: int):
         op = &#34;1970-01-01T00:00:00&#34;
         if rd:
             rop = rd[idx]
             if rop:
-                op = dt(rop, r&#34;%B %d, %Y&#34;)
+                op = dt(rop, self.date_format)
         return op
     return Manga(
         url             = url,
         covers          = [ms.select_one(&#34;.summary_image img&#34;)[self.cover_src]],
-        title           = title_fn(ms) if title_fn else sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
+        title           = self.title_fn(ms) if self.title_fn else sanitize_text(ms.select_one(&#34;div.post-title h1&#34;).text),
         alt_titles      = mst(&#34;Alternative&#34;),
         author          = mst(&#34;Author(s)&#34;, lambda x: x.split(&#34;,&#34;)),
         artist          = mst(&#34;Artist(s)&#34;, lambda x: x.split(&#34;,&#34;)),

@@ -20,7 +20,9 @@ Considered to be a sister project of MangDL.
 
 A simple but powerful anime downloader and streamer.
 
-The origin of it all.
+> The origin of everything
+>
+> \- someone, probably
 
 - <a target="_blank" href="https://github.com/pystardust/ani-cli/">ani-cli</a>
 
