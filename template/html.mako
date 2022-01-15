@@ -316,6 +316,7 @@
             <li><a href="/docs/index.html"><strong>Documentation</strong></a></li>
             <li><a href="/changelog.html"><strong>Changelog</strong></a></li>
             <li><a href="/license.html"><strong>License</strong></a></li>
+            <li><a href="/more.html"><strong>More Apps</strong></a></li>
         <ul>
     </div>
     ${extract_toc(module.docstring) if extract_module_toc_into_sidebar else ''}
