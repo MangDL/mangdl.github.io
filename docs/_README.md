@@ -72,19 +72,15 @@ Github: [github.com/${organization}/${repo_name}](https://github.com/${organizat
 
 Website: [${site}](https://${site})
 
+To be updated, be sure to watch this repository and join the [Discord Support Server](https://discord.com/invite/${dc_inv}) for MangDL.
+
+For the terms of usage and legals, visit [license](license.md) and [terms of usage & disclaimer](tou_disc.md).
+
 ## **Downloads**
 
 Since people are looking for the download first, here you go:
 
 Follow [this link](https://${site}/installation) to install MangDL in your machine.
-
-## **Important**
-
-This project is a work in progress, use at your own risk.
-
-To be updated, be sure to watch this repository and join the [Discord Support Server](https://discord.com/invite/${dc_inv}) for MangDL.
-
-For the terms of usage and legals, visit [license](license.md) and [terms of usage & disclaimer](tou_disc.md).
 
 ## **Features**
 
@@ -106,7 +102,6 @@ For the full list of providers, visit [this link](https://${site}/providers).
 <!-- TOC section. Update when adding sections and subsections fitted in TOC. -->
 ## **Table of Contents**
 
-- [**Important**](#important)
 - [**Features**](#features)
   - [Supported OSes](#supported-oses)
 - [**Sites**](#sites)
