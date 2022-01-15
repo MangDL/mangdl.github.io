@@ -395,7 +395,7 @@ class Downloader:
         for r in chdls:
             ch, arg = list(r.items())[0]
             if ch:
-                if type(ch) is int or type(ch) is float:
+                if isinstance(ch, int) or isinstance(ch, float):
                     k = ch
                 else:
                     k = ast.literal_eval(ch)
@@ -889,7 +889,7 @@ class Ch:
         for r in chdls:
             ch, arg = list(r.items())[0]
             if ch:
-                if type(ch) is int or type(ch) is float:
+                if isinstance(ch, int) or isinstance(ch, float):
                     k = ch
                 else:
                     k = ast.literal_eval(ch)
@@ -973,7 +973,7 @@ class Ch:
     for r in chdls:
         ch, arg = list(r.items())[0]
         if ch:
-            if type(ch) is int or type(ch) is float:
+            if isinstance(ch, int) or isinstance(ch, float):
                 k = ch
             else:
                 k = ast.literal_eval(ch)

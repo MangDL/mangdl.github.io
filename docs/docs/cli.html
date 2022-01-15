@@ -165,7 +165,7 @@ def cao(group: click.group, cmd: str) -&gt; List[Callable[[Callable[[Any], Any]]
                 h = &#34;\n&#34;.join(f&#39;{&#34; &#34; * ((n + 3)-(0 if i else len(j)))}{j}&#39; for i, j in enumerate(h.split(&#34;\n&#34;))) if h else &#34;&#34;
                 e = &#34;\n&#34; + &#34;\n&#34;.join(f&#39;{&#34; &#34; * (n + (11 if i else 5))}{&#34;Ex.: &#34; if not i else &#34;&#34;}{j}&#39; for i, j in enumerate(e.split(&#34;\n&#34;))) if e else &#34;&#34;
                 kw[&#34;help&#34;] = f&#39;\b\n{t}{&#34; &#34;*((n + 3) - len(t))}{h}{e}&#39;
-                if type(kt) is dict:
+                if isinstance(kt, dict):
                     ktk, ktv = list(kt.items())[0]
                     kta, ktkw = [i[1] for i in ktv.items()]
                     kw[&#34;type&#34;] = getattr(click, ktk)(*kta, **ktkw if ktkw else {})
@@ -199,7 +199,6 @@ def command(group: click.group) -&gt; Callable[[Callable[[Any], Any]], Callable[
 @click.group(context_settings={&#39;help_option_names&#39;: [&#39;-h&#39;, &#39;--help&#39;]})
 def cli():
     &#34;&#34;&#34;Main command group.&#34;&#34;&#34;
-    pass
 
 @command(cli)
 def dl(title: str, **kwargs: dict[str, Any]):
@@ -237,7 +236,7 @@ def credits():
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="mangdl.cli.cao"><code class="name flex">
-<span>def <span class="ident">cao</span></span>(<span>group: <function group at 0x7f0f9be95480>, cmd: str) ‑> List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]</span>
+<span>def <span class="ident">cao</span></span>(<span>group: <function group at 0x7fd9c398d480>, cmd: str) ‑> List[Callable[[Callable[[Any], Any]], Callable[[Any], Any]]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Retruns wrappers for a click command evaluated from the given arguments.</p>
@@ -336,7 +335,7 @@ def credits():
                 h = &#34;\n&#34;.join(f&#39;{&#34; &#34; * ((n + 3)-(0 if i else len(j)))}{j}&#39; for i, j in enumerate(h.split(&#34;\n&#34;))) if h else &#34;&#34;
                 e = &#34;\n&#34; + &#34;\n&#34;.join(f&#39;{&#34; &#34; * (n + (11 if i else 5))}{&#34;Ex.: &#34; if not i else &#34;&#34;}{j}&#39; for i, j in enumerate(e.split(&#34;\n&#34;))) if e else &#34;&#34;
                 kw[&#34;help&#34;] = f&#39;\b\n{t}{&#34; &#34;*((n + 3) - len(t))}{h}{e}&#39;
-                if type(kt) is dict:
+                if isinstance(kt, dict):
                     ktk, ktv = list(kt.items())[0]
                     kta, ktkw = [i[1] for i in ktv.items()]
                     kw[&#34;type&#34;] = getattr(click, ktk)(*kta, **ktkw if ktkw else {})
@@ -352,7 +351,7 @@ def credits():
 </details>
 </dd>
 <dt id="mangdl.cli.command"><code class="name flex">
-<span>def <span class="ident">command</span></span>(<span>group: <function group at 0x7f0f9be95480>) ‑> Callable[[Callable[[Any], Any]], Callable[[Any], Any]]</span>
+<span>def <span class="ident">command</span></span>(<span>group: <function group at 0x7fd9c398d480>) ‑> Callable[[Callable[[Any], Any]], Callable[[Any], Any]]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Wrapper for click commands.</p>

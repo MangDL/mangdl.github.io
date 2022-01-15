@@ -76,7 +76,7 @@ class template:
         for k, v in attr.items():
             setattr(self, k, getattr(prov, k, v))
         rfk = [&#34;manga_id_fn&#34;]
-        if type(self.rch_fn) == str:
+        if isinstance(self.rch_fn, str):
             self.rch_fn = partial(
                 getattr(rch_fn, self.rch_fn),
                 base_url=self.base_url,
@@ -84,7 +84,7 @@ class template:
             )
         for i in [&#34;ch_num_fn&#34;, &#34;rch_num_fn&#34;]:
             gi = getattr(self, i)
-            if type(gi) == str:
+            if isinstance(gi, str):
                 setattr(self, i, getattr(globals()[i], getattr(prov, i, gi), gi))
 
         self.template = import_module(f&#34;.{self.prov.template}&#34;, &#34;mangdl.api.providers.templates&#34;).template
@@ -354,7 +354,7 @@ class template:
         for k, v in attr.items():
             setattr(self, k, getattr(prov, k, v))
         rfk = [&#34;manga_id_fn&#34;]
-        if type(self.rch_fn) == str:
+        if isinstance(self.rch_fn, str):
             self.rch_fn = partial(
                 getattr(rch_fn, self.rch_fn),
                 base_url=self.base_url,
@@ -362,7 +362,7 @@ class template:
             )
         for i in [&#34;ch_num_fn&#34;, &#34;rch_num_fn&#34;]:
             gi = getattr(self, i)
-            if type(gi) == str:
+            if isinstance(gi, str):
                 setattr(self, i, getattr(globals()[i], getattr(prov, i, gi), gi))
 
         self.template = import_module(f&#34;.{self.prov.template}&#34;, &#34;mangdl.api.providers.templates&#34;).template

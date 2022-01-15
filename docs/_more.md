@@ -12,7 +12,15 @@ Their supposed discord support server became the cradle for what will be my firs
 
 - <a target="_blank" href="https://github.com/justfoolingaround/animdl">animdl</a>
 
-A highly efficient, fast, powerful and light-weight anime downloader and streamer for your favorite anime. Considered to be a sister project of MangDL.
+A highly efficient, fast, powerful and light-weight anime downloader and streamer for your favorite anime.
+
+Considered to be a sister project of MangDL.
+
+- <a target="_blank" href="https://github.com/anime-dl/anime-downloader">anime-dl</a>
+
+A simple but powerful anime downloader and streamer.
+
+The origin of it all.
 
 - <a target="_blank" href="https://github.com/pystardust/ani-cli/">ani-cli</a>
 
@@ -24,4 +32,4 @@ A cli tool to browse and play anime. Featured in <a target="_blank" href="https:
 >
 > \- <a target="_blank" href="https://github.com/brahmkshatriya">brahmkshatriya</a>
 
-Troll or not, true or not, who knows?
+True or not, troll or not, who knows?
