@@ -372,3 +372,10 @@ td btn {
 thead {
     border-bottom: #646464 solid .25em;
 }
+
+blockquote {
+    background: hsla(0 0% 100% / 5%);
+    padding: 1px 20px;
+    border-left: .25em solid #30363d;
+    align-content: center;
+}

@@ -21,3 +21,7 @@ A cli tool to browse and play anime. Featured in <a target="_blank" href="https:
 - <a target="_blank" href="https://github.com/saikou-app/saikou">saikou</a>
 
 > "Literally best anime & manga app!"
+>
+> \- <a target="_blank" href="https://github.com/brahmkshatriya">brahmkshatriya</a>
+
+Troll or not, true or not, who knows?
