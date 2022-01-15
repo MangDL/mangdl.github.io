@@ -1,19 +1,19 @@
 <h1 align="center" style="font-weight: bold">
-    LIST OF REJECTED SITES
-</h1>
+        LIST OF REJECTED SITES
+    </h1>
 
-A site will not be accepted if it:
-- does not have a list of all comics
-- has duplicate links
-- has external links redirecting to other sites
-- has no search capability
-- is geo-blocked
-- is protected by an anti-DDoS mechanism except for DDoS Guard
-- is torrent and/or download only; and
-- serves paid content
+    A site will not be accepted if it:
+    - does not have a list of all comics
+    - has duplicate links
+    - has external links redirecting to other sites
+    - has no search capability
+    - is geo-blocked
+    - is protected by an anti-DDoS mechanism except for DDoS Guard
+    - is torrent and/or download only; and
+    - serves paid content
 
-| Site | Reason/s |
-|:---:|:---:|
+    | Site | Reason/s |
+    |:---:|:---:|
 | <a target="_blank" href="https://1stkissmanga.io/">1stkissmanga.io</a> | Cloudflare UAM |
 | <a target="_blank" href="https://akuma.moe/">akuma.moe</a> | Doesn't have a list of all comics |
 | <a target="_blank" href="https://doki.co">doki.co</a> | External links |
