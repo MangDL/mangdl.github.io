@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>mangdl.utils.utils API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/atom-one-dark.min.css" crossorigin>
+<style>html{scrollbar-face-color:#646464;scrollbar-base-color:#646464;scrollbar-3dlight-color:#646464;scrollbar-highlight-color:#646464;scrollbar-track-color:#000;scrollbar-arrow-color:#000;scrollbar-shadow-color:#646464;scrollbar-dark-shadow-color:#646464}::-webkit-scrollbar{width:14px;height:3px}::-webkit-scrollbar-button{background-color:#000;height:3px}::-webkit-scrollbar-track{background-color:#646464}::-webkit-scrollbar-track-piece{background-color:#000}::-webkit-scrollbar-thumb{height:50px;background-color:#666;border-radius:7px}::-webkit-scrollbar-corner{background-color:#646464}::-webkit-resizer{background-color:#666}:root{--highlight-color:#978141}.flex{display:flex !important}body{line-height:1.5em;color:#fff;background-color:#0f0f0f}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}#lunr-search{color:#fff;width:100%;font-size:1em;padding:6px 9px 5px 9px;border:1px solid transparent;background:#262626}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em;font-family:Liberation Mono}h2{font-size:1.75em;margin:.75em 0 .25em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#70BAFF;text-decoration:none;transition:color .2s ease-in-out}a:hover{color:#CDB4DB}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#79aaf8}pre code{background:transparent;font-size:.8em;line-height:1.4em}code{background:rgba(255,255,255,0.1);padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#1e2122;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #646464}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 2em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:0 0}.name{background:#000;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#0b0b0b}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{background:#282c34;max-height:500px;margin:0;overflow-x:scroll;overflow-y:scroll}.source pre code{font-size:12px;overflow-x:initial}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;border-left:1px solid #1b1b1b}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+<script src="/script.js"></script>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>mangdl.utils.utils</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import ast
+import difflib
+import itertools
+import re
+import sys
+import unicodedata
+from datetime import datetime, timedelta
+from functools import lru_cache
+from os.path import dirname as dn
+from os.path import realpath as rp
+from time import strftime, strptime
+from typing import Any, Callable, Dict, List, Union
+
+import arrow
+
+# https://stackoverflow.com/a/93029
+ALL_CHARS = (chr(i) for i in range(sys.maxunicode))
+CATEGORIES = {&#39;Cn&#39;}
+CCHARS = &#39;&#39;.join(map(chr, itertools.chain(range(0x00,0x20), range(0x7f,0xa0))))
+CCHARS_RE = re.compile(&#39;[%s]&#39; % re.escape(CCHARS))
+
+def dnrp(file: str, n: int=1) -&gt; str:
+    &#34;&#34;&#34;
+    Get the directory component of a pathname by n times recursively then return it.
+
+    Args:
+        file (str): File to get the directory of.
+        n (int, optional): Number of times to get up the directory???? Defaults to 1.
+
+    Returns:
+        op (str): The directory component got recursively by n times from the given pathname
+    &#34;&#34;&#34;
+    op = rp(file)
+    for _ in range(n):
+        op = dn(op)
+    return op
+
+def de(a: Any, d: Any) -&gt; Any:
+    &#34;&#34;&#34;
+    Defaults. Return a if a is True, else returns d.
+
+    Args:
+        a (Any): Object to be tested, will be returned if evaluates to True.
+        d (Any): Default object to be returned if `a` evaluates to False.
+
+    Returns:
+        Any
+    &#34;&#34;&#34;
+    if a:
+        return a
+    else:
+        return d
+
+def dd(default: Dict[Any, Any], d: Union[Dict[Any, Any], None]) -&gt; Dict[Any, Any]:
+    &#34;&#34;&#34;
+    Defaults dictionary. Overwrite the items in the default dict with the
+    items in the d dict.
+
+    Args:
+        default (Dict[Any, Any]): The dict to rewrite the items to.
+        d (Union[Dict[Any, Any], None]): The dict to rewrite the items from.
+
+    Returns:
+        dict[Any, Any]
+    &#34;&#34;&#34;
+    op = default
+    if d:
+        for a, v in d.items():
+            op[a] = v
+    return op
+
+def ddir(d: Dict[Any, Any], dir: str, de: Any={}) -&gt; Any:
+    &#34;&#34;&#34;
+    Retrieve dictionary value using recursive indexing with a string.
+    ex.:
+        `ddir({&#34;data&#34;: {&#34;attr&#34;: {&#34;ch&#34;: 1}}}, &#34;data/attr/ch&#34;)`
+        will return `1`
+
+
+    Args:
+        dict (dict): Dictionary to retrieve the value from.
+        dir (str): Directory of the value to be retrieved.
+
+    Returns:
+        op (Any): Retrieved value.
+    &#34;&#34;&#34;
+    op = d
+    for a in dir.split(&#34;/&#34;):
+        op = op[a]
+    return op or de
+
+@lru_cache
+def dt(dt: str, format: str) -&gt; str:
+    &#34;&#34;&#34;
+    Remove timezone from datetime and format it to ISO 8601 format.
+
+    Args:
+        dt (str): Unformatted datetime string to be formatted to ISO 8601 format
+        format (str): The initial format of the datetime string
+
+    Returns:
+        str: Formatted datetime string
+    &#34;&#34;&#34;
+    op = dt
+    if &#34;ago&#34; in dt:
+        arw = arrow.utcnow()
+        arw.dehumanize(&#34;2 days ago&#34;)
+    else:
+        op = strftime(&#34;%Y-%m-%dT%H:%M:%S&#34;, strptime(dt, format))
+        tz = re.match(r&#34;(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})([-+])(\d{2}):(\d{2})&#34;, op)
+        if tz:
+            iso, s, ho, mo = tz.groups()
+            s = -1 if s == &#34;-&#34; else 1
+            op = (datetime.fromisoformat(iso) - (s * timedelta(hours=int(ho), minutes=int(mo)))).strftime(&#34;%Y-%m-%dT%H:%M:%S&#34;)
+    return op
+
+@lru_cache
+def dt_ts(ts: str) -&gt; str:
+    &#34;&#34;&#34;
+    Convert the given unix timestamp to ISO 8601 format.
+
+    Args:
+        ts (str): unix timestamp to be converted to ISO 8601 format
+
+    Returns:
+        str: Formatted datetime string
+    &#34;&#34;&#34;
+    return (datetime.utcfromtimestamp(int(ts))).strftime(&#34;%Y-%m-%dT%H:%M:%S&#34;)
+
+def parse_list(opt: Union[str, None]):
+    &#34;&#34;&#34;
+    Takes a string and evaluates it to a list if it is a list,
+    else it splits it into a list.
+
+    It then evaluates the values of that list.
+
+    Args:
+        opt (Union[str, None]): The object to be evaluated.
+    &#34;&#34;&#34;
+
+    if isinstance(opt, str):
+        opt = opt[1:-1]
+        try:
+            opts = list(ast.literal_eval(opt))
+        except (SyntaxError, ValueError):
+            opts = list(opt.split(&#39;,&#39;))
+        for i, x in enumerate(opts):
+            try:
+                opts[i] = ast.literal_eval(x)
+            except (SyntaxError, ValueError):
+                opts[i] = x.strip()
+        return opts
+    else:
+        return None
+
+def squery(query: str, possibilities: List[str], cutoff: int=0.6, *, processor: Callable[[Any], Any]=lambda r: r):
+    &#34;&#34;&#34;
+    Custom search query.
+
+    Args:
+        query (str): String to search for in the possibilities.
+        possibilities (List[str]): The possibilities to search from.
+        cutoff (int, optional): The minimum percentage of similarity from the
+            given possibilities. Defaults to 0.6.
+        processor (Callable[[Any], Any], optional): Processes the possibilities
+            before comparing it with the query. Defaults to lambda r:r.
+    &#34;&#34;&#34;
+
+    sequence_matcher = difflib.SequenceMatcher()
+    sequence_matcher.set_seq2(query)
+
+    for search_value in possibilities:
+        sequence_matcher.set_seq1(processor(search_value))
+        if (query.lower() in processor(search_value).lower()):
+            yield (None, search_value)
+            continue
+        if (sequence_matcher.real_quick_ratio() &gt;= cutoff and sequence_matcher.quick_ratio(
+        ) &gt;= cutoff and sequence_matcher.ratio() &gt;= cutoff):
+            yield (sequence_matcher.ratio(), search_value)
+
+def sanitize_text(s: str):
+    return unicodedata.normalize(&#34;NFKD&#34;, CCHARS_RE.sub(&#39;&#39;, s)).strip()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="mangdl.utils.utils.dd"><code class="name flex">
+<span>def <span class="ident">dd</span></span>(<span>default: Dict[Any, Any], d: Optional[Dict[Any, Any]]) ‑> Dict[Any, Any]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Defaults dictionary. Overwrite the items in the default dict with the
+items in the d dict.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>default</code></strong> :&ensp;<code>Dict[Any, Any]</code></dt>
+<dd>The dict to rewrite the items to.</dd>
+<dt><strong><code>d</code></strong> :&ensp;<code>Union[Dict[Any, Any], None]</code></dt>
+<dd>The dict to rewrite the items from.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>dict[Any, Any]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dd(default: Dict[Any, Any], d: Union[Dict[Any, Any], None]) -&gt; Dict[Any, Any]:
+    &#34;&#34;&#34;
+    Defaults dictionary. Overwrite the items in the default dict with the
+    items in the d dict.
+
+    Args:
+        default (Dict[Any, Any]): The dict to rewrite the items to.
+        d (Union[Dict[Any, Any], None]): The dict to rewrite the items from.
+
+    Returns:
+        dict[Any, Any]
+    &#34;&#34;&#34;
+    op = default
+    if d:
+        for a, v in d.items():
+            op[a] = v
+    return op</code></pre>
+</details>
+</dd>
+<dt id="mangdl.utils.utils.ddir"><code class="name flex">
+<span>def <span class="ident">ddir</span></span>(<span>d: Dict[Any, Any], dir: str, de: Any = {}) ‑> Any</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Retrieve dictionary value using recursive indexing with a string.
+ex.:
+<code>ddir({"data": {"attr": {"ch": 1}}}, "data/attr/ch")</code>
+will return <code>1</code></p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>dict</code></strong> :&ensp;<code>dict</code></dt>
+<dd>Dictionary to retrieve the value from.</dd>
+<dt><strong><code>dir</code></strong> :&ensp;<code>str</code></dt>
+<dd>Directory of the value to be retrieved.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>op (Any): Retrieved value.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ddir(d: Dict[Any, Any], dir: str, de: Any={}) -&gt; Any:
+    &#34;&#34;&#34;
+    Retrieve dictionary value using recursive indexing with a string.
+    ex.:
+        `ddir({&#34;data&#34;: {&#34;attr&#34;: {&#34;ch&#34;: 1}}}, &#34;data/attr/ch&#34;)`
+        will return `1`
+
+
+    Args:
+        dict (dict): Dictionary to retrieve the value from.
+        dir (str): Directory of the value to be retrieved.
+
+    Returns:
+        op (Any): Retrieved value.
+    &#34;&#34;&#34;
+    op = d
+    for a in dir.split(&#34;/&#34;):
+        op = op[a]
+    return op or de</code></pre>
+</details>
+</dd>
+<dt id="mangdl.utils.utils.de"><code class="name flex">
+<span>def <span class="ident">de</span></span>(<span>a: Any, d: Any) ‑> Any</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Defaults. Return a if a is True, else returns d.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>a</code></strong> :&ensp;<code>Any</code></dt>
+<dd>Object to be tested, will be returned if evaluates to True.</dd>
+<dt><strong><code>d</code></strong> :&ensp;<code>Any</code></dt>
+<dd>Default object to be returned if <code>a</code> evaluates to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Any</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def de(a: Any, d: Any) -&gt; Any:
+    &#34;&#34;&#34;
+    Defaults. Return a if a is True, else returns d.
+
+    Args:
+        a (Any): Object to be tested, will be returned if evaluates to True.
+        d (Any): Default object to be returned if `a` evaluates to False.
+
+    Returns:
+        Any
+    &#34;&#34;&#34;
+    if a:
+        return a
+    else:
+        return d</code></pre>
+</details>
+</dd>
+<dt id="mangdl.utils.utils.dnrp"><code class="name flex">
+<span>def <span class="ident">dnrp</span></span>(<span>file: str, n: int = 1) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get the directory component of a pathname by n times recursively then return it.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>file</code></strong> :&ensp;<code>str</code></dt>
+<dd>File to get the directory of.</dd>
+<dt><strong><code>n</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of times to get up the directory???? Defaults to 1.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>op (str): The directory component got recursively by n times from the given pathname</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dnrp(file: str, n: int=1) -&gt; str:
+    &#34;&#34;&#34;
+    Get the directory component of a pathname by n times recursively then return it.
+
+    Args:
+        file (str): File to get the directory of.
+        n (int, optional): Number of times to get up the directory???? Defaults to 1.
+
+    Returns:
+        op (str): The directory component got recursively by n times from the given pathname
+    &#34;&#34;&#34;
+    op = rp(file)
+    for _ in range(n):
+        op = dn(op)
+    return op</code></pre>
+</details>
+</dd>
+<dt id="mangdl.utils.utils.dt"><code class="name flex">
+<span>def <span class="ident">dt</span></span>(<span>dt: str, format: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Remove timezone from datetime and format it to ISO 8601 format.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>dt</code></strong> :&ensp;<code>str</code></dt>
+<dd>Unformatted datetime string to be formatted to ISO 8601 format</dd>
+<dt><strong><code>format</code></strong> :&ensp;<code>str</code></dt>
+<dd>The initial format of the datetime string</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>Formatted datetime string</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@lru_cache
+def dt(dt: str, format: str) -&gt; str:
+    &#34;&#34;&#34;
+    Remove timezone from datetime and format it to ISO 8601 format.
+
+    Args:
+        dt (str): Unformatted datetime string to be formatted to ISO 8601 format
+        format (str): The initial format of the datetime string
+
+    Returns:
+        str: Formatted datetime string
+    &#34;&#34;&#34;
+    op = dt
+    if &#34;ago&#34; in dt:
+        arw = arrow.utcnow()
+        arw.dehumanize(&#34;2 days ago&#34;)
+    else:
+        op = strftime(&#34;%Y-%m-%dT%H:%M:%S&#34;, strptime(dt, format))
+        tz = re.match(r&#34;(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})([-+])(\d{2}):(\d{2})&#34;, op)
+        if tz:
+            iso, s, ho, mo = tz.groups()
+            s = -1 if s == &#34;-&#34; else 1
+            op = (datetime.fromisoformat(iso) - (s * timedelta(hours=int(ho), minutes=int(mo)))).strftime(&#34;%Y-%m-%dT%H:%M:%S&#34;)
+    return op</code></pre>
+</details>
+</dd>
+<dt id="mangdl.utils.utils.dt_ts"><code class="name flex">
+<span>def <span class="ident">dt_ts</span></span>(<span>ts: str) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Convert the given unix timestamp to ISO 8601 format.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>ts</code></strong> :&ensp;<code>str</code></dt>
+<dd>unix timestamp to be converted to ISO 8601 format</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>Formatted datetime string</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@lru_cache
+def dt_ts(ts: str) -&gt; str:
+    &#34;&#34;&#34;
+    Convert the given unix timestamp to ISO 8601 format.
+
+    Args:
+        ts (str): unix timestamp to be converted to ISO 8601 format
+
+    Returns:
+        str: Formatted datetime string
+    &#34;&#34;&#34;
+    return (datetime.utcfromtimestamp(int(ts))).strftime(&#34;%Y-%m-%dT%H:%M:%S&#34;)</code></pre>
+</details>
+</dd>
+<dt id="mangdl.utils.utils.parse_list"><code class="name flex">
+<span>def <span class="ident">parse_list</span></span>(<span>opt: Optional[str])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Takes a string and evaluates it to a list if it is a list,
+else it splits it into a list.</p>
+<p>It then evaluates the values of that list.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>opt</code></strong> :&ensp;<code>Union[str, None]</code></dt>
+<dd>The object to be evaluated.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def parse_list(opt: Union[str, None]):
+    &#34;&#34;&#34;
+    Takes a string and evaluates it to a list if it is a list,
+    else it splits it into a list.
+
+    It then evaluates the values of that list.
+
+    Args:
+        opt (Union[str, None]): The object to be evaluated.
+    &#34;&#34;&#34;
+
+    if isinstance(opt, str):
+        opt = opt[1:-1]
+        try:
+            opts = list(ast.literal_eval(opt))
+        except (SyntaxError, ValueError):
+            opts = list(opt.split(&#39;,&#39;))
+        for i, x in enumerate(opts):
+            try:
+                opts[i] = ast.literal_eval(x)
+            except (SyntaxError, ValueError):
+                opts[i] = x.strip()
+        return opts
+    else:
+        return None</code></pre>
+</details>
+</dd>
+<dt id="mangdl.utils.utils.sanitize_text"><code class="name flex">
+<span>def <span class="ident">sanitize_text</span></span>(<span>s: str)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sanitize_text(s: str):
+    return unicodedata.normalize(&#34;NFKD&#34;, CCHARS_RE.sub(&#39;&#39;, s)).strip()</code></pre>
+</details>
+</dd>
+<dt id="mangdl.utils.utils.squery"><code class="name flex">
+<span>def <span class="ident">squery</span></span>(<span>query: str, possibilities: List[str], cutoff: int = 0.6, *, processor: Callable[[Any], Any] = &lt;function &lt;lambda&gt;&gt;)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Custom search query.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>query</code></strong> :&ensp;<code>str</code></dt>
+<dd>String to search for in the possibilities.</dd>
+<dt><strong><code>possibilities</code></strong> :&ensp;<code>List[str]</code></dt>
+<dd>The possibilities to search from.</dd>
+<dt><strong><code>cutoff</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>The minimum percentage of similarity from the
+given possibilities. Defaults to 0.6.</dd>
+<dt><strong><code>processor</code></strong> :&ensp;<code>Callable[[Any], Any]</code>, optional</dt>
+<dd>Processes the possibilities
+before comparing it with the query. Defaults to lambda r:r.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def squery(query: str, possibilities: List[str], cutoff: int=0.6, *, processor: Callable[[Any], Any]=lambda r: r):
+    &#34;&#34;&#34;
+    Custom search query.
+
+    Args:
+        query (str): String to search for in the possibilities.
+        possibilities (List[str]): The possibilities to search from.
+        cutoff (int, optional): The minimum percentage of similarity from the
+            given possibilities. Defaults to 0.6.
+        processor (Callable[[Any], Any], optional): Processes the possibilities
+            before comparing it with the query. Defaults to lambda r:r.
+    &#34;&#34;&#34;
+
+    sequence_matcher = difflib.SequenceMatcher()
+    sequence_matcher.set_seq2(query)
+
+    for search_value in possibilities:
+        sequence_matcher.set_seq1(processor(search_value))
+        if (query.lower() in processor(search_value).lower()):
+            yield (None, search_value)
+            continue
+        if (sequence_matcher.real_quick_ratio() &gt;= cutoff and sequence_matcher.quick_ratio(
+        ) &gt;= cutoff and sequence_matcher.ratio() &gt;= cutoff):
+            yield (sequence_matcher.ratio(), search_value)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>MangDL</h1>
+<form>
+<input id="lunr-search" name="q" placeholder="Search..." aria-label="Search"
+disabled minlength="2">
+</form>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.15.3/tingle.min.css" integrity="sha512-j1u8eUJ4f23xPPxwOrLUPQaCD2dwzNqqmDDcWS4deWsMv2ohLqmXXuP3hU7g8TyzbMSakP/mMqoNBYWj8AEIFg==" crossorigin>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tingle/0.15.3/tingle.min.js" integrity="sha512-plGUER9JkeEWPPqQBE4sdLqBoQug5Ap+BCGMc7bJ8BXkm+VVj6QzkpBz5Yv2yPkkq+cqg9IpkBaGCas6uDbW8g==" crossorigin></script>
+<style>
+.modal-dialog iframe {
+width: 100vw;
+height: calc(100vh - 80px);
+}
+@media screen and (min-width: 700px) {
+.modal-dialog iframe {
+width: 70vw;
+height: 80vh;
+}
+}
+.modal-dialog .tingle-modal-box {
+width: auto;
+background: #0f0f0f;
+}
+.modal-dialog .tingle-modal-box__content {padding: 0;}
+#search-status{
+font-family: Liberation Mono;
+}
+footer{
+font-family: Liberation Mono;
+}
+</style>
+<script>
+const input = document.getElementById('lunr-search');
+input.disabled = false;
+input.form.addEventListener('submit', (ev) => {
+ev.preventDefault();
+const url = new URL(window.location);
+url.searchParams.set('q', input.value);
+history.replaceState({}, null, url.toString());
+search(input.value);
+});
+const query = new URL(window.location).searchParams.get('q');
+if (query)
+search(query);
+function search(query) {
+const url = '../../doc-search.html#' + encodeURIComponent(query);
+new tingle.modal({
+cssClass: ['modal-dialog'],
+onClose: () => {
+const url = new URL(window.location);
+url.searchParams.delete('q');
+history.replaceState({}, null, url.toString());
+setTimeout(() => input.focus(), 100);
+}
+}).setContent('<iframe src="' + url + '"></iframe>').open();
+}
+</script>
+<h2>Index</h2>
+<div class="toc">
+<ul>
+<li><a href="/index.html"><strong>Homepage</strong></a></li>
+<li><a href="/installation.html"><strong>Installation</strong></a></li>
+<li><a href="/upgrade.html"><strong>Upgrading</strong></a></li>
+<li>
+<a href="/providers.html"><strong>Providers</strong></a>
+<ul>
+<li><a href="/rejected.html"><strong>Rejected Sites</strong></a></li>
+</ul>
+</li>
+<li><a href="/tou_disc.html"><strong>Terms of Usage & Disclaimer</strong></a></li>
+<li><a href="/docs/index.html"><strong>Documentation</strong></a></li>
+<li><a href="/changelog.html"><strong>Changelog</strong></a></li>
+<li><a href="/license.html"><strong>License</strong></a></li>
+<li><a href="/more.html"><strong>More Apps</strong></a></li>
+<ul>
+</div>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="mangdl.utils" href="index.html">mangdl.utils</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="mangdl.utils.utils.dd" href="#mangdl.utils.utils.dd">dd</a></code></li>
+<li><code><a title="mangdl.utils.utils.ddir" href="#mangdl.utils.utils.ddir">ddir</a></code></li>
+<li><code><a title="mangdl.utils.utils.de" href="#mangdl.utils.utils.de">de</a></code></li>
+<li><code><a title="mangdl.utils.utils.dnrp" href="#mangdl.utils.utils.dnrp">dnrp</a></code></li>
+<li><code><a title="mangdl.utils.utils.dt" href="#mangdl.utils.utils.dt">dt</a></code></li>
+<li><code><a title="mangdl.utils.utils.dt_ts" href="#mangdl.utils.utils.dt_ts">dt_ts</a></code></li>
+<li><code><a title="mangdl.utils.utils.parse_list" href="#mangdl.utils.utils.parse_list">parse_list</a></code></li>
+<li><code><a title="mangdl.utils.utils.sanitize_text" href="#mangdl.utils.utils.sanitize_text">sanitize_text</a></code></li>
+<li><code><a title="mangdl.utils.utils.squery" href="#mangdl.utils.utils.squery">squery</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+If you have spotted some errors in this site, do not hesitate to report it <a target="_blank" href="https://github.com/MangDL/mdl/issues/new">here</a> or at the <a target="_blank" href="https://discord.com/invite/JbAtUxGcJZ">Discord Support Server</a>, or just fix it yourself <a target="_blank" href="https://github.com/MangDL/mdl/">here</a>.
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
