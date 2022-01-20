@@ -29,12 +29,31 @@
 <h3>
 <a id="added" class="anchor" href="#added" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>ADDED</strong>
 </h3>
+<ul>
+<li>
+<a href="https://lhtranslation.net/" rel="nofollow">Lhtranslation</a> provider</li>
+<li>
+<a href="https://readmanhua.net/" rel="nofollow">Read Manhua</a> provider</li>
+<li>
+<a href="https://readlight.org/" rel="nofollow">UltraLight</a> provider</li>
+<li>Added <code>setsu</code> function in the <code>mangdl/api/providers/templates/wordpress.py</code>'s <code>manga_id_fn</code> templates and make it a default for the providers to use.</li>
+</ul>
 <h3>
 <a id="changed" class="anchor" href="#changed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>CHANGED</strong>
 </h3>
+<ul>
+<li>Changed <code>mangdl/api/providers/templates/wordpress.py</code>'s <code>template</code> class to make <code>%B %d, %Y</code> as default for <code>date_format</code>.</li>
+<li>Changed <code>mangdl/api/providers/templates/wordpress.py</code>'s <code>template.manga</code> function to check if a provider script declares a <code>date_format</code>, if which it did will pass the <code>ms</code> or master soup to it and use the returned value as the title of the manga.</li>
+<li>Changed <code>mangdl/api/providers/templates/wordpress.py</code>'s <code>template.manga</code> function to check if a provider script declares a <code>title_fn</code>, if which it did will be used as the date format for the all the manga metadata dates.</li>
+<li>Removed <code>manga_id_fn</code> function in <code>mangdl/api/providers/chibimanga.py</code> and <code>mangdl/api/providers/setsuscans.py</code> to use the default <code>manga_id_fn.setsu</code> template function.</li>
+</ul>
 <h3>
 <a id="fixed" class="anchor" href="#fixed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>FIXED</strong>
 </h3>
+<ul>
+<li>Removed the <code>title_fn</code> in <code>mangdl/api/providers/templates/wordpress.py</code>'s <code>template.manga</code> function due to the said variable not being used anywhere.</li>
+<li>Fixed <code>mangdl/api/providers/firstkiss.py</code>'s <code>manga_id_fn</code> function to receive <code>url</code> and keyword arguments instead of <code>soup</code>.</li>
+</ul>
 <h2>
 <a id="mangdl-v3010" class="anchor" href="#mangdl-v3010" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>MangDL v.3.0.1.0</strong>
 </h2>

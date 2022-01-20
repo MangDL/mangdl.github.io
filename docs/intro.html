@@ -36,7 +36,7 @@
 <p>Now, to get the manga's metadata, call the provider's manga function and pass the url.</p>
 <div class="highlight highlight-source-python"><pre><span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">manga</span> <span class="pl-c1">=</span> <span class="pl-s1">prov</span>.<span class="pl-en">manga</span>(<span class="pl-s">"https://mangadex.org/title/010a8606-ab4f-4e3e-82ce-17f19b02f262"</span>)
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">manga</span>.<span class="pl-s1">url</span>
-<span class="pl-s1">https</span>:<span class="pl-c1">//</span><span class="pl-s1">mangadex</span>.<span class="pl-s1">org</span><span class="pl-c1">/</span><span class="pl-s1">title</span><span class="pl-c1">/</span><span class="pl-c1">010</span><span class="pl-s1">a8606</span><span class="pl-c1">-</span><span class="pl-s1">ab4f</span><span class="pl-c1">-</span><span class="pl-c1">4e3</span><span class="pl-s1">e</span><span class="pl-c1">-</span><span class="pl-c1">82</span><span class="pl-s1">ce</span><span class="pl-c1">-</span><span class="pl-c1">17</span><span class="pl-s1">f19b02f262</span><span class="pl-c1">/</span><span class="pl-s1">happy</span><span class="pl-c1">-</span><span class="pl-s1">sugar</span><span class="pl-c1">-</span><span class="pl-s1">life</span>
+<span class="pl-s">'https://mangadex.org/title/010a8606-ab4f-4e3e-82ce-17f19b02f262/happy-sugar-life'</span>
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">manga</span>.<span class="pl-s1">title</span>
 <span class="pl-v">Happy</span> <span class="pl-v">Sugar</span> <span class="pl-v">Life</span>
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">manga</span>.<span class="pl-s1">author</span>
@@ -52,9 +52,9 @@
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">manga</span>.<span class="pl-s1">alt_titles</span>
 [<span class="pl-s">'White Sugar Garden, Black Salt Cage'</span>, ..., <span class="pl-s">'Сладкая жизнь'</span>]
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">manga</span>.<span class="pl-s1">updated_at</span>
-<span class="pl-c1">2021</span><span class="pl-c1">-</span><span class="pl-c1">11</span><span class="pl-c1">-</span><span class="pl-c1">23</span><span class="pl-v">T21</span>:<span class="pl-c1">12</span>:<span class="pl-c1">00</span><span class="pl-c1">+</span><span class="pl-c1">00</span>:<span class="pl-c1">00</span>
+<span class="pl-s">'2021-11-23T21:12:00+00:00'</span>
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">manga</span>.<span class="pl-s1">created_at</span>
-<span class="pl-c1">2018</span><span class="pl-c1">-</span><span class="pl-c1">12</span><span class="pl-c1">-</span><span class="pl-c1">07</span><span class="pl-v">T02</span>:<span class="pl-c1">17</span>:<span class="pl-c1">58</span><span class="pl-c1">+</span><span class="pl-c1">00</span>:<span class="pl-c1">00</span>
+<span class="pl-s">'2018-12-07T02:17:58+00:00'</span>
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">manga</span>.<span class="pl-s1">views</span>
 <span class="pl-c1">
 <blockquote style='background:hsla(0 0% 100% / 5%);padding:0 20px 5px 20px;margin:30px 0 0;'>
@@ -70,7 +70,7 @@
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">manga</span>.<span class="pl-s1">chapters</span>
 {}
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">manga</span>.<span class="pl-s1">description</span>
-<span class="pl-v">High</span><span class="pl-c1">-</span><span class="pl-s1">schooler</span> <span class="pl-v">Matsuzaka</span> <span class="pl-v">Satou</span> <span class="pl-s1">has</span> <span class="pl-s1">a</span> <span class="pl-s1">reputation</span> <span class="pl-k">for</span> <span class="pl-s1">being</span> <span class="pl-s1">easy</span>, <span class="pl-s1">but</span> ... <span class="pl-s1">as</span> <span class="pl-s1">an</span> <span class="pl-s1">extra</span>.
+<span class="pl-s">'High-schooler Matsuzaka Satou has a reputation for being easy, but ... as an extra.'</span>
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">manga</span>.<span class="pl-s1">links</span>
 {
     <span class="pl-s">'al'</span>: <span class="pl-s">'https://anilist.co/manga/86655'</span>,
@@ -149,17 +149,17 @@
 <p>To get the chapter's metadata, call the provider's chapter function and pass the chapter's URL to it.</p>
 <div class="highlight highlight-source-python"><pre><span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">chapter</span> <span class="pl-c1">=</span> <span class="pl-s1">prov</span>.<span class="pl-en">chapter</span>(<span class="pl-s">"https://mangadex.org/chapter/a5dd4835-c1f3-446d-89b7-3f6b5e115fa5"</span>)
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">chapter</span>.<span class="pl-s1">url</span>
-<span class="pl-s1">https</span>:<span class="pl-c1">//</span><span class="pl-s1">mangadex</span>.<span class="pl-s1">org</span><span class="pl-c1">/</span><span class="pl-s1">chapter</span><span class="pl-c1">/</span><span class="pl-s1">a5dd4835</span><span class="pl-c1">-</span><span class="pl-s1">c1f3</span><span class="pl-c1">-</span><span class="pl-c1">446</span><span class="pl-s1">d</span><span class="pl-c1">-</span><span class="pl-c1">89</span><span class="pl-s1">b7</span><span class="pl-c1">-</span><span class="pl-c1">3</span><span class="pl-s1">f6b5e115fa5</span>
+<span class="pl-s">'https://mangadex.org/chapter/a5dd4835-c1f3-446d-89b7-3f6b5e115fa5'</span>
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">chapter</span>.<span class="pl-s1">ch</span>
 <span class="pl-c1">19.5</span>
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">chapter</span>.<span class="pl-s1">vol</span>
 <span class="pl-c1">5</span>
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">chapter</span>.<span class="pl-s1">title</span>
-<span class="pl-v">Interlude</span>
+<span class="pl-s">'Interlude'</span>
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">chapter</span>.<span class="pl-s1">views</span>
 <span class="pl-c1">0</span>
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">chapter</span>.<span class="pl-s1">uploaded_at</span>
-<span class="pl-c1">2018</span><span class="pl-c1">-</span><span class="pl-c1">02</span><span class="pl-c1">-</span><span class="pl-c1">03</span><span class="pl-v">T14</span>:<span class="pl-c1">47</span>:<span class="pl-c1">25</span><span class="pl-c1">+</span><span class="pl-c1">00</span>:<span class="pl-c1">00</span>
+<span class="pl-s">'2018-02-03T14:47:25+00:00'</span>
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">chapter</span>.<span class="pl-s1">scanlator_groups</span>
 []
 <span class="pl-c1">&gt;&gt;</span><span class="pl-c1">&gt;</span> <span class="pl-s1">chapter</span>.<span class="pl-s1">user</span>

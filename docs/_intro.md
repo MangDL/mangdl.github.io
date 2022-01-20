@@ -20,7 +20,7 @@ Now, to get the manga's metadata, call the provider's manga function and pass th
 ```python
 >>> manga = prov.manga("https://mangadex.org/title/010a8606-ab4f-4e3e-82ce-17f19b02f262")
 >>> manga.url
-https://mangadex.org/title/010a8606-ab4f-4e3e-82ce-17f19b02f262/happy-sugar-life
+'https://mangadex.org/title/010a8606-ab4f-4e3e-82ce-17f19b02f262/happy-sugar-life'
 >>> manga.title
 Happy Sugar Life
 >>> manga.author
@@ -36,15 +36,15 @@ Happy Sugar Life
 >>> manga.alt_titles
 ['White Sugar Garden, Black Salt Cage', ..., 'Сладкая жизнь']
 >>> manga.updated_at
-2021-11-23T21:12:00+00:00
+'2021-11-23T21:12:00+00:00'
 >>> manga.created_at
-2018-12-07T02:17:58+00:00
+'2018-12-07T02:17:58+00:00'
 >>> manga.views
 None
 >>> manga.chapters
 {}
 >>> manga.description
-High-schooler Matsuzaka Satou has a reputation for being easy, but ... as an extra.
+'High-schooler Matsuzaka Satou has a reputation for being easy, but ... as an extra.'
 >>> manga.links
 {
     'al': 'https://anilist.co/manga/86655',
@@ -114,17 +114,17 @@ To get the chapter's metadata, call the provider's chapter function and pass the
 ```python
 >>> chapter = prov.chapter("https://mangadex.org/chapter/a5dd4835-c1f3-446d-89b7-3f6b5e115fa5")
 >>> chapter.url
-https://mangadex.org/chapter/a5dd4835-c1f3-446d-89b7-3f6b5e115fa5
+'https://mangadex.org/chapter/a5dd4835-c1f3-446d-89b7-3f6b5e115fa5'
 >>> chapter.ch
 19.5
 >>> chapter.vol
 5
 >>> chapter.title
-Interlude
+'Interlude'
 >>> chapter.views
 0
 >>> chapter.uploaded_at
-2018-02-03T14:47:25+00:00
+'2018-02-03T14:47:25+00:00'
 >>> chapter.scanlator_groups
 []
 >>> chapter.user
